@@ -1,10 +1,10 @@
 {% extends 'resume/base.html' %}
 {% block content %}
-<h2>Регистрация</h2>
+<h2>Login</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Войти</button>
+    <button type="submit">Login</button>
 </form>
-<p>Нет аккаунта?<a href="{% url 'login_view' %}">Зарегистрироваться</a></p>
+<p>Don't have an account?<a href="{% url 'login_view' %}">Register</a></p>
 {% endblock content %}

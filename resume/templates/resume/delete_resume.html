@@ -1,9 +1,9 @@
 {% extends 'resume/base.html' %}
 {% block content %}
-<h4>Удаление резюме</h4>
+<h4>Resume deletion</h4>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Удалить</button>
+    <button type="submit">Delete</button>
 </form>
 {% endblock content %}

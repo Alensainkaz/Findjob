@@ -1,34 +1,33 @@
 {% extends 'resume/base.html' %}
 
 {% block content %}
-<h2>Список Искателей работы</h2>
+<h2>Main Page</h2>
 
 <div class="category">
-    <strong>Специальности:</strong>
+    <strong>Specialities:</strong>
     {% for c in categories %}
         <a href="?category={{ c.id }}">{{ c.name }}</a>
     {% endfor %}
 </div>
-<p><a href="{% url 'create_resume' %}">Добавить свое резюме</a></p>
-<p><a href="{% url 'create_resume_category' %}">Добавить специальность</a></p>
-<form method="get">
-    <input type="text" name="q" placeholder="Поиск по специальности" value="{{ request.GET.q }}">
-    <button type="submit">Искать</button>
-</form>
+<p><a href="{% url 'create_resume' %}">Add own resume</a></p>
+<p><a href="{% url 'create_resume_category' %}">Add speciality</a></p>
 {% for resume in resumes %}
     <div>
         <a href="{% url 'resume_detail' resume.pk %}">
-            <strong>{{ resume.name }}</strong>
-        </a><br>
+            <div class="name">
+                <strong>{{ resume.name }}</strong>
+                <strong>{{ resume.surname }}</strong>
+                <strong>{{ resume.father_name }}</strong>
+        </a>
         {% if resume.image %}
-            <img src="{{ resume.image.url }}" alt="{{ resume.name }}" width="400">
+            <img src="{{ resume.image.url }}" alt="{{ resume.name }}">
         {% endif %}
-        <a href="{% url 'cart_add' resume.id %}">Добавить на рассмотрение</a>
-        <a href="{% url 'edit_resume' resume.id %}">Изменить Резюме</a>
-        <a href="{% url 'delete_resume' resume.id %}">Удалить Резюме</a>
+        <a href="{% url 'cart_add' resume.id %}">Add for consideration</a>
+        <a href="{% url 'edit_resume' resume.id %}">Change resume</a>
+        <a href="{% url 'delete_resume' resume.id %}">Remove resume</a>
 
     </div>
 {% empty %}
-    <p>Искателей работы на данный момент нет.</p>
+    <p>There are no any Searchers.</p>
 {% endfor %}
 {% endblock content %}
