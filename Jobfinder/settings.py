@@ -7,9 +7,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = 'django-insecure-vx2$oi!=+f@dwk-q2-&%z&(pv*%c&^rko$qf-^=vr1ysm&wn9p'
 DEBUG = True
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['alensa.pythonanywhere.com']
 
-# Application definition
+# Application 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
