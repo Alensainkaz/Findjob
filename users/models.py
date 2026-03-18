@@ -9,4 +9,3 @@ class User(AbstractUser):
     )
     role=models.CharField(choices=ROLE_CHOICES,default='jobfinder',max_length=20)
 
-# Create your models here.

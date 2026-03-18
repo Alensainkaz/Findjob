@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = 'django-insecure-vx2$oi!=+f@dwk-q2-&%z&(pv*%c&^rko$qf-^=vr1ysm&wn9p'
 DEBUG = True
-ALLOWED_HOSTS = ['www.findy-job.com','findy-job.com']
+ALLOWED_HOSTS = ['www.findy-job.com','findy-job.com','http://127.0.0.1:8000/','127.0.0.1']
 
 # Application 
 INSTALLED_APPS = [
@@ -75,6 +75,9 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files

@@ -1,20 +1,20 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import ResumeForm, CategoryForm
-from .models import Resume, Category
+from .forms import ResumeForm
+from .models import Resume,SPECIALITY_CHOICES
 def index(request):
-    category_id = request.GET.get('category')
-    search_query = request.GET.get('q')
+    specialities=(choice[1] for choice in SPECIALITY_CHOICES)
     resumes = Resume.objects.all().order_by('-created_at')
-    categories = Category.objects.all()
-    if category_id:
-        resumes = resumes.filter(category_id=category_id)
+    search_query = request.GET.get('q')    
+    speciality_filter=request.GET.get('speciality')
+    if speciality_filter:
+        resumes=resumes.filter(speciality=speciality_filter)
     if search_query:
         resumes = resumes.filter(name__icontains=search_query)
     context = {
         'resumes': resumes,
-        'categories': categories,
+        'specialities':specialities,
     }
     return render(request, 'resume/index.html', context)
 @login_required
@@ -29,16 +29,6 @@ def create_resume(request):
     else:
         form = ResumeForm()
     return render(request, 'resume/create_resume.html', {'form': form})
-@login_required
-def create_resume_category(request):
-    if request.method == 'POST':
-        form = CategoryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('index')
-    else:
-        form = CategoryForm()
-    return render(request,'resume/create_resume_category.html',{'form':form})
 def resume_detail(request, pk):
     resume = get_object_or_404(Resume, pk=pk)
     return render(request,'resume/resume_detail.html',{'resume': resume})

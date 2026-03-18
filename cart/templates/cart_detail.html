@@ -1,6 +1,6 @@
 {% extends 'resume/base.html' %}
 {% block content %}
-<h1>Резюме добавленные на рассмотрение</h1>
+<h1>Resume added for consideration</h1>
 
 {% if items %}
     {% for item in items %}
@@ -9,14 +9,14 @@
         {% if item.resume.image %}
             <img src="{{ item.resume.image.url }}" alt="{{ item.resume.name }}" width="400">
         {% endif %}
-        <a href="{% url 'message' %}">Написать письмо</a>
+        <a href="{% url 'message' %}">Write an email</a>
         <form method="post" action="{% url 'cart_remove' item.id %}">
             {% csrf_token %}
-            <button type="submit">Убрать из рассмотрения</button>
+            <button type="submit">Remove from list</button>
         </form>
     {% endfor %}
 {% else %}
-    <p>На данный момент вы ничего на рассмотрение не добавляли</p>
+    <p>You didn't add anything for consideration</p>
 {% endif %}
 
 {% endblock content %}
