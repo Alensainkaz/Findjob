@@ -1,0 +1,9 @@
+{% extends 'resume/base.html' %}
+{% block content %}
+<h1>Writing a message</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send</button>
+</form>
+{% endblock content %}
