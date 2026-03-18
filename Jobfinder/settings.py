@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = 'django-insecure-vx2$oi!=+f@dwk-q2-&%z&(pv*%c&^rko$qf-^=vr1ysm&wn9p'
 DEBUG = True
-ALLOWED_HOSTS = ['alensa.pythonanywhere.com']
+ALLOWED_HOSTS = ['www.findy-job.com','findy-job.com']
 
 # Application 
 INSTALLED_APPS = [
