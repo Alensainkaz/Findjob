@@ -15,8 +15,10 @@
         </a>
         <div class="links-resume">
             <a href="{% url 'cart_add' resume.id %}">Add for consideration</a>
-            <a href="{% url 'edit_resume' resume.id %}">Change resume</a>
-            <a href="{% url 'delete_resume' resume.id %}">Remove resume</a>
+            {% if request.user.is_staff %}
+                <a href="{% url 'edit_resume' resume.id %}">Change resume</a>
+                <a href="{% url 'delete_resume' resume.id %}">Remove resume</a>
+            {% endif %}
         </div>
     </div>
 {% empty %}

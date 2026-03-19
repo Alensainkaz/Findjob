@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import ResumeForm
 from .models import Resume,SPECIALITY_CHOICES
+from django.contrib.admin.views.decorators import staff_member_required
+
 def index(request):
     specialities=(choice[1] for choice in SPECIALITY_CHOICES)
     resumes = Resume.objects.all().order_by('-created_at')
@@ -32,7 +34,7 @@ def create_resume(request):
 def resume_detail(request, pk):
     resume = get_object_or_404(Resume, pk=pk)
     return render(request,'resume/resume_detail.html',{'resume': resume})
-@login_required
+@staff_member_required
 def edit_resume(request, pk):
     resume = get_object_or_404(Resume, pk=pk)
     if request.user != resume.user:
@@ -45,7 +47,7 @@ def edit_resume(request, pk):
     else:
         form = ResumeForm(instance=resume)
     return render(request,'resume/edit_resume.html', {'form': form, 'resume': resume})
-@login_required
+@staff_member_required
 def delete_resume(request, pk):
     resume = get_object_or_404(Resume, pk=pk)
     if request.user != resume.user:
