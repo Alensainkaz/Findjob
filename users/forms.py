@@ -31,21 +31,22 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 class UserLoginForm(forms.Form):
-    email=forms.EmailField(label='Email')
-    password=forms.CharField(label='Password',widget=forms.PasswordInput)
+    email = forms.EmailField(label='Email')
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+
     def clean(self):
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
-        try:
-            user = User.objects.filter(email=email).exists()
-        except User.DoesNotExist:
+
+        user_obj = User.objects.filter(email=email).first()
+        if not user_obj:
             raise forms.ValidationError('Wrong email or password')
-        user=authenticate(username=user.username, password=password)
+
+        user = authenticate(username=user_obj.username, password=password)
         if not user:
             raise forms.ValidationError('Wrong email or password')
 
         self.user = user
         return self.cleaned_data
-
     def get_user(self):
         return self.user
