@@ -22,6 +22,11 @@ class UserRegisterForm(UserCreationForm):
         widget=forms.EmailInput(attrs={'placeholder':'Email'}),
         help_text=''
     )
+    def clean_email(self):
+        email=self.cleaned_data.get('email')
+        if User.objects.filter(email=email).first():
+            raise forms.ValidationError('This email is already exists')
+        return email
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
@@ -32,12 +37,12 @@ class UserLoginForm(forms.Form):
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.filter(email=email).exists()
         except User.DoesNotExist:
-            raise forms.ValidationError('Пользователь с таким email не найден')
+            raise forms.ValidationError('Wrong email or password')
         user=authenticate(username=user.username, password=password)
         if not user:
-            raise forms.ValidationError('Неверный пароль')
+            raise forms.ValidationError('Wrong email or password')
 
         self.user = user
         return self.cleaned_data

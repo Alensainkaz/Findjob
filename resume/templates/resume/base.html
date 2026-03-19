@@ -7,6 +7,9 @@
     <title>Findy-Job</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="icon" type="image/svg+xml" href="{% static 'favicon-16x16.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'favicon-512.png' %}">
     <link rel="stylesheet" href="{% static 'resume/style.css' %}?v=1">
     <style>
     * {
@@ -29,7 +32,7 @@
     .block {
         display: flex;
         gap:20px;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: flex-start;
     }
 

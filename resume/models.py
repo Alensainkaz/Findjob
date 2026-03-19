@@ -12,7 +12,7 @@ class Resume(models.Model):
     name=models.CharField(max_length=100)
     surname=models.CharField(max_length=100)
     father_name=models.CharField(max_length=100)
-    email=models.EmailField(max_length=100)
+    email=models.EmailField(max_length=100, unique=True)
     experience=models.CharField(max_length=100)
     education=models.CharField(max_length=100)
     telephone=models.CharField(name='telephone')
