@@ -19,6 +19,7 @@ def index(request):
         'specialities':specialities,
     }
     return render(request, 'resume/index.html', context)
+
 @login_required
 def create_resume(request):
     if request.method == 'POST':

@@ -1,13 +1,14 @@
 from django.db import models
 from users.models import User
 from django.conf import settings
+import uuid
 SPECIALITY_CHOICES = [
     ('finansist','Finansist'),
     ('architecture','Architecture'),
     ('Sales manager','Sales Manager'),
     ('Sportsman','Sportsman'),
     ('Programmer','Programmer'),
-]
+] 
 class Resume(models.Model):
     name=models.CharField(max_length=100)
     surname=models.CharField(max_length=100)

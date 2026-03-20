@@ -1,11 +1,12 @@
 from pathlib import Path
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
-SECRET_KEY = 'django-insecure-vx2$oi!=+f@dwk-q2-&%z&(pv*%c&^rko$qf-^=vr1ysm&wn9p'
+
 DEBUG = True
 ALLOWED_HOSTS = ['www.findy-job.com','findy-job.com','http://127.0.0.1:8000/','127.0.0.1']
 
@@ -89,3 +90,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom user model
 AUTH_USER_MODEL = 'users.User'
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
