@@ -1,5 +1,10 @@
 from pathlib import Path
 import os
+from pathlib import Path
+import os
+from dotenv import load_dotenv  # ← это есть?
+
+load_dotenv()  # ← и это?
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,6 +24,7 @@ INSTALLED_APPS = [
     'users',
     'resume',
     'cart',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -95,3 +101,6 @@ ANYMAIL = {
     'BREVO_API_KEY': os.getenv('BREVO_API_KEY'),
 }
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+# Временно в settings.py для проверки:
+print("BREVO KEY:", os.getenv('BREVO_API_KEY'))
+print("FROM EMAIL:", os.getenv('DEFAULT_FROM_EMAIL'))
