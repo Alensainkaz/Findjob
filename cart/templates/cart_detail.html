@@ -1,22 +1,32 @@
 {% extends 'resume/base.html' %}
 {% block content %}
-<h1>Resume added for consideration</h1>
+
+<h2 style="margin-bottom:20px;">Saved for consideration</h2>
 
 {% if items %}
     {% for item in items %}
-        <h3>{{ item.resume.name }}</h3>
-
+    <div class="block">
         {% if item.resume.image %}
-            <img src="{{ item.resume.image.url }}" alt="{{ item.resume.name }}" width="400">
+            <img src="{{ item.resume.image.url }}" alt="{{ item.resume.name }}">
         {% endif %}
-        <a href="{% url 'message' %}">Write an email</a>
-        <form method="post" action="{% url 'cart_remove' item.id %}">
-            {% csrf_token %}
-            <button type="submit">Remove from list</button>
-        </form>
+        <div class="block-info">
+            <div class="name">
+                <strong>{{ item.resume.name }}</strong>
+                <strong>{{ item.resume.surname }}</strong>
+            </div>
+            <p style="color:#0052ce;font-size:0.9rem;margin-top:4px;">{{ item.resume.speciality }}</p>
+            <div class="links-resume" style="margin-top:10px;">
+                <a href="{% url 'message' %}">Write an email</a>
+                <form method="post" action="{% url 'cart_remove' item.id %}" style="margin:0;">
+                    {% csrf_token %}
+                    <button type="submit" style="padding:6px 14px;border-radius:6px;background:#fff;color:#c00;border:1px solid #ddd;cursor:pointer;font-size:0.85rem;font-weight:600;">Remove</button>
+                </form>
+            </div>
+        </div>
+    </div>
     {% endfor %}
 {% else %}
-    <p>You didn't add anything for consideration</p>
+    <p style="color:#999;">You didn't add anything for consideration.</p>
 {% endif %}
 
 {% endblock content %}
