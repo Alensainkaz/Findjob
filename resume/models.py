@@ -3,12 +3,32 @@ from users.models import User
 from django.conf import settings
 import uuid
 SPECIALITY_CHOICES = [
-    ('finansist','Finansist'),
-    ('architecture','Architecture'),
-    ('Sales manager','Sales Manager'),
-    ('Sportsman','Sportsman'),
-    ('Programmer','Programmer'),
-] 
+    ('finansist', 'Finansist'),
+    ('architecture', 'Architecture'),
+    ('sales_manager', 'Sales Manager'),
+    ('sportsman', 'Sportsman'),
+    ('programmer', 'Programmer'),
+    ('doctor', 'Doctor'),
+    ('lawyer', 'Lawyer'),
+    ('teacher', 'Teacher'),
+    ('engineer', 'Engineer'),
+    ('designer', 'Designer'),
+    ('accountant', 'Accountant'),
+    ('psychologist', 'Psychologist'),
+    ('pharmacist', 'Pharmacist'),
+    ('journalist', 'Journalist'),
+    ('marketing_specialist', 'Marketing Specialist'),
+    ('data_scientist', 'Data Scientist'),
+    ('project_manager', 'Project Manager'),
+    ('nurse', 'Nurse'),
+    ('chef', 'Chef'),
+    ('electrician', 'Electrician'),
+    ('translator', 'Translator'),
+    ('economist', 'Economist'),
+    ('biologist', 'Biologist'),
+    ('photographer', 'Photographer'),
+    ('security_specialist', 'Security Specialist'),
+]
 class Resume(models.Model):
     name=models.CharField(max_length=100)
     surname=models.CharField(max_length=100)
