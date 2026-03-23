@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DEBUG = False
 ALLOWED_HOSTS = ['www.findy-job.com','findy-job.com','127.0.0.1:8000','127.0.0.1']
-
+SERVE_MEDIA = True
 # Application 
 INSTALLED_APPS = [
     'django.contrib.admin',
