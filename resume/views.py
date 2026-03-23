@@ -38,7 +38,7 @@ def resume_detail(request, pk):
 @staff_member_required
 def edit_resume(request, pk):
     resume = get_object_or_404(Resume, pk=pk)
-    if request.user != resume.user:
+    if not request.user.is_staff and request.user != resume.user:
         return HttpResponse('У вас нет прав на изменение этого резюме')
     if request.method == 'POST':
         form = ResumeForm(request.POST, request.FILES, instance=resume)
@@ -51,10 +51,9 @@ def edit_resume(request, pk):
 @staff_member_required
 def delete_resume(request, pk):
     resume = get_object_or_404(Resume, pk=pk)
-    if request.user != resume.user:
+    if not request.user.is_staff and request.user != resume.user:
         return HttpResponse('У вас нет прав на удаление этого резюме')
-
     if request.method == 'POST':
         resume.delete()
         return redirect('index')
-    return render(request,'resume/delete_resume.html', {'resume': resume})
+    return render(request, 'resume/delete_resume.html', {'resume': resume})
