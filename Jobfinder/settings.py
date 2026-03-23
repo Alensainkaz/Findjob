@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['www.findy-job.com','findy-job.com','http://127.0.0.1:8000/','127.0.0.1']
 
 # Application 
@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -101,6 +102,4 @@ ANYMAIL = {
     'BREVO_API_KEY': os.getenv('BREVO_API_KEY'),
 }
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
-# Временно в settings.py для проверки:
-print("BREVO KEY:", os.getenv('BREVO_API_KEY'))
-print("FROM EMAIL:", os.getenv('DEFAULT_FROM_EMAIL'))
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
