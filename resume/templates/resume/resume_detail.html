@@ -1,26 +1,31 @@
 {% extends 'resume/base.html' %}
 
 {% block content %}
-<a href="{% url 'index' %}" style="color:#555;text-decoration:none;font-size:0.9rem;">← Back</a>
+<a href="{% url 'index' %}" style="color:#5A8BBF;text-decoration:none;font-size:0.9rem;">← Back</a>
 
-<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:28px;margin-top:16px;display:flex;gap:24px;align-items:flex-start;max-width:700px;">
+<div style="background:#16253A;border:1px solid rgba(45,232,176,0.2);border-radius:12px;padding:28px;margin-top:16px;display:flex;gap:24px;align-items:flex-start;max-width:700px;">
     {% if resume.image %}
         <img src="{{ resume.image.url }}" style="width:130px;height:130px;object-fit:cover;border-radius:8px;flex-shrink:0;">
     {% endif %}
 
     <div>
         <div class="name" style="margin-bottom:12px;">
-            <strong style="font-size:1.3rem;">{{ resume.name }}</strong>
-            <strong style="font-size:1.3rem;">{{ resume.surname }}</strong>
-            <strong style="font-size:1.3rem;">{{ resume.father_name }}</strong>
+            <strong style="font-size:1.3rem;color:#F0F6FF;">{{ resume.name }}</strong>
+            <strong style="font-size:1.3rem;color:#F0F6FF;">{{ resume.surname }}</strong>
+            <strong style="font-size:1.3rem;color:#F0F6FF;">{{ resume.father_name }}</strong>
         </div>
 
-        <p style="margin-bottom:6px;color:#555;">Education: {{ resume.education }}</p>
-        <p style="margin-bottom:6px;color:#555;">Experience: {{ resume.experience }}</p>
-        <p style="margin-bottom:6px;color:#555;">Email: {{ resume.email }}</p>
-        <p style="margin-bottom:16px;color:#555;">Telephone: {{ resume.telephone }}</p>
+        <p style="color:#2DE8B0;font-size:0.9rem;margin-bottom:14px;">{{ resume.speciality }}</p>
 
-        <a href="{% url 'cart_add' resume.id %}" style="padding:8px 18px;border-radius:6px;background:#111;color:#fff;text-decoration:none;font-size:0.9rem;font-weight:600;">Add for consideration</a>
+        <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">Education: <span style="color:#F0F6FF;">{{ resume.education }}</span></p>
+        <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">Experience: <span style="color:#F0F6FF;">{{ resume.experience }}</span></p>
+        <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">Email: <span style="color:#F0F6FF;">{{ resume.email }}</span></p>
+        <p style="margin-bottom:16px;color:#8AABCC;font-size:0.9rem;">Telephone: <span style="color:#F0F6FF;">{{ resume.telephone }}</span></p>
+
+        <a href="{% url 'cart_add' resume.id %}"
+           style="display:inline-block;padding:9px 22px;border-radius:6px;background:linear-gradient(90deg,#2DE8B0,#0EB8F5);color:#0D1B2A;text-decoration:none;font-size:0.9rem;font-weight:700;">
+            Add for consideration
+        </a>
     </div>
 </div>
 {% endblock content %}

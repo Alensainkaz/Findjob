@@ -2,10 +2,9 @@ from pathlib import Path
 import os
 from pathlib import Path
 import os
-from dotenv import load_dotenv  # ← это есть?
+from dotenv import load_dotenv
 
-load_dotenv()  # ← и это?
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+load_dotenv()  
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY

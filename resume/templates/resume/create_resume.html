@@ -3,11 +3,11 @@
 
 <h2 style="margin-bottom:20px;">Add Resume</h2>
 
-<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:28px;max-width:520px;">
+<div style="background:#16253A;border:1px solid #e8e8e8;border-radius:10px;padding:28px;max-width:520px;">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
-        <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:14px;">
+        <div style="background:#16253A;border:1px solid rgba(45,232,176,0.2);border-radius:10px;padding:28px;max-width:520px;">
             <label style="font-size:0.85rem;font-weight:600;color:#555;">{{ field.label }}</label>
             {{ field }}
             {% if field.errors %}
@@ -15,7 +15,7 @@
             {% endif %}
         </div>
         {% endfor %}
-        <button type="submit" style="margin-top:6px;">Add resume</button>
+        <button type="submit" style="background: linear-gradient(90deg, #2DE8B0, #0EB8F5);color: #0D1B2A;border: none;">Add resume</button>
     </form>
 </div>
 

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import ResumeForm
 from .models import Resume,SPECIALITY_CHOICES
 from django.contrib.admin.views.decorators import staff_member_required
-
+from django.db.models import Q
 def index(request):
     specialities=(choice[1] for choice in SPECIALITY_CHOICES)
     resumes = Resume.objects.all().order_by('-created_at')
@@ -13,7 +13,11 @@ def index(request):
     if speciality_filter:
         resumes=resumes.filter(speciality=speciality_filter)
     if search_query:
-        resumes = resumes.filter(name__icontains=search_query)
+        resumes = resumes.filter(
+        Q(name__icontains=search_query) |
+        Q(surname__icontains=search_query) |
+        Q(speciality__icontains=search_query)
+    )
     context = {
         'resumes': resumes,
         'specialities':specialities,
