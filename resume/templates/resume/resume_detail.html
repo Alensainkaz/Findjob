@@ -25,10 +25,12 @@
                 {{ resume.email }}
             </a>
         </p>
+        <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">
+            Telephone:
             <a href="tel:{{ resume.telephone }}" style="color:#F0F6FF; text-decoration:none;">
                 {{ resume.telephone }}
             </a>
-
+        </p>
         <a href="{% url 'cart_add' resume.id %}"
            style="display:inline-block;padding:9px 22px;border-radius:6px;background:linear-gradient(90deg,#2DE8B0,#0EB8F5);color:#0D1B2A;text-decoration:none;font-size:0.9rem;font-weight:700;">
             Add for consideration
