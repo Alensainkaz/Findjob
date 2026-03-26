@@ -3,9 +3,9 @@
 {% block content %}
 <a href="{% url 'index' %}" style="color:#5A8BBF;text-decoration:none;font-size:0.9rem;">← Back</a>
 
-<div style="background:#0e355e;;border:1px solid rgba(45,232,176,0.2);border-radius:12px;padding:28px;margin-top:16px;display:flex;gap:24px;align-items:flex-start;max-width:700px;">
+<div style="background:#13263b;border:1px solid rgba(45,232,176,0.2);border-radius:12px;padding:28px;margin-top:16px;display:flex;gap:24px;align-items:flex-start;max-width:700px;">
     {% if resume.image %}
-        <img src="{{ resume.image.url }}" style="width:130px;height:130px;object-fit:cover;border-radius:8px;flex-shrink:0;">
+        <img src="{{ resume.image.url }}" style="width:130px;height:190px;object-fit:cover;border-radius:8px;flex-shrink:0;">
     {% endif %}
 
     <div>

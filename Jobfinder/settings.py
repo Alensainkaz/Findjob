@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 
 DEBUG = True
-ALLOWED_HOSTS = ['www.findy-job.com','findy-job.com','http://127.0.0.1:8000/','127.0.0.1']
+ALLOWED_HOSTS = ['www.findy-job.com','findy-job.com','127.0.0.1']
 
 # Application 
 INSTALLED_APPS = [
