@@ -3,7 +3,7 @@
 {% block content %}
 <a href="{% url 'index' %}" style="color:#5A8BBF;text-decoration:none;font-size:0.9rem;">← Back</a>
 
-<div style="background:#16253A;border:1px solid rgba(45,232,176,0.2);border-radius:12px;padding:28px;margin-top:16px;display:flex;gap:24px;align-items:flex-start;max-width:700px;">
+<div style="background:#0e355e;;border:1px solid rgba(45,232,176,0.2);border-radius:12px;padding:28px;margin-top:16px;display:flex;gap:24px;align-items:flex-start;max-width:700px;">
     {% if resume.image %}
         <img src="{{ resume.image.url }}" style="width:130px;height:130px;object-fit:cover;border-radius:8px;flex-shrink:0;">
     {% endif %}
@@ -19,8 +19,15 @@
 
         <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">Education: <span style="color:#F0F6FF;">{{ resume.education }}</span></p>
         <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">Experience: <span style="color:#F0F6FF;">{{ resume.experience }}</span></p>
-        <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">Email: <span style="color:#F0F6FF;">{{ resume.email }}</span></p>
-        <p style="margin-bottom:16px;color:#8AABCC;font-size:0.9rem;">Telephone: <span style="color:#F0F6FF;">{{ resume.telephone }}</span></p>
+        <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">
+            Email: 
+            <a href="mailto:{{ resume.email }}" style="color:#F0F6FF;text-decoration: none; border-bottom:1px dotted #2DE8B0">
+                {{ resume.email }}
+            </a>
+        </p>
+            <a href="tel:{{ resume.telephone }}" style="color:#F0F6FF; text-decoration:none;">
+                {{ resume.telephone }}
+            </a>
 
         <a href="{% url 'cart_add' resume.id %}"
            style="display:inline-block;padding:9px 22px;border-radius:6px;background:linear-gradient(90deg,#2DE8B0,#0EB8F5);color:#0D1B2A;text-decoration:none;font-size:0.9rem;font-weight:700;">

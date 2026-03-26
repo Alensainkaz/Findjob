@@ -1,5 +1,4 @@
 from django.db import models
-from users.models import User
 from django.conf import settings
 import uuid
 SPECIALITY_CHOICES = [
@@ -43,8 +42,3 @@ class Resume(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     def __str__(self):
         return self.name
-class Message(models.Model):
-    email=models.EmailField(max_length=100)
-    message=models.TextField()
-    sended_at=models.DateTimeField(auto_now_add=True)
-    from_user=models.ForeignKey(User,on_delete=models.CASCADE)

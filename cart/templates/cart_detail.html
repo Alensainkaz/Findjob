@@ -16,7 +16,6 @@
             </div>
             <p style="color:#0052ce;font-size:0.9rem;margin-top:4px;">{{ item.resume.speciality }}</p>
             <div class="links-resume" style="margin-top:10px;">
-                <a href="{% url 'message' %}">Write an email</a>
                 <form method="post" action="{% url 'cart_remove' item.id %}" style="margin:0;">
                     {% csrf_token %}
                     <button type="submit" style="padding:6px 14px;border-radius:6px;background:#fff;color:#c00;border:1px solid #ddd;cursor:pointer;font-size:0.85rem;font-weight:600;">Remove</button>

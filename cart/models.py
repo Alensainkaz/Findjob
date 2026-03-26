@@ -5,7 +5,7 @@ class Cart(models.Model):
     user = models.ForeignKey('users.User', null=True, related_name='carts', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'Cart of {self.user.username}'
+        return f'Savings of {self.user.username}'
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)

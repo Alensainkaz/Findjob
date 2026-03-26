@@ -1,9 +1,5 @@
-
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-
-from .forms import MessageForm
 from .models import Cart, CartItem
 from resume.models import Resume
 
@@ -33,17 +29,3 @@ def cart_remove(request,item_id):
 def cart_update(request,item_id):
     item=get_object_or_404(CartItem,id=item_id,cart__user=request.user)
     return redirect('cart_detail')
-@login_required
-def message(request):
-    if request.method == 'POST':
-        form = MessageForm(request.POST)
-        if form.is_valid():
-            message = form.save(commit=False)
-            message.from_user = request.user
-            message.save()
-            return redirect('index')
-    else:
-        form=MessageForm()
-    context = {'form':form}
-    return render(request,'cart_message.html',context)
-
