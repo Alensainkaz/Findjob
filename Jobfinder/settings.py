@@ -10,7 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 
 DEBUG = True
-ALLOWED_HOSTS = ['www.findy-job.com','findy-job.com','127.0.0.1']
+
+ALLOWED_HOSTS = ['www.findy-job.com', 'findy-job.com', '127.0.0.1', '.onrender.com'] 
 
 # Application 
 INSTALLED_APPS = [
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ← добавь сюда
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -84,6 +86,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
