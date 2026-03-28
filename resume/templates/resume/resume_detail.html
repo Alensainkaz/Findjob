@@ -1,14 +1,44 @@
 {% extends 'resume/base.html' %}
 
 {% block content %}
+<style>
+@media (max-width: 768px) {
+    .detail-card {
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 20px !important;
+        gap: 16px !important;
+    }
+
+    .detail-card img {
+        width: 110px !important;
+        height: 160px !important;
+    }
+
+    .detail-card .detail-info {
+        text-align: center;
+    }
+
+    .detail-card .name {
+        justify-content: center;
+    }
+
+    .detail-card a[href*="cart"] {
+        width: 100%;
+        text-align: center;
+        display: block !important;
+    }
+}
+</style>
+
 <a href="{% url 'index' %}" style="color:#5A8BBF;text-decoration:none;font-size:0.9rem;">← Back</a>
 
-<div style="background:#13263b;border:1px solid rgba(45,232,176,0.2);border-radius:12px;padding:28px;margin-top:16px;display:flex;gap:24px;align-items:flex-start;max-width:700px;">
+<div class="detail-card" style="background:#13263b;border:1px solid rgba(45,232,176,0.2);border-radius:12px;padding:28px;margin-top:16px;display:flex;gap:24px;align-items:flex-start;max-width:700px;">
     {% if resume.image %}
         <img src="{{ resume.image.url }}" style="width:130px;height:190px;object-fit:cover;border-radius:8px;flex-shrink:0;">
     {% endif %}
 
-    <div>
+    <div class="detail-info">
         <div class="name" style="margin-bottom:12px;">
             <strong style="font-size:1.3rem;color:#F0F6FF;">{{ resume.name }}</strong>
             <strong style="font-size:1.3rem;color:#F0F6FF;">{{ resume.surname }}</strong>
@@ -20,14 +50,14 @@
         <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">Education: <span style="color:#F0F6FF;">{{ resume.education }}</span></p>
         <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">Experience: <span style="color:#F0F6FF;">{{ resume.experience }}</span></p>
         <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">
-            Email: 
-            <a href="mailto:{{ resume.email }}" style="color:#F0F6FF;text-decoration: none; border-bottom:1px dotted #2DE8B0">
+            Email:
+            <a href="mailto:{{ resume.email }}" style="color:#F0F6FF;text-decoration:none;border-bottom:1px dotted #2DE8B0">
                 {{ resume.email }}
             </a>
         </p>
         <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">
             Telephone:
-            <a href="tel:{{ resume.telephone }}" style="color:#F0F6FF; text-decoration:none;">
+            <a href="tel:{{ resume.telephone }}" style="color:#F0F6FF;text-decoration:none;">
                 {{ resume.telephone }}
             </a>
         </p>

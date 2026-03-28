@@ -1,9 +1,41 @@
 {% extends 'resume/base.html' %}
 {% block content %}
-<h4>Resume deletion</h4>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Delete</button>
-</form>
+
+<a href="{% url 'index' %}" style="color:#5A8BBF;text-decoration:none;font-size:0.9rem;">← Back</a>
+
+<!-- Карточка резюме -->
+<div style="background:#13263b;border:1px solid rgba(45,232,176,0.2);border-radius:12px;padding:20px;margin-top:16px;max-width:460px;display:flex;gap:16px;align-items:flex-start;">
+    {% if resume.image %}
+        <img src="{{ resume.image.url }}" style="width:90px;height:130px;object-fit:cover;border-radius:8px;flex-shrink:0;">
+    {% endif %}
+    <div>
+        <div style="display:flex;gap:6px;margin-bottom:6px;flex-wrap:wrap;">
+            <strong style="color:#F0F6FF;font-size:1.1rem;">{{ resume.name }}</strong>
+            <strong style="color:#F0F6FF;font-size:1.1rem;">{{ resume.surname }}</strong>
+            <strong style="color:#F0F6FF;font-size:1.1rem;">{{ resume.father_name }}</strong>
+        </div>
+        <p style="color:#2DE8B0;font-size:0.85rem;margin-bottom:6px;">{{ resume.speciality }}</p>
+        <p style="color:#8AABCC;font-size:0.85rem;">{{ resume.education }}</p>
+        <p style="color:#8AABCC;font-size:0.85rem;">{{ resume.experience }}</p>
+    </div>
+</div>
+
+<!-- Подтверждение удаления -->
+<div style="background:#13263b;border:1px solid rgba(232,45,45,0.3);border-radius:12px;padding:24px;margin-top:12px;max-width:460px;">
+    <p style="color:#F0F6FF;font-size:0.95rem;margin-bottom:6px;font-weight:600;">Delete this resume?</p>
+    <p style="color:#8AABCC;font-size:0.85rem;margin-bottom:20px;">This action cannot be undone.</p>
+
+    <form method="post" style="display:flex;gap:12px;flex-wrap:wrap;">
+        {% csrf_token %}
+        <button type="submit"
+            style="padding:9px 22px;border-radius:6px;background:linear-gradient(90deg,#e12222,#c00);color:#fff;border:none;font-size:0.9rem;font-weight:700;cursor:pointer;">
+            Yes, delete
+        </button>
+        <a href="{% url 'index' %}"
+            style="padding:9px 22px;border-radius:6px;background:#1e3a55;color:#F0F6FF;text-decoration:none;font-size:0.9rem;font-weight:600;">
+            Cancel
+        </a>
+    </form>
+</div>
+
 {% endblock content %}

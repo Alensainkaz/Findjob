@@ -4,7 +4,7 @@
 {% for resume in resumes %}
 <div class="block">
     {% if resume.image %}
-        <img src="{{ resume.image.url }}" alt="{{ resume.name }}">
+        <img src="{{ resume.image.url }}" alt="{{ resume.name }}" style="height:150px;width:150px;">
     {% endif %}
     <div class="block-info">
         <a href="{% url 'resume_detail' resume.pk %}" style="text-decoration:none;">
