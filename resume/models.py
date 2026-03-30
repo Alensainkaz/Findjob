@@ -184,7 +184,6 @@ class Resume(models.Model):
     email=models.EmailField(max_length=100, unique=True)
     experience=models.CharField(max_length=100)
     education=models.CharField(max_length=100)
-    telephone=models.CharField(name='telephone')
     image=models.ImageField(upload_to='images/', blank=True, null=True)
     speciality=models.CharField(max_length=100,choices=SPECIALITY_CHOICES)
     created_at=models.DateTimeField(auto_now_add=True)

@@ -46,19 +46,12 @@
         </div>
 
         <p style="color:#2DE8B0;font-size:0.9rem;margin-bottom:14px;">{{ resume.speciality }}</p>
-
         <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">Education: <span style="color:#F0F6FF;">{{ resume.education }}</span></p>
         <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">Experience: <span style="color:#F0F6FF;">{{ resume.experience }}</span></p>
         <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">
             Email:
             <a href="mailto:{{ resume.email }}" style="color:#F0F6FF;text-decoration:none;border-bottom:1px dotted #2DE8B0">
                 {{ resume.email }}
-            </a>
-        </p>
-        <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">
-            Telephone:
-            <a href="tel:{{ resume.telephone }}" style="color:#F0F6FF;text-decoration:none;">
-                {{ resume.telephone }}
             </a>
         </p>
         <a href="{% url 'cart_add' resume.id %}"
