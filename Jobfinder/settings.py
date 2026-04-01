@@ -20,13 +20,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage', 
     'django.contrib.staticfiles',
+    'cloudinary',
     'users',
     'resume',
     'cart',
     'anymail',
-    'cloudinary',
-    'cloudinary_storage', 
+    
 ]
 
 MIDDLEWARE = [
@@ -107,3 +108,5 @@ ANYMAIL = {
     'BREVO_API_KEY': os.getenv('BREVO_API_KEY'),
 }
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+print("CLOUDINARY_CLOUD_NAME:", os.getenv('CLOUDINARY_CLOUD_NAME'))
+print("CLOUDINARY_API_KEY:", os.getenv('CLOUDINARY_API_KEY'))
