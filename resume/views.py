@@ -27,6 +27,7 @@ def index(request):
 @login_required
 def create_resume(request):
     if request.method == 'POST':
+        print("FILES:", request.FILES)
         form = ResumeForm(request.POST, request.FILES)
         if form.is_valid():
             resume = form.save(commit=False)
