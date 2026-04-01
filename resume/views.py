@@ -33,6 +33,7 @@ def create_resume(request):
             resume = form.save(commit=False)
             resume.user = request.user
             resume.save()
+            print("Image URL:", resume.image.url)
             return redirect('index')
     else:
         form = ResumeForm()
