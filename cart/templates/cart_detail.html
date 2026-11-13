@@ -14,7 +14,7 @@
                 <strong>{{ item.resume.name }}</strong>
                 <strong>{{ item.resume.surname }}</strong>
             </div>
-            <p style="color:#0052ce;font-size:0.9rem;margin-top:4px;">{{ item.resume.speciality }}</p>
+            <p style="color:#0052ce;font-size:0.9rem;margin-top:4px;">{{ item.resume.get_speciality_display }}</p>
             <a style="color:#00E5C0;;font-size:0.9rem;margin-top:4px;text-decoration: none;" href="mailto:{{ item.resume.email }}">{{ item.resume.email }}</a>
             <div class="links-resume" style="margin-top:10px;">
                 <form method="post" action="{% url 'cart_remove' item.id %}" style="margin:0;">

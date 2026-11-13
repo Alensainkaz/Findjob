@@ -24,8 +24,8 @@ class UserRegisterForm(UserCreationForm):
     )
     def clean_email(self):
         email=self.cleaned_data.get('email')
-        if User.objects.filter(email=email).first():
-            raise forms.ValidationError('This email is already exists')
+        if User.objects.filter(email__iexact=email).exists():
+            raise forms.ValidationError('This email already exists')
         return email
     class Meta:
         model = User
@@ -37,10 +37,15 @@ class UserLoginForm(forms.Form):
     def clean(self):
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
+        if not email or not password:
+            return self.cleaned_data
 
-        user_obj = User.objects.filter(email=email).first()
+        user_obj = User.objects.filter(email__iexact=email).first()
         if not user_obj:
             raise forms.ValidationError('Wrong email or password')
+
+        if not user_obj.is_active and user_obj.check_password(password):
+            raise forms.ValidationError('Please confirm your email first — check your inbox')
 
         user = authenticate(username=user_obj.username, password=password)
         if not user:
