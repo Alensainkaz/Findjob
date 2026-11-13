@@ -1,30 +1,36 @@
 {% extends 'resume/base.html' %}
+{% block title %}Resumes · Findy-Job{% endblock %}
+{% block header_search %}{% endblock %}
 
 {% block content %}
-{% for resume in resumes %}
-<div class="block">
-    {% if resume.image %}
-        <img src="{{ resume.image.url }}" alt="{{ resume.name }}" style="height:150px;width:150px;">
-    {% endif %}
-    <div class="block-info">
-        <a href="{% url 'resume_detail' resume.pk %}" style="text-decoration:none;">
-            <div class="name">
-                <strong>{{ resume.name }}</strong>
-                <strong>{{ resume.surname }}</strong>
-                <strong>{{ resume.father_name }}</strong>
-            </div>
-            <p style="color: #2DE8B0;font-size:0.9rem;margin-top:4px;">{{ resume.get_speciality_display }}</p>
-        </a>
-        <div class="links-resume">
-            <a href="{% url 'cart_add' resume.id %}">Add for consideration</a>
-            {% if request.user.is_staff or request.user == resume.user %}
-                <a href="{% url 'edit_resume' resume.id %}">Change resume</a>
-                <a href="{% url 'delete_resume' resume.id %}">Remove resume</a>
-            {% endif %}
-        </div>
-    </div>
+<div class="page-head page-head--split">
+  <div>
+    <h1>Find your next hire</h1>
+    <p>Browse resumes, filter by speciality and save the people you want to contact.</p>
+  </div>
 </div>
-{% empty %}
-    <p style="color:#999;">No resumes found.</p>
-{% endfor %}
-{% endblock content %}
+
+{{ board|json_script:"board-data" }}
+<div data-vue="resume-board" data-props-id="board-data">
+  {# Server-rendered fallback: replaced by the Vue board once it mounts #}
+  <form class="board__filters" method="get" role="search">
+    <input type="search" name="q" value="{{ request.GET.q }}" class="input" placeholder="Search by name or speciality" aria-label="Search resumes">
+  </form>
+  <p class="board__count">{{ board.total }} resume{{ board.total|pluralize }}</p>
+  <div class="board__list">
+    {% for r in resumes %}
+      <article class="resume-row">
+        <a href="{{ r.url }}" class="resume-row__avatar" tabindex="-1" aria-hidden="true">
+          {% if r.image %}<img src="{{ r.image }}" alt="" class="is-loaded" loading="lazy">{% else %}<span class="avatar-initials">{{ r.name|first|upper }}{{ r.surname|first|upper }}</span>{% endif %}
+        </a>
+        <div class="resume-row__body">
+          <h3 class="resume-row__name"><a href="{{ r.url }}">{{ r.name }} {{ r.surname }} <span class="muted">{{ r.fatherName }}</span></a></h3>
+          <p class="chip">{{ r.speciality }}</p>
+        </div>
+      </article>
+    {% empty %}
+      <div class="empty"><h2 class="empty__title">No resumes yet</h2></div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

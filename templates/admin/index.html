@@ -1,0 +1,44 @@
+{% extends 'admin/base.html' %}
+{% load i18n unfold %}
+
+{% block title %}{% trans 'Dashboard' %} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block content %}
+{% component "unfold/components/container.html" %}
+    {% component "unfold/components/title.html" with class="mb-6" %}Findy-Job overview{% endcomponent %}
+
+    <div class="grid gap-4 mb-8 md:grid-cols-3">
+        {% for kpi in kpis %}
+            {% component "unfold/components/card.html" with href=kpi.href %}
+                {% component "unfold/components/text.html" %}{{ kpi.title }}{% endcomponent %}
+                <p class="font-semibold mt-1 text-3xl text-font-important-light dark:text-font-important-dark">{{ kpi.value }}</p>
+                <p class="mt-1 text-sm">{{ kpi.note }}</p>
+            {% endcomponent %}
+        {% endfor %}
+    </div>
+
+    <div class="grid gap-4 lg:grid-cols-2">
+        {% component "unfold/components/card.html" with title="Top specialities" %}
+            {% for row in top_specialities %}
+                <div class="flex items-center justify-between py-2 {% if not forloop.last %}border-b border-base-200 dark:border-base-800{% endif %}">
+                    <span>{{ row.label }}</span>
+                    <span class="font-semibold text-font-important-light dark:text-font-important-dark">{{ row.total }}</span>
+                </div>
+            {% empty %}
+                <p>No resumes yet.</p>
+            {% endfor %}
+        {% endcomponent %}
+
+        {% component "unfold/components/card.html" with title="Latest resumes" %}
+            {% for resume in latest_resumes %}
+                <a href="{% url 'admin:resume_resume_change' resume.pk %}" class="flex items-center justify-between py-2 hover:text-primary-600 {% if not forloop.last %}border-b border-base-200 dark:border-base-800{% endif %}">
+                    <span>{{ resume.name }} {{ resume.surname }} · {{ resume.get_speciality_display }}</span>
+                    <span class="text-sm">{{ resume.created_at|date:"d M" }}</span>
+                </a>
+            {% empty %}
+                <p>No resumes yet.</p>
+            {% endfor %}
+        {% endcomponent %}
+    </div>
+{% endcomponent %}
+{% endblock %}

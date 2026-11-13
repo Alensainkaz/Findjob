@@ -31,6 +31,8 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 class UserLoginForm(forms.Form):
+    pending_user = None
+
     email = forms.EmailField(label='Email')
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
@@ -45,7 +47,9 @@ class UserLoginForm(forms.Form):
             raise forms.ValidationError('Wrong email or password')
 
         if not user_obj.is_active and user_obj.check_password(password):
-            raise forms.ValidationError('Please confirm your email first — check your inbox')
+            # View sends a fresh code and redirects to the code page
+            self.pending_user = user_obj
+            raise forms.ValidationError('Please confirm your email first.', code='inactive')
 
         user = authenticate(username=user_obj.username, password=password)
         if not user:

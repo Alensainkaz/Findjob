@@ -1,32 +1,25 @@
 {% extends 'resume/base.html' %}
+{% block title %}Saved resumes · Findy-Job{% endblock %}
+
 {% block content %}
-
-<h2 style="margin-bottom:20px;">Saved for consideration</h2>
-
-{% if items %}
+<div class="page-head">
+  <h1>Saved for consideration</h1>
+  <p>Your shortlist. Email candidates directly or remove the ones you’ve ruled out.</p>
+</div>
+{{ props|json_script:"saved-data" }}
+<div data-vue="saved-list" data-props-id="saved-data">
+  <div class="board__list">
     {% for item in items %}
-    <div class="block">
-        {% if item.resume.image %}
-            <img src="{{ item.resume.image.url }}" alt="{{ item.resume.name }}">
-        {% endif %}
-        <div class="block-info">
-            <div class="name">
-                <strong>{{ item.resume.name }}</strong>
-                <strong>{{ item.resume.surname }}</strong>
-            </div>
-            <p style="color:#0052ce;font-size:0.9rem;margin-top:4px;">{{ item.resume.get_speciality_display }}</p>
-            <a style="color:#00E5C0;;font-size:0.9rem;margin-top:4px;text-decoration: none;" href="mailto:{{ item.resume.email }}">{{ item.resume.email }}</a>
-            <div class="links-resume" style="margin-top:10px;">
-                <form method="post" action="{% url 'cart_remove' item.id %}" style="margin:0;">
-                    {% csrf_token %}
-                    <button type="submit" style="padding:6px 14px;border-radius:6px;background:#fff;color:#c00;border:1px solid #ddd;cursor:pointer;font-size:0.85rem;font-weight:600;">Remove</button>
-                </form>
-            </div>
+      <article class="resume-row">
+        <div class="resume-row__body">
+          <h3 class="resume-row__name"><a href="{% url 'resume_detail' item.resume_id %}">{{ item.resume.name }} {{ item.resume.surname }}</a></h3>
+          <p class="chip">{{ item.resume.get_speciality_display }}</p>
         </div>
-    </div>
+        <form method="post" action="{% url 'cart_remove' item.id %}">{% csrf_token %}<button class="btn btn--small btn--ghost">Remove</button></form>
+      </article>
+    {% empty %}
+      <div class="empty"><h2 class="empty__title">Nothing saved yet</h2><a href="{% url 'index' %}" class="btn btn--primary">Browse resumes</a></div>
     {% endfor %}
-{% else %}
-    <p style="color:#999;">You didn't add anything for consideration.</p>
-{% endif %}
-
-{% endblock content %}
+  </div>
+</div>
+{% endblock %}

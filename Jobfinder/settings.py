@@ -3,6 +3,8 @@ from pathlib import Path
 
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
+from django.templatetags.static import static
+from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -37,6 +39,8 @@ if not DEBUG:
 
 # Application
 INSTALLED_APPS = [
+    'unfold',
+    'unfold.contrib.filters',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -69,13 +73,14 @@ ROOT_URLCONF = 'Jobfinder.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'Jobfinder.context_processors.toasts',
             ],
         },
     },
@@ -121,7 +126,9 @@ CLOUDINARY_STORAGE = {
 # игнорируются — хранилища задаются только через STORAGES.
 STORAGES = {
     'default': {
-        'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage',
+        # Cloudinary in production; local disk when Cloudinary isn't configured (local dev)
+        'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage'
+        if os.getenv('CLOUDINARY_CLOUD_NAME') else 'django.core.files.storage.FileSystemStorage',
     },
     'staticfiles': {
         'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
@@ -137,11 +144,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = 'login_view'
 
-EMAIL_BACKEND = 'anymail.backends.brevo.EmailBackend'
+# Brevo in production; without a key (local dev) emails are printed to the runserver console
+EMAIL_BACKEND = (
+    'anymail.backends.brevo.EmailBackend' if os.getenv('BREVO_API_KEY')
+    else 'django.core.mail.backends.console.EmailBackend'
+)
 ANYMAIL = {
     'BREVO_API_KEY': os.getenv('BREVO_API_KEY'),
 }
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL') or 'Findy-Job <no-reply@findy-job.com>'
 
 # Пишем ошибки (включая traceback 500-х) в stdout — их видно в логах Render
 LOGGING = {
@@ -153,5 +164,58 @@ LOGGING = {
     'root': {'handlers': ['console'], 'level': 'INFO'},
     'loggers': {
         'django': {'handlers': ['console'], 'level': 'INFO', 'propagate': False},
+    },
+}
+
+# Admin theme (django-unfold) in the site's navy + teal palette
+UNFOLD = {
+    'SITE_TITLE': 'Findy-Job admin',
+    'SITE_HEADER': 'Findy-Job',
+    'SITE_SUBHEADER': 'Resume board',
+    'SITE_URL': '/',
+    'SITE_SYMBOL': 'work',
+    'SITE_FAVICONS': [
+        {'rel': 'icon', 'sizes': '32x32', 'type': 'image/png', 'href': lambda request: static('favicon-32x32.png')},
+    ],
+    'SHOW_HISTORY': True,
+    'SHOW_VIEW_ON_SITE': True,
+    'BORDER_RADIUS': '8px',
+    'THEME': 'dark',  # match the site; hides the light/dark switcher
+    'DASHBOARD_CALLBACK': 'Jobfinder.dashboard.dashboard_callback',
+    'COLORS': {
+        'base': {
+            '50': 'oklch(98% .004 250)', '100': 'oklch(95.5% .008 250)', '200': 'oklch(91% .014 250)',
+            '300': 'oklch(84% .022 250)', '400': 'oklch(68% .032 250)', '500': 'oklch(54% .038 250)',
+            '600': 'oklch(44% .042 250)', '700': 'oklch(35% .045 250)', '800': 'oklch(27% .045 250)',
+            '900': 'oklch(21% .042 250)', '950': 'oklch(16% .038 250)',
+        },
+        'primary': {
+            '50': 'oklch(97.5% .03 170)', '100': 'oklch(94% .06 170)', '200': 'oklch(89% .1 170)',
+            '300': 'oklch(85% .14 168)', '400': 'oklch(81% .16 167)', '500': 'oklch(73% .155 167)',
+            '600': 'oklch(63% .135 168)', '700': 'oklch(53% .115 169)', '800': 'oklch(44% .095 170)',
+            '900': 'oklch(37% .08 171)', '950': 'oklch(27% .06 172)',
+        },
+    },
+    'SIDEBAR': {
+        'show_search': True,
+        'show_all_applications': False,
+        'navigation': [
+            {
+                'title': 'Board',
+                'items': [
+                    {'title': 'Dashboard', 'icon': 'dashboard', 'link': reverse_lazy('admin:index')},
+                    {'title': 'Resumes', 'icon': 'badge', 'link': reverse_lazy('admin:resume_resume_changelist')},
+                    {'title': 'Saved lists', 'icon': 'bookmarks', 'link': reverse_lazy('admin:cart_cart_changelist')},
+                ],
+            },
+            {
+                'title': 'People',
+                'items': [
+                    {'title': 'Users', 'icon': 'group', 'link': reverse_lazy('admin:users_user_changelist')},
+                    {'title': 'Email verification', 'icon': 'mark_email_read', 'link': reverse_lazy('admin:users_emailverificationtoken_changelist')},
+                    {'title': 'Groups', 'icon': 'shield_person', 'link': reverse_lazy('admin:auth_group_changelist')},
+                ],
+            },
+        ],
     },
 }

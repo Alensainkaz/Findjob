@@ -1,0 +1,7 @@
+Hi {{ user.username }},
+
+Your Findy-Job verification code is: {{ code }}
+
+It expires in {{ minutes }} minutes. If you didn't sign up for Findy-Job, ignore this email.
+
+— Findy-Job

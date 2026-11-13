@@ -1,63 +1,42 @@
 {% extends 'resume/base.html' %}
+{% block title %}{{ resume.name }} {{ resume.surname }} — {{ resume.get_speciality_display }} · Findy-Job{% endblock %}
+{% block description %}{{ resume.name }} {{ resume.surname }}, {{ resume.get_speciality_display }}. {{ resume.education }}. {{ resume.experience }}.{% endblock %}
 
 {% block content %}
-<style>
-@media (max-width: 768px) {
-    .detail-card {
-        flex-direction: column !important;
-        align-items: center !important;
-        padding: 20px !important;
-        gap: 16px !important;
-    }
+<a href="{% url 'index' %}" class="back-link"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg>All resumes</a>
 
-    .detail-card img {
-        width: 110px !important;
-        height: 160px !important;
-    }
+<article class="profile">
+  {% if resume.image %}
+    <img src="{{ resume.image.url }}" alt="Photo of {{ resume.name }} {{ resume.surname }}" class="profile__photo">
+  {% else %}
+    <div class="profile__photo profile__photo--empty" aria-hidden="true">{{ resume.name|first|upper }}{{ resume.surname|first|upper }}</div>
+  {% endif %}
 
-    .detail-card .detail-info {
-        text-align: center;
-    }
+  <div>
+    <h1 class="profile__name">{{ resume.name }} {{ resume.surname }}<span>{{ resume.father_name }}</span></h1>
+    <p class="chip">{{ resume.get_speciality_display }}</p>
 
-    .detail-card .name {
-        justify-content: center;
-    }
+    <dl class="facts">
+      <div><dt>Education</dt><dd>{{ resume.education }}</dd></div>
+      <div><dt>Experience</dt><dd>{{ resume.experience }}</dd></div>
+      <div><dt>Email</dt><dd><a href="mailto:{{ resume.email }}">{{ resume.email }}</a></dd></div>
+      <div><dt>Published</dt><dd>{{ resume.created_at|date:"j F Y" }}</dd></div>
+    </dl>
 
-    .detail-card a[href*="cart"] {
-        width: 100%;
-        text-align: center;
-        display: block !important;
-    }
-}
-</style>
-
-<a href="{% url 'index' %}" style="color:#5A8BBF;text-decoration:none;font-size:0.9rem;">← Back</a>
-
-<div class="detail-card" style="background:#13263b;border:1px solid rgba(45,232,176,0.2);border-radius:12px;padding:28px;margin-top:16px;display:flex;gap:24px;align-items:flex-start;max-width:700px;">
-    {% if resume.image %}
-        <img src="{{ resume.image.url }}" style="width:130px;height:190px;object-fit:cover;border-radius:8px;flex-shrink:0;">
-    {% endif %}
-
-    <div class="detail-info">
-        <div class="name" style="margin-bottom:12px;">
-            <strong style="font-size:1.3rem;color:#F0F6FF;">{{ resume.name }}</strong>
-            <strong style="font-size:1.3rem;color:#F0F6FF;">{{ resume.surname }}</strong>
-            <strong style="font-size:1.3rem;color:#F0F6FF;">{{ resume.father_name }}</strong>
-        </div>
-
-        <p style="color:#2DE8B0;font-size:0.9rem;margin-bottom:14px;">{{ resume.get_speciality_display }}</p>
-        <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">Education: <span style="color:#F0F6FF;">{{ resume.education }}</span></p>
-        <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">Experience: <span style="color:#F0F6FF;">{{ resume.experience }}</span></p>
-        <p style="margin-bottom:6px;color:#8AABCC;font-size:0.9rem;">
-            Email:
-            <a href="mailto:{{ resume.email }}" style="color:#F0F6FF;text-decoration:none;border-bottom:1px dotted #2DE8B0">
-                {{ resume.email }}
-            </a>
-        </p>
-        <a href="{% url 'cart_add' resume.id %}"
-           style="display:inline-block;padding:9px 22px;border-radius:6px;background:linear-gradient(90deg,#2DE8B0,#0EB8F5);color:#0D1B2A;text-decoration:none;font-size:0.9rem;font-weight:700;">
-            Add for consideration
-        </a>
+    <div class="profile__actions">
+      {{ save_props|json_script:"save-data" }}
+      <div data-vue="save-button" data-props-id="save-data">
+        <form method="post" action="{% url 'cart_add' resume.pk %}">{% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <button class="btn btn--primary">Save for consideration</button>
+        </form>
+      </div>
+      <a href="mailto:{{ resume.email }}" class="btn btn--ghost"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-mail"/></svg>Email candidate</a>
+      {% if can_manage %}
+        <a href="{% url 'edit_resume' resume.pk %}" class="btn btn--ghost"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-pencil"/></svg>Edit</a>
+        <a href="{% url 'delete_resume' resume.pk %}" class="btn btn--ghost btn--danger-text"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-trash"/></svg>Delete</a>
+      {% endif %}
     </div>
-</div>
-{% endblock content %}
+  </div>
+</article>
+{% endblock %}
