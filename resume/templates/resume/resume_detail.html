@@ -17,6 +17,7 @@
     <p class="chip">{{ resume.get_speciality_display }}</p>
 
     <dl class="facts">
+      {% if resume.city %}<div><dt>City</dt><dd>{{ resume.get_city_display }}</dd></div>{% endif %}
       <div><dt>Education</dt><dd>{{ resume.education }}</dd></div>
       <div><dt>Experience</dt><dd>{{ resume.experience }}</dd></div>
       <div><dt>Email</dt><dd><a href="mailto:{{ resume.email }}">{{ resume.email }}</a></dd></div>

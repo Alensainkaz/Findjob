@@ -13,6 +13,7 @@ const props = defineProps({
   errors: { type: Object, default: () => ({}) },
   image: { type: String, default: '' },
   specialities: { type: Array, required: true },
+  cities: { type: Array, required: true },
   submitLabel: { type: String, default: 'Publish resume' },
   cancelUrl: { type: String, default: '/' },
 })
@@ -26,6 +27,7 @@ const state = reactive({
   father_name: props.initial.father_name || '',
   email: props.initial.email || '',
   speciality: props.initial.speciality || '',
+  city: props.initial.city || '',
   education: props.initial.education || '',
   experience: props.initial.experience || '',
   image: null,
@@ -48,6 +50,7 @@ const v$ = useVuelidate({
   father_name: text('Patronymic'),
   email: { ...text('Email'), email: helpers.withMessage('This doesn’t look like an email', email) },
   speciality: { required: helpers.withMessage('Pick a speciality', required) },
+  city: { required: helpers.withMessage('Pick the city you want to work in', required) },
   education: text('Education'),
   experience: text('Experience'),
   image: {
@@ -162,6 +165,17 @@ const textFields = [
               <option v-for="s in filteredSpecialities" :key="s.value" :value="s.value">{{ s.label }}</option>
             </select>
           </div>
+        </template>
+      </FormField>
+      <FormField id="resume-city" label="City you want to work in" :errors="errorsFor('city')">
+        <template #default="{ invalid, describedBy }">
+          <select id="resume-city" v-model="state.city" name="city" class="input select" :class="{ 'input--invalid': invalid }"
+                  :aria-invalid="invalid" :aria-describedby="describedBy" @blur="v$.city.$touch()">
+            <option value="" disabled>Choose a city</option>
+            <optgroup v-for="g in cities" :key="g.region" :label="g.region">
+              <option v-for="c in g.cities" :key="c.value" :value="c.value">{{ c.label }}</option>
+            </optgroup>
+          </select>
         </template>
       </FormField>
       <div class="form__grid">

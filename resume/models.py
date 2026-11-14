@@ -1,5 +1,8 @@
 from django.db import models
 from django.conf import settings
+
+from .cities import CITY_CHOICES
+
 SPECIALITY_CHOICES = [
     ('accountant', 'Accountant'),
     ('actor', 'Actor'),
@@ -187,5 +190,6 @@ class Resume(models.Model):
     speciality=models.CharField(max_length=100,choices=SPECIALITY_CHOICES)
     created_at=models.DateTimeField(auto_now_add=True)
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    city = models.CharField(max_length=50, choices=CITY_CHOICES, db_index=True)
     def __str__(self):
         return self.name

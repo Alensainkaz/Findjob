@@ -202,7 +202,7 @@ p { text-wrap: pretty; }
 .auth .page-head p { margin-inline: auto; }
 
 /* ---------- resume board ---------- */
-.board__filters { display: grid; grid-template-columns: 1fr 260px; gap: 12px; }
+.board__filters { display: grid; grid-template-columns: 1fr 240px 220px; gap: 12px; }
 .board__count { margin: 20px 0 12px; color: var(--text-subtle); font-size: .88rem; font-variant-numeric: tabular-nums; }
 .board__list { display: grid; gap: 10px; }
 .board__more { display: grid; gap: 10px; justify-items: center; margin-top: 20px; }
@@ -312,6 +312,8 @@ p { text-wrap: pretty; }
   .site-footer__inner { grid-template-columns: 1fr 1fr; }
   .site-footer__about { grid-column: 1 / -1; }
   .profile { grid-template-columns: 1fr; }
+  .board__filters { grid-template-columns: 1fr 1fr; }
+  .board__search { grid-column: 1 / -1; }
   .profile__photo { max-width: 220px; }
 }
 @media (max-width: 600px) {

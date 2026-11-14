@@ -30,6 +30,7 @@ const initials = computed(() => `${props.resume.name[0] || ''}${props.resume.sur
       </h3>
       <p class="chip">{{ resume.speciality }}</p>
       <p class="resume-row__meta">
+        <span v-if="resume.city"><AppIcon name="pin" :size="15" />{{ resume.city }}</span>
         <span><AppIcon name="cap" :size="15" />{{ resume.education }}</span>
         <span><AppIcon name="briefcase" :size="15" />{{ resume.experience }}</span>
       </p>

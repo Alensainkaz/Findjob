@@ -6,7 +6,7 @@
 <div class="page-head page-head--split">
   <div>
     <h1>Find your next hire</h1>
-    <p>Browse resumes, filter by speciality and save the people you want to contact.</p>
+    <p>Browse resumes, filter by speciality and city, and save the people you want to contact.</p>
   </div>
 </div>
 
@@ -15,6 +15,10 @@
   {# Server-rendered fallback: replaced by the Vue board once it mounts #}
   <form class="board__filters" method="get" role="search">
     <input type="search" name="q" value="{{ request.GET.q }}" class="input" placeholder="Search by name or speciality" aria-label="Search resumes">
+    <select name="city" class="input select" aria-label="Filter by city" onchange="this.form.submit()">
+      <option value="">All cities</option>
+      {% for g in board.cities %}<optgroup label="{{ g.region }}">{% for c in g.cities %}<option value="{{ c.value }}"{% if c.value == board.city %} selected{% endif %}>{{ c.label }}</option>{% endfor %}</optgroup>{% endfor %}
+    </select>
   </form>
   <p class="board__count">{{ board.total }} resume{{ board.total|pluralize }}</p>
   <div class="board__list">
@@ -25,7 +29,7 @@
         </a>
         <div class="resume-row__body">
           <h3 class="resume-row__name"><a href="{{ r.url }}">{{ r.name }} {{ r.surname }} <span class="muted">{{ r.fatherName }}</span></a></h3>
-          <p class="chip">{{ r.speciality }}</p>
+          <p class="chip">{{ r.speciality }}</p>{% if r.city %} <span class="muted">{{ r.city }}</span>{% endif %}
         </div>
       </article>
     {% empty %}

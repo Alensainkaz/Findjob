@@ -15,6 +15,8 @@ const props = defineProps({
   q: { type: String, default: '' },
   speciality: { type: String, default: '' },
   specialities: { type: Array, default: () => [] },
+  city: { type: String, default: '' },
+  cities: { type: Array, default: () => [] },
   isAuthenticated: Boolean,
   loginUrl: { type: String, required: true },
   apiUrl: { type: String, required: true },
@@ -28,6 +30,7 @@ const hasNext = ref(props.hasNext)
 const query = useDebouncedRef(props.q, 300)
 const queryInput = ref(props.q)
 const speciality = ref(props.speciality)
+const city = ref(props.city)
 const loading = ref(false)
 const loadingMore = ref(false)
 const failed = ref(false)
@@ -40,6 +43,7 @@ function params(p) {
   const search = new URLSearchParams()
   if (query.value.trim()) search.set('q', query.value.trim())
   if (speciality.value) search.set('speciality', speciality.value)
+  if (city.value) search.set('city', city.value)
   if (p > 1) search.set('page', p)
   return search
 }
@@ -68,7 +72,7 @@ async function load(p = 1) {
   }
 }
 
-watch([query, speciality], () => load(1))
+watch([query, speciality, city], () => load(1))
 onBeforeUnmount(() => controller?.abort())
 
 async function toggleSave(resume) {
@@ -92,6 +96,7 @@ function resetFilters() {
   queryInput.value = ''
   query.value = ''
   speciality.value = ''
+  city.value = ''
 }
 </script>
 
@@ -106,6 +111,12 @@ function resetFilters() {
       <select v-model="speciality" name="speciality" class="input select board__select" aria-label="Filter by speciality">
         <option value="">All specialities</option>
         <option v-for="s in specialities" :key="s.value" :value="s.value">{{ s.label }}</option>
+      </select>
+      <select v-model="city" name="city" class="input select board__select" aria-label="Filter by city">
+        <option value="">All cities</option>
+        <optgroup v-for="g in cities" :key="g.region" :label="g.region">
+          <option v-for="c in g.cities" :key="c.value" :value="c.value">{{ c.label }}</option>
+        </optgroup>
       </select>
     </form>
 
@@ -128,7 +139,7 @@ function resetFilters() {
     <div v-else-if="!items.length" class="empty">
       <AppIcon name="search" :size="28" />
       <h2 class="empty__title">No resumes match</h2>
-      <p class="empty__text">Try another name, or show every speciality.</p>
+      <p class="empty__text">Try another name, or widen the speciality and city filters.</p>
       <button type="button" class="btn btn--ghost" @click="resetFilters">Clear filters</button>
     </div>
 

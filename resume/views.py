@@ -8,6 +8,7 @@ from django.views.decorators.http import require_GET
 
 from cart.models import CartItem
 from .forms import ResumeForm
+from .cities import CITY_LABELS, city_groups
 from .models import Resume, SPECIALITY_CHOICES
 
 PAGE_SIZE = 12
@@ -23,6 +24,9 @@ def _filtered_resumes(params):
     speciality_filter = params.get('speciality')
     if speciality_filter:
         resumes = resumes.filter(speciality=speciality_filter)
+    city_filter = params.get('city')
+    if city_filter in CITY_LABELS:
+        resumes = resumes.filter(city=city_filter)
     if search_query:
         matching_specialities = [
             value for value, label in SPECIALITY_CHOICES
@@ -57,6 +61,7 @@ def _serialize(resume, user, saved_ids):
         'url': reverse('resume_detail', args=[resume.pk]),
         'editUrl': reverse('edit_resume', args=[resume.pk]) if can_manage else '',
         'deleteUrl': reverse('delete_resume', args=[resume.pk]) if can_manage else '',
+        'city': resume.get_city_display() if resume.city else '',
         'saved': resume.pk in saved_ids,
     }
 
@@ -80,6 +85,8 @@ def index(request):
         'q': request.GET.get('q', ''),
         'speciality': request.GET.get('speciality', ''),
         'specialities': [{'value': v, 'label': l} for v, l in SPECIALITY_CHOICES],
+        'city': request.GET.get('city', '') if request.GET.get('city') in CITY_LABELS else '',
+        'cities': city_groups(),
         'isAuthenticated': request.user.is_authenticated,
         'loginUrl': reverse('login_view'),
         'apiUrl': reverse('api_resumes'),
@@ -98,7 +105,7 @@ def api_resumes(request):
 
 def _resume_form_context(form, resume=None):
     errors = {field: [str(e) for e in errs] for field, errs in form.errors.items()}
-    initial = {name: (form[name].value() or '') for name in ['name', 'surname', 'father_name', 'education', 'experience', 'email', 'speciality']}
+    initial = {name: (form[name].value() or '') for name in ['name', 'surname', 'father_name', 'city', 'education', 'experience', 'email', 'speciality']}
     return {
         'form': form,
         'resume': resume,
@@ -107,6 +114,7 @@ def _resume_form_context(form, resume=None):
             'errors': errors,
             'image': resume.image.url if resume and resume.image else '',
             'specialities': [{'value': v, 'label': l} for v, l in SPECIALITY_CHOICES],
+            'cities': city_groups(),
             'submitLabel': 'Save changes' if resume else 'Publish resume',
             'cancelUrl': reverse('resume_detail', args=[resume.pk]) if resume else reverse('index'),
         },
