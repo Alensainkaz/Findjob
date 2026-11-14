@@ -144,15 +144,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = 'login_view'
 
-# Brevo in production; without a key (local dev) emails are printed to the runserver console
-EMAIL_BACKEND = (
-    'anymail.backends.brevo.EmailBackend' if os.getenv('BREVO_API_KEY')
-    else 'django.core.mail.backends.console.EmailBackend'
-)
+# Почта: SMTP mail.ru, если задан пароль; иначе Brevo, если задан ключ;
+# иначе (локальная разработка) письма печатаются в консоль runserver
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.mail.ru')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', '465'))
+EMAIL_USE_SSL = EMAIL_PORT == 465
+EMAIL_USE_TLS = EMAIL_PORT == 587
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'findy-job.noreply@mail.ru')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+EMAIL_TIMEOUT = 15
+
+if EMAIL_HOST_PASSWORD:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+elif os.getenv('BREVO_API_KEY'):
+    EMAIL_BACKEND = 'anymail.backends.brevo.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ANYMAIL = {
     'BREVO_API_KEY': os.getenv('BREVO_API_KEY'),
 }
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL') or 'Findy-Job <no-reply@findy-job.com>'
+# mail.ru принимает только письма, где From совпадает с ящиком авторизации
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL') or f'Findy-Job <{EMAIL_HOST_USER}>'
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 # Пишем ошибки (включая traceback 500-х) в stdout — их видно в логах Render
 LOGGING = {
