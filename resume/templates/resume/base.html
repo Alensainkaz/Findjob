@@ -40,7 +40,14 @@
       <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-menu"/></svg>
     </button>
 
+    <div class="nav-backdrop" data-nav-close aria-hidden="true"></div>
     <nav id="site-nav" class="nav" aria-label="Main">
+      <div class="nav__head">
+        <a href="{% url 'index' %}" class="logo" tabindex="-1">Findy<span>-</span>Job</a>
+        <button type="button" class="icon-button" data-nav-close aria-label="Close menu">
+          <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </div>
       <a href="{% url 'index' %}" {% if path == '/' %}aria-current="page"{% endif %}>Resumes</a>
       {% if user.is_authenticated %}
         <a href="{% url 'cart_detail' %}" {% if path == '/cart/' %}aria-current="page"{% endif %}>Saved</a>

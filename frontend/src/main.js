@@ -32,12 +32,24 @@ document.querySelectorAll('[data-vue]').forEach((el) => {
   el.classList.add('is-mounted')
 })
 
-// Mobile navigation toggle
+// Mobile navigation: sidebar drawer
 const navToggle = document.querySelector('[data-nav-toggle]')
-navToggle?.addEventListener('click', () => {
-  const open = document.body.classList.toggle('nav-open')
+const nav = document.getElementById('site-nav')
+const mobileNav = window.matchMedia('(max-width: 860px)')
+nav?.querySelectorAll(':scope > a').forEach((a, i) => a.style.setProperty('--i', i))
+
+function setNav(open, { restoreFocus = true } = {}) {
+  if (!navToggle || document.body.classList.contains('nav-open') === open) return
+  document.body.classList.toggle('nav-open', open)
   navToggle.setAttribute('aria-expanded', String(open))
-})
+  if (open) nav.querySelector(':scope > a')?.focus({ preventScroll: true })
+  else if (restoreFocus) navToggle.focus({ preventScroll: true })
+}
+navToggle?.addEventListener('click', () => setNav(!document.body.classList.contains('nav-open')))
+document.querySelectorAll('[data-nav-close]').forEach((el) => el.addEventListener('click', () => setNav(false)))
+nav?.addEventListener('click', (e) => { if (e.target.closest('a')?.parentElement === nav) setNav(false, { restoreFocus: false }) })
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setNav(false) })
+mobileNav.addEventListener('change', (e) => { if (!e.matches) setNav(false, { restoreFocus: false }) })
 
 // Top progress bar for full page navigations (links and plain forms)
 const bar = document.querySelector('.page-progress')
