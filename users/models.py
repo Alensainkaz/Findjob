@@ -8,13 +8,14 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _, ngettext
 
 
 class User(AbstractUser):
     ROLE_CHOICES = (
-        ('employer', 'Employer'),
-        ('admin', 'Administrator'),
-        ('jobfinder', 'Job seeker'),
+        ('employer', _('Employer')),
+        ('admin', _('Administrator')),
+        ('jobfinder', _('Job seeker')),
     )
     role = models.CharField(choices=ROLE_CHOICES, default='jobfinder', max_length=20)
 
@@ -59,14 +60,18 @@ class EmailVerificationToken(models.Model):
     def check_code(self, code):
         """Return (ok, error_message). Counts failed attempts."""
         if self.is_expired:
-            return False, 'This code has expired. Request a new one.'
+            return False, str(_('This code has expired. Request a new one.'))
         if self.attempts >= self.MAX_ATTEMPTS:
-            return False, 'Too many attempts. Request a new code.'
+            return False, str(_('Too many attempts. Request a new code.'))
         if not hmac.compare_digest(self.code_hash, _hash_code(code or '')):
             self.attempts += 1
             self.save(update_fields=['attempts'])
             left = self.MAX_ATTEMPTS - self.attempts
             if left <= 0:
-                return False, 'Too many attempts. Request a new code.'
-            return False, f'Wrong code. {left} attempt{"s" if left != 1 else ""} left.'
+                return False, str(_('Too many attempts. Request a new code.'))
+            return False, ngettext(
+                'Wrong code. %(left)d attempt left.',
+                'Wrong code. %(left)d attempts left.',
+                left,
+            ) % {'left': left}
         return True, ''

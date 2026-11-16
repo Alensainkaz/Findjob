@@ -4,6 +4,8 @@ from django.db.models import Q
 from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.utils import translation
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET
 
 from cart.models import CartItem
@@ -28,9 +30,13 @@ def _filtered_resumes(params):
     if city_filter in CITY_LABELS:
         resumes = resumes.filter(city=city_filter)
     if search_query:
+        needle = search_query.lower()
+        with translation.override('en'):
+            english = {value: str(label) for value, label in SPECIALITY_CHOICES}
+        # Match the label in the visitor's language and in English
         matching_specialities = [
             value for value, label in SPECIALITY_CHOICES
-            if search_query.lower() in label.lower()
+            if needle in str(label).lower() or needle in english[value].lower()
         ]
         resumes = resumes.filter(
             Q(name__icontains=search_query) |
@@ -39,6 +45,11 @@ def _filtered_resumes(params):
             Q(speciality__in=matching_specialities)
         )
     return resumes
+
+
+def _speciality_options():
+    options = [{'value': v, 'label': str(l)} for v, l in SPECIALITY_CHOICES]
+    return sorted(options, key=lambda o: o['label'].lower())
 
 
 def _saved_ids(user):
@@ -84,7 +95,7 @@ def index(request):
         **payload,
         'q': request.GET.get('q', ''),
         'speciality': request.GET.get('speciality', ''),
-        'specialities': [{'value': v, 'label': l} for v, l in SPECIALITY_CHOICES],
+        'specialities': _speciality_options(),
         'city': request.GET.get('city', '') if request.GET.get('city') in CITY_LABELS else '',
         'cities': city_groups(),
         'isAuthenticated': request.user.is_authenticated,
@@ -113,9 +124,9 @@ def _resume_form_context(form, resume=None):
             'initial': initial,
             'errors': errors,
             'image': resume.image.url if resume and resume.image else '',
-            'specialities': [{'value': v, 'label': l} for v, l in SPECIALITY_CHOICES],
+            'specialities': _speciality_options(),
             'cities': city_groups(),
-            'submitLabel': 'Save changes' if resume else 'Publish resume',
+            'submitLabel': _('Save changes') if resume else _('Publish resume'),
             'cancelUrl': reverse('resume_detail', args=[resume.pk]) if resume else reverse('index'),
         },
     }
@@ -153,7 +164,7 @@ def resume_detail(request, pk):
 def edit_resume(request, pk):
     resume = get_object_or_404(Resume, pk=pk)
     if not _can_manage(request.user, resume):
-        return HttpResponseForbidden('You cannot edit this resume.')
+        return HttpResponseForbidden(_('You cannot edit this resume.'))
     if request.method == 'POST':
         form = ResumeForm(request.POST, request.FILES, instance=resume)
         if form.is_valid():
@@ -168,7 +179,7 @@ def edit_resume(request, pk):
 def delete_resume(request, pk):
     resume = get_object_or_404(Resume, pk=pk)
     if not _can_manage(request.user, resume):
-        return HttpResponseForbidden('You cannot delete this resume.')
+        return HttpResponseForbidden(_('You cannot delete this resume.'))
     if request.method == 'POST':
         resume.delete()
         return redirect('index')

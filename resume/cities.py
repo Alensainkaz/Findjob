@@ -1,129 +1,131 @@
+from django.utils.translation import gettext_lazy as _
+
 # All cities of Kazakhstan, grouped by region.
 # The three cities of republican significance come first, the rest follow by region.
 CITIES_BY_REGION = [
-    ('Cities of republican significance', [
-        ('astana', 'Astana'),
-        ('almaty', 'Almaty'),
-        ('shymkent', 'Shymkent'),
+    (_('Cities of republican significance'), [
+        ('astana', _('Astana')),
+        ('almaty', _('Almaty')),
+        ('shymkent', _('Shymkent')),
     ]),
-    ('Abai Region', [
-        ('semey', 'Semey'),
-        ('ayagoz', 'Ayagoz'),
-        ('kurchatov', 'Kurchatov'),
-        ('shar', 'Shar'),
+    (_('Abai Region'), [
+        ('semey', _('Semey')),
+        ('ayagoz', _('Ayagoz')),
+        ('kurchatov', _('Kurchatov')),
+        ('shar', _('Shar')),
     ]),
-    ('Akmola Region', [
-        ('kokshetau', 'Kokshetau'),
-        ('stepnogorsk', 'Stepnogorsk'),
-        ('akkol', 'Akkol'),
-        ('atbasar', 'Atbasar'),
-        ('derzhavinsk', 'Derzhavinsk'),
-        ('yereymentau', 'Yereymentau'),
-        ('esil', 'Esil'),
-        ('kosshy', 'Kosshy'),
-        ('makinsk', 'Makinsk'),
-        ('stepnyak', 'Stepnyak'),
-        ('shchuchinsk', 'Shchuchinsk'),
+    (_('Akmola Region'), [
+        ('kokshetau', _('Kokshetau')),
+        ('stepnogorsk', _('Stepnogorsk')),
+        ('akkol', _('Akkol')),
+        ('atbasar', _('Atbasar')),
+        ('derzhavinsk', _('Derzhavinsk')),
+        ('yereymentau', _('Yereymentau')),
+        ('esil', _('Esil')),
+        ('kosshy', _('Kosshy')),
+        ('makinsk', _('Makinsk')),
+        ('stepnyak', _('Stepnyak')),
+        ('shchuchinsk', _('Shchuchinsk')),
     ]),
-    ('Aktobe Region', [
-        ('aktobe', 'Aktobe'),
-        ('alga', 'Alga'),
-        ('embi', 'Embi'),
-        ('kandyagash', 'Kandyagash'),
-        ('temir', 'Temir'),
-        ('khromtau', 'Khromtau'),
-        ('shalkar', 'Shalkar'),
-        ('zhem', 'Zhem'),
+    (_('Aktobe Region'), [
+        ('aktobe', _('Aktobe')),
+        ('alga', _('Alga')),
+        ('embi', _('Embi')),
+        ('kandyagash', _('Kandyagash')),
+        ('temir', _('Temir')),
+        ('khromtau', _('Khromtau')),
+        ('shalkar', _('Shalkar')),
+        ('zhem', _('Zhem')),
     ]),
-    ('Almaty Region', [
-        ('konaev', 'Konaev (Kapshagay)'),
-        ('esik', 'Esik'),
-        ('kaskelen', 'Kaskelen'),
-        ('talgar', 'Talgar'),
+    (_('Almaty Region'), [
+        ('konaev', _('Konaev (Kapshagay)')),
+        ('esik', _('Esik')),
+        ('kaskelen', _('Kaskelen')),
+        ('talgar', _('Talgar')),
     ]),
-    ('Atyrau Region', [
-        ('atyrau', 'Atyrau'),
-        ('kulsary', 'Kulsary'),
+    (_('Atyrau Region'), [
+        ('atyrau', _('Atyrau')),
+        ('kulsary', _('Kulsary')),
     ]),
-    ('East Kazakhstan Region', [
-        ('oskemen', 'Oskemen (Ust-Kamenogorsk)'),
-        ('ridder', 'Ridder'),
-        ('altai', 'Altai (Zyryanovsk)'),
-        ('serebryansk', 'Serebryansk'),
-        ('shemonaikha', 'Shemonaikha'),
-        ('zaysan', 'Zaysan'),
+    (_('East Kazakhstan Region'), [
+        ('oskemen', _('Oskemen (Ust-Kamenogorsk)')),
+        ('ridder', _('Ridder')),
+        ('altai', _('Altai (Zyryanovsk)')),
+        ('serebryansk', _('Serebryansk')),
+        ('shemonaikha', _('Shemonaikha')),
+        ('zaysan', _('Zaysan')),
     ]),
-    ('Jambyl Region', [
-        ('taraz', 'Taraz'),
-        ('karatau', 'Karatau'),
-        ('shu', 'Shu'),
-        ('zhanatas', 'Zhanatas'),
+    (_('Jambyl Region'), [
+        ('taraz', _('Taraz')),
+        ('karatau', _('Karatau')),
+        ('shu', _('Shu')),
+        ('zhanatas', _('Zhanatas')),
     ]),
-    ('Jetisu Region', [
-        ('taldykorgan', 'Taldykorgan'),
-        ('tekeli', 'Tekeli'),
-        ('ushtobe', 'Ushtobe'),
-        ('sarkand', 'Sarkand'),
-        ('zharkent', 'Zharkent'),
+    (_('Jetisu Region'), [
+        ('taldykorgan', _('Taldykorgan')),
+        ('tekeli', _('Tekeli')),
+        ('ushtobe', _('Ushtobe')),
+        ('sarkand', _('Sarkand')),
+        ('zharkent', _('Zharkent')),
     ]),
-    ('Karaganda Region', [
-        ('karaganda', 'Karaganda'),
-        ('abai', 'Abai'),
-        ('balkhash', 'Balkhash'),
-        ('karkaraly', 'Karkaraly'),
-        ('priozersk', 'Priozersk'),
-        ('saran', 'Saran'),
-        ('temirtau', 'Temirtau'),
-        ('shakhtinsk', 'Shakhtinsk'),
+    (_('Karaganda Region'), [
+        ('karaganda', _('Karaganda')),
+        ('abai', _('Abai')),
+        ('balkhash', _('Balkhash')),
+        ('karkaraly', _('Karkaraly')),
+        ('priozersk', _('Priozersk')),
+        ('saran', _('Saran')),
+        ('temirtau', _('Temirtau')),
+        ('shakhtinsk', _('Shakhtinsk')),
     ]),
-    ('Kostanay Region', [
-        ('kostanay', 'Kostanay'),
-        ('arkalyk', 'Arkalyk'),
-        ('lisakovsk', 'Lisakovsk'),
-        ('rudny', 'Rudny'),
-        ('tobyl', 'Tobyl'),
-        ('zhitikara', 'Zhitikara'),
+    (_('Kostanay Region'), [
+        ('kostanay', _('Kostanay')),
+        ('arkalyk', _('Arkalyk')),
+        ('lisakovsk', _('Lisakovsk')),
+        ('rudny', _('Rudny')),
+        ('tobyl', _('Tobyl')),
+        ('zhitikara', _('Zhitikara')),
     ]),
-    ('Kyzylorda Region', [
-        ('kyzylorda', 'Kyzylorda'),
-        ('aral', 'Aral'),
-        ('baikonur', 'Baikonur'),
-        ('kazaly', 'Kazaly'),
+    (_('Kyzylorda Region'), [
+        ('kyzylorda', _('Kyzylorda')),
+        ('aral', _('Aral')),
+        ('baikonur', _('Baikonur')),
+        ('kazaly', _('Kazaly')),
     ]),
-    ('Mangystau Region', [
-        ('aktau', 'Aktau'),
-        ('zhanaozen', 'Zhanaozen'),
-        ('fort_shevchenko', 'Fort-Shevchenko'),
+    (_('Mangystau Region'), [
+        ('aktau', _('Aktau')),
+        ('zhanaozen', _('Zhanaozen')),
+        ('fort_shevchenko', _('Fort-Shevchenko')),
     ]),
-    ('North Kazakhstan Region', [
-        ('petropavl', 'Petropavl'),
-        ('bulaevo', 'Bulaevo'),
-        ('mamlyutka', 'Mamlyutka'),
-        ('sergeyevka', 'Sergeyevka'),
-        ('taiynsha', 'Taiynsha'),
+    (_('North Kazakhstan Region'), [
+        ('petropavl', _('Petropavl')),
+        ('bulaevo', _('Bulaevo')),
+        ('mamlyutka', _('Mamlyutka')),
+        ('sergeyevka', _('Sergeyevka')),
+        ('taiynsha', _('Taiynsha')),
     ]),
-    ('Pavlodar Region', [
-        ('pavlodar', 'Pavlodar'),
-        ('aksu', 'Aksu'),
-        ('ekibastuz', 'Ekibastuz'),
+    (_('Pavlodar Region'), [
+        ('pavlodar', _('Pavlodar')),
+        ('aksu', _('Aksu')),
+        ('ekibastuz', _('Ekibastuz')),
     ]),
-    ('Turkistan Region', [
-        ('turkistan', 'Turkistan'),
-        ('arys', 'Arys'),
-        ('kentau', 'Kentau'),
-        ('lenger', 'Lenger'),
-        ('saryagash', 'Saryagash'),
-        ('shardara', 'Shardara'),
-        ('zhetysai', 'Zhetysai'),
+    (_('Turkistan Region'), [
+        ('turkistan', _('Turkistan')),
+        ('arys', _('Arys')),
+        ('kentau', _('Kentau')),
+        ('lenger', _('Lenger')),
+        ('saryagash', _('Saryagash')),
+        ('shardara', _('Shardara')),
+        ('zhetysai', _('Zhetysai')),
     ]),
-    ('Ulytau Region', [
-        ('zhezkazgan', 'Zhezkazgan'),
-        ('karazhal', 'Karazhal'),
-        ('satbayev', 'Satbayev'),
+    (_('Ulytau Region'), [
+        ('zhezkazgan', _('Zhezkazgan')),
+        ('karazhal', _('Karazhal')),
+        ('satbayev', _('Satbayev')),
     ]),
-    ('West Kazakhstan Region', [
-        ('oral', 'Oral (Uralsk)'),
-        ('aksai', 'Aksai'),
+    (_('West Kazakhstan Region'), [
+        ('oral', _('Oral (Uralsk)')),
+        ('aksai', _('Aksai')),
     ]),
 ]
 
@@ -136,6 +138,6 @@ CITY_LABELS = {value: label for _, cities in CITIES_BY_REGION for value, label i
 def city_groups():
     """JSON-friendly city list for the Vue islands."""
     return [
-        {'region': region, 'cities': [{'value': v, 'label': l} for v, l in cities]}
+        {'region': str(region), 'cities': [{'value': v, 'label': str(l)} for v, l in cities]}
         for region, cities in CITIES_BY_REGION
     ]

@@ -1,13 +1,14 @@
 {% extends 'resume/base.html' %}
+{% load i18n %}
 {% block title %}{{ resume.name }} {{ resume.surname }} — {{ resume.get_speciality_display }} · Findy-Job{% endblock %}
 {% block description %}{{ resume.name }} {{ resume.surname }}, {{ resume.get_speciality_display }}. {{ resume.education }}. {{ resume.experience }}.{% endblock %}
 
 {% block content %}
-<a href="{% url 'index' %}" class="back-link"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg>All resumes</a>
+<a href="{% url 'index' %}" class="back-link"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg>{% trans "All resumes" %}</a>
 
 <article class="profile">
   {% if resume.image %}
-    <img src="{{ resume.image.url }}" alt="Photo of {{ resume.name }} {{ resume.surname }}" class="profile__photo">
+    <img src="{{ resume.image.url }}" alt="{% blocktrans with name=resume.name surname=resume.surname %}Photo of {{ name }} {{ surname }}{% endblocktrans %}" class="profile__photo">
   {% else %}
     <div class="profile__photo profile__photo--empty" aria-hidden="true">{{ resume.name|first|upper }}{{ resume.surname|first|upper }}</div>
   {% endif %}
@@ -17,11 +18,11 @@
     <p class="chip">{{ resume.get_speciality_display }}</p>
 
     <dl class="facts">
-      {% if resume.city %}<div><dt>City</dt><dd>{{ resume.get_city_display }}</dd></div>{% endif %}
-      <div><dt>Education</dt><dd>{{ resume.education }}</dd></div>
-      <div><dt>Experience</dt><dd>{{ resume.experience }}</dd></div>
-      <div><dt>Email</dt><dd><a href="mailto:{{ resume.email }}">{{ resume.email }}</a></dd></div>
-      <div><dt>Published</dt><dd>{{ resume.created_at|date:"j F Y" }}</dd></div>
+      {% if resume.city %}<div><dt>{% trans "City" %}</dt><dd>{{ resume.get_city_display }}</dd></div>{% endif %}
+      <div><dt>{% trans "Education" %}</dt><dd>{{ resume.education }}</dd></div>
+      <div><dt>{% trans "Experience" %}</dt><dd>{{ resume.experience }}</dd></div>
+      <div><dt>{% trans "Email" %}</dt><dd><a href="mailto:{{ resume.email }}">{{ resume.email }}</a></dd></div>
+      <div><dt>{% trans "Published" %}</dt><dd>{{ resume.created_at|date:"j F Y" }}</dd></div>
     </dl>
 
     <div class="profile__actions">
@@ -29,13 +30,13 @@
       <div data-vue="save-button" data-props-id="save-data">
         <form method="post" action="{% url 'cart_add' resume.pk %}">{% csrf_token %}
           <input type="hidden" name="next" value="{{ request.path }}">
-          <button class="btn btn--primary">Save for consideration</button>
+          <button class="btn btn--primary">{% trans "Save for consideration" %}</button>
         </form>
       </div>
-      <a href="mailto:{{ resume.email }}" class="btn btn--ghost"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-mail"/></svg>Email candidate</a>
+      <a href="mailto:{{ resume.email }}" class="btn btn--ghost"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-mail"/></svg>{% trans "Email candidate" %}</a>
       {% if can_manage %}
-        <a href="{% url 'edit_resume' resume.pk %}" class="btn btn--ghost"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-pencil"/></svg>Edit</a>
-        <a href="{% url 'delete_resume' resume.pk %}" class="btn btn--ghost btn--danger-text"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-trash"/></svg>Delete</a>
+        <a href="{% url 'edit_resume' resume.pk %}" class="btn btn--ghost"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-pencil"/></svg>{% trans "Edit" %}</a>
+        <a href="{% url 'delete_resume' resume.pk %}" class="btn btn--ghost btn--danger-text"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-trash"/></svg>{% trans "Delete" %}</a>
       {% endif %}
     </div>
   </div>

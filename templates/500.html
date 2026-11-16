@@ -1,10 +1,12 @@
 {% extends 'resume/base.html' %}
-{% block title %}Something went wrong · Findy-Job{% endblock %}
+{% load i18n %}
+{% block robots %}<meta name="robots" content="noindex, follow">{% endblock %}
+{% block title %}{% trans "Something went wrong" %} · Findy-Job{% endblock %}
 {% block content %}
 <div class="error-page">
   <p class="error-page__code">500</p>
-  <h1>Something went wrong</h1>
-  <p>We hit an error on our side. Please try again in a moment.</p>
-  <a href="/" class="btn btn--primary">Back to resumes</a>
+  <h1>{% trans "Something went wrong" %}</h1>
+  <p>{% trans "We hit an error on our side. Please try again in a moment." %}</p>
+  <a href="/" class="btn btn--primary">{% trans "Back to resumes" %}</a>
 </div>
 {% endblock %}

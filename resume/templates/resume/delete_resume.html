@@ -1,11 +1,13 @@
 {% extends 'resume/base.html' %}
-{% block title %}Delete resume · Findy-Job{% endblock %}
+{% load i18n %}
+{% block robots %}<meta name="robots" content="noindex, follow">{% endblock %}
+{% block title %}{% trans "Delete resume" %} · Findy-Job{% endblock %}
 
 {% block content %}
-<a href="{% url 'resume_detail' resume.pk %}" class="back-link"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg>Back to resume</a>
+<a href="{% url 'resume_detail' resume.pk %}" class="back-link"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg>{% trans "Back to resume" %}</a>
 <div class="confirm">
-  <h1>Delete this resume?</h1>
-  <p>It disappears from the board and from everyone’s saved lists. This can’t be undone.</p>
+  <h1>{% trans "Delete this resume?" %}</h1>
+  <p>{% trans "It disappears from the board and from everyone’s saved lists. This can’t be undone." %}</p>
   <div class="confirm__person">
     {% if resume.image %}<img src="{{ resume.image.url }}" alt="">{% else %}<span class="avatar-initials">{{ resume.name|first|upper }}{{ resume.surname|first|upper }}</span>{% endif %}
     <div>
@@ -15,8 +17,8 @@
   </div>
   <form method="post" class="confirm__actions">
     {% csrf_token %}
-    <button type="submit" class="btn btn--danger"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-trash"/></svg>Delete resume</button>
-    <a href="{% url 'resume_detail' resume.pk %}" class="btn btn--ghost">Keep it</a>
+    <button type="submit" class="btn btn--danger"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-trash"/></svg>{% trans "Delete resume" %}</button>
+    <a href="{% url 'resume_detail' resume.pk %}" class="btn btn--ghost">{% trans "Keep it" %}</a>
   </form>
 </div>
 {% endblock %}

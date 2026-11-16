@@ -6,6 +6,7 @@ import AppIcon from './AppIcon.vue'
 import AppSpinner from './AppSpinner.vue'
 import { getJSON, postJSON, toast } from '../composables/api'
 import { useDebouncedRef } from '../composables/useDebouncedRef'
+import { t, tn } from '../i18n'
 
 const props = defineProps({
   results: { type: Array, default: () => [] },
@@ -84,9 +85,9 @@ async function toggleSave(resume) {
   try {
     const data = await postJSON(props.toggleUrl.replace('/0/', `/${resume.id}/`))
     resume.saved = data.saved
-    toast(data.saved ? `${resume.name} saved for consideration` : `${resume.name} removed from saved`, 'success')
+    toast(t(data.saved ? '{name} saved for consideration' : '{name} removed from saved', { name: resume.name }), 'success')
   } catch {
-    toast('Could not update saved resumes. Try again.', 'error')
+    toast(t('Could not update saved resumes. Try again.'), 'error')
   } finally {
     pending.delete(resume.id)
   }
@@ -105,15 +106,15 @@ function resetFilters() {
     <form class="board__filters" role="search" @submit.prevent="load(1)">
       <div class="input-wrap board__search">
         <AppIcon name="search" class="input-wrap__icon" />
-        <input v-model="queryInput" type="search" name="q" class="input input--with-icon" placeholder="Search by name or speciality" aria-label="Search resumes">
+        <input v-model="queryInput" type="search" name="q" class="input input--with-icon" :placeholder="t('Search by name or speciality')" :aria-label="t('Search resumes')">
         <AppSpinner v-if="loading" class="input-wrap__spinner" :size="16" />
       </div>
-      <select v-model="speciality" name="speciality" class="input select board__select" aria-label="Filter by speciality">
-        <option value="">All specialities</option>
+      <select v-model="speciality" name="speciality" class="input select board__select" :aria-label="t('Filter by speciality')">
+        <option value="">{{ t('All specialities') }}</option>
         <option v-for="s in specialities" :key="s.value" :value="s.value">{{ s.label }}</option>
       </select>
-      <select v-model="city" name="city" class="input select board__select" aria-label="Filter by city">
-        <option value="">All cities</option>
+      <select v-model="city" name="city" class="input select board__select" :aria-label="t('Filter by city')">
+        <option value="">{{ t('All cities') }}</option>
         <optgroup v-for="g in cities" :key="g.region" :label="g.region">
           <option v-for="c in g.cities" :key="c.value" :value="c.value">{{ c.label }}</option>
         </optgroup>
@@ -121,8 +122,8 @@ function resetFilters() {
     </form>
 
     <p class="board__count" aria-live="polite">
-      <template v-if="!loading">{{ total }} {{ total === 1 ? 'resume' : 'resumes' }}</template>
-      <template v-else>Searching…</template>
+      <template v-if="!loading">{{ tn('resumes', total) }}</template>
+      <template v-else>{{ t('Searching…') }}</template>
     </p>
 
     <div v-if="loading" class="board__list">
@@ -131,16 +132,16 @@ function resetFilters() {
 
     <div v-else-if="failed" class="empty">
       <AppIcon name="alert" :size="28" />
-      <h2 class="empty__title">Couldn’t load resumes</h2>
-      <p class="empty__text">Check your connection and try again.</p>
-      <button type="button" class="btn btn--ghost" @click="load(1)"><AppIcon name="refresh" :size="16" /> Retry</button>
+      <h2 class="empty__title">{{ t('Couldn’t load resumes') }}</h2>
+      <p class="empty__text">{{ t('Check your connection and try again.') }}</p>
+      <button type="button" class="btn btn--ghost" @click="load(1)"><AppIcon name="refresh" :size="16" /> {{ t('Retry') }}</button>
     </div>
 
     <div v-else-if="!items.length" class="empty">
       <AppIcon name="search" :size="28" />
-      <h2 class="empty__title">No resumes match</h2>
-      <p class="empty__text">Try another name, or widen the speciality and city filters.</p>
-      <button type="button" class="btn btn--ghost" @click="resetFilters">Clear filters</button>
+      <h2 class="empty__title">{{ t('No resumes match') }}</h2>
+      <p class="empty__text">{{ t('Try another name, or widen the speciality and city filters.') }}</p>
+      <button type="button" class="btn btn--ghost" @click="resetFilters">{{ t('Clear filters') }}</button>
     </div>
 
     <TransitionGroup v-else tag="div" name="list" class="board__list">
@@ -149,7 +150,7 @@ function resetFilters() {
 
     <div v-if="hasNext && !loading && !failed" class="board__more">
       <template v-if="loadingMore"><SkeletonRow v-for="n in 2" :key="`more-${n}`" /></template>
-      <button v-else type="button" class="btn btn--ghost" @click="load(page + 1)">Show more</button>
+      <button v-else type="button" class="btn btn--ghost" @click="load(page + 1)">{{ t('Show more') }}</button>
     </div>
   </section>
 </template>

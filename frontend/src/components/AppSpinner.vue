@@ -1,5 +1,6 @@
 <script setup>
-defineProps({ size: { type: Number, default: 16 }, label: { type: String, default: 'Loading' } })
+import { t } from '../i18n'
+defineProps({ size: { type: Number, default: 16 }, label: { type: String, default: () => t('Loading') } })
 </script>
 
 <template>

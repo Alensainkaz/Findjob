@@ -10,6 +10,7 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET, require_POST
 
 from .forms import UserRegisterForm, UserLoginForm
@@ -28,7 +29,7 @@ def _form_errors(form):
 def _send_code(user, code):
     context = {'user': user, 'code': code, 'minutes': int(EmailVerificationToken.CODE_TTL.total_seconds() // 60)}
     send_mail(
-        subject=f'{code} is your Findy-Job verification code',
+        subject=_('%(code)s is your Findy-Job verification code') % {'code': code},
         message=render_to_string('users/email/verify_code.txt', context),
         from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=[user.email],
@@ -39,14 +40,14 @@ def _send_code(user, code):
 
 def _start_verification(request, user):
     """Issue a code for `user`, email it and remember the user in the session."""
-    token, _ = EmailVerificationToken.objects.get_or_create(user=user)
+    token, _created = EmailVerificationToken.objects.get_or_create(user=user)
     code = token.issue_code()
     _send_code(user, code)
     request.session[PENDING_KEY] = user.pk
 
 
 def _mask_email(email):
-    name, _, domain = email.partition('@')
+    name, _at, domain = email.partition('@')
     visible = name[:2] if len(name) > 2 else name[:1]
     return f'{visible}{"•" * max(1, len(name) - len(visible))}@{domain}'
 
@@ -69,9 +70,9 @@ def login_view(request):
                     request.session[PENDING_KEY] = form.pending_user.pk
             except Exception:
                 logger.exception('Could not send verification code to %s', form.pending_user.email)
-                form.add_error(None, 'We could not send the confirmation code. Please try again later.')
+                form.add_error(None, _('We could not send the confirmation code. Please try again later.'))
             else:
-                messages.info(request, 'Your email is not confirmed yet. We sent you a code.')
+                messages.info(request, _('Your email is not confirmed yet. We sent you a code.'))
                 return redirect('verify_code')
     else:
         form = UserLoginForm()
@@ -99,7 +100,7 @@ def register_view(request):
             except Exception:
                 logger.exception('Registration failed for %s', form.cleaned_data.get('email'))
                 request.session.pop(PENDING_KEY, None)
-                form.add_error(None, 'We could not send the confirmation code. Please try again later.')
+                form.add_error(None, _('We could not send the confirmation code. Please try again later.'))
             else:
                 return redirect('verify_code')
     else:
@@ -142,7 +143,7 @@ def verify_code(request):
             token.save(update_fields=['is_verified', 'code_hash'])
             request.session.pop(PENDING_KEY, None)
             login(request, user)
-            messages.success(request, f'Welcome to Findy-Job, {user.username}!')
+            messages.success(request, _('Welcome to Findy-Job, %(name)s!') % {'name': user.username})
             return redirect('index')
 
     return render(request, 'users/verify_code.html', {
@@ -159,16 +160,16 @@ def verify_code(request):
 def resend_code(request):
     token = _pending_token(request)
     if token is None:
-        return JsonResponse({'ok': False, 'error': 'Your session expired. Please sign up again.'}, status=400)
+        return JsonResponse({'ok': False, 'error': _('Your session expired. Please sign up again.')}, status=400)
     wait = token.resend_available_in
     if wait:
-        return JsonResponse({'ok': False, 'error': f'Please wait {wait} s.', 'resendIn': wait}, status=429)
+        return JsonResponse({'ok': False, 'error': _('Please wait %(seconds)d s.') % {'seconds': wait}, 'resendIn': wait}, status=429)
     try:
         code = token.issue_code()
         _send_code(token.user, code)
     except Exception:
         logger.exception('Could not resend verification code to %s', token.user.email)
-        return JsonResponse({'ok': False, 'error': 'We could not send the code. Try again later.'}, status=502)
+        return JsonResponse({'ok': False, 'error': _('We could not send the code. Try again later.')}, status=502)
     return JsonResponse({'ok': True, 'resendIn': token.resend_available_in})
 
 

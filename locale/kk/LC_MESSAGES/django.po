@@ -1,0 +1,1661 @@
+# Findy-Job translations.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Findy-Job\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-16 15:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: Jobfinder/settings.py:117
+msgid "Kazakh"
+msgstr "Қазақша"
+
+#: Jobfinder/settings.py:118
+msgid "Russian"
+msgstr "Орысша"
+
+#: Jobfinder/settings.py:119
+msgid "English"
+msgstr "Ағылшынша"
+
+#: cart/templates/cart_detail.html:4 resume/templates/resume/base.html:117
+msgid "Saved resumes"
+msgstr "Таңдаулы түйіндемелер"
+
+#: cart/templates/cart_detail.html:8
+msgid "Saved for consideration"
+msgstr "Таңдаулылар"
+
+#: cart/templates/cart_detail.html:9
+msgid ""
+"Your shortlist. Email candidates directly or remove the ones you’ve ruled "
+"out."
+msgstr ""
+"Сіздің қысқа тізіміңіз. Үміткерлерге тікелей жазыңыз немесе сәйкес "
+"келмегендерін өшіріңіз."
+
+#: cart/templates/cart_detail.html:20
+msgid "Remove"
+msgstr "Өшіру"
+
+#: cart/templates/cart_detail.html:23
+msgid "Nothing saved yet"
+msgstr "Таңдаулылар әзірге бос"
+
+#: cart/templates/cart_detail.html:23
+msgid "Browse resumes"
+msgstr "Түйіндемелерді қарау"
+
+#: resume/cities.py:6
+msgid "Cities of republican significance"
+msgstr "Республикалық маңызы бар қалалар"
+
+#: resume/cities.py:7
+msgid "Astana"
+msgstr "Астана"
+
+#: resume/cities.py:8
+msgid "Almaty"
+msgstr "Алматы"
+
+#: resume/cities.py:9
+msgid "Shymkent"
+msgstr "Шымкент"
+
+#: resume/cities.py:11
+msgid "Abai Region"
+msgstr "Абай облысы"
+
+#: resume/cities.py:12
+msgid "Semey"
+msgstr "Семей"
+
+#: resume/cities.py:13
+msgid "Ayagoz"
+msgstr "Аягөз"
+
+#: resume/cities.py:14
+msgid "Kurchatov"
+msgstr "Курчатов"
+
+#: resume/cities.py:15
+msgid "Shar"
+msgstr "Шар"
+
+#: resume/cities.py:17
+msgid "Akmola Region"
+msgstr "Ақмола облысы"
+
+#: resume/cities.py:18
+msgid "Kokshetau"
+msgstr "Көкшетау"
+
+#: resume/cities.py:19
+msgid "Stepnogorsk"
+msgstr "Степногорск"
+
+#: resume/cities.py:20
+msgid "Akkol"
+msgstr "Ақкөл"
+
+#: resume/cities.py:21
+msgid "Atbasar"
+msgstr "Атбасар"
+
+#: resume/cities.py:22
+msgid "Derzhavinsk"
+msgstr "Державинск"
+
+#: resume/cities.py:23
+msgid "Yereymentau"
+msgstr "Ерейментау"
+
+#: resume/cities.py:24
+msgid "Esil"
+msgstr "Есіл"
+
+#: resume/cities.py:25
+msgid "Kosshy"
+msgstr "Қосшы"
+
+#: resume/cities.py:26
+msgid "Makinsk"
+msgstr "Макинск"
+
+#: resume/cities.py:27
+msgid "Stepnyak"
+msgstr "Степняк"
+
+#: resume/cities.py:28
+msgid "Shchuchinsk"
+msgstr "Щучинск"
+
+#: resume/cities.py:30
+msgid "Aktobe Region"
+msgstr "Ақтөбе облысы"
+
+#: resume/cities.py:31
+msgid "Aktobe"
+msgstr "Ақтөбе"
+
+#: resume/cities.py:32
+msgid "Alga"
+msgstr "Алға"
+
+#: resume/cities.py:33
+msgid "Embi"
+msgstr "Ембі"
+
+#: resume/cities.py:34
+msgid "Kandyagash"
+msgstr "Қандыағаш"
+
+#: resume/cities.py:35
+msgid "Temir"
+msgstr "Темір"
+
+#: resume/cities.py:36
+msgid "Khromtau"
+msgstr "Хромтау"
+
+#: resume/cities.py:37
+msgid "Shalkar"
+msgstr "Шалқар"
+
+#: resume/cities.py:38
+msgid "Zhem"
+msgstr "Жем"
+
+#: resume/cities.py:40
+msgid "Almaty Region"
+msgstr "Алматы облысы"
+
+#: resume/cities.py:41
+msgid "Konaev (Kapshagay)"
+msgstr "Қонаев (Қапшағай)"
+
+#: resume/cities.py:42
+msgid "Esik"
+msgstr "Есік"
+
+#: resume/cities.py:43
+msgid "Kaskelen"
+msgstr "Қаскелең"
+
+#: resume/cities.py:44
+msgid "Talgar"
+msgstr "Талғар"
+
+#: resume/cities.py:46
+msgid "Atyrau Region"
+msgstr "Атырау облысы"
+
+#: resume/cities.py:47
+msgid "Atyrau"
+msgstr "Атырау"
+
+#: resume/cities.py:48
+msgid "Kulsary"
+msgstr "Құлсары"
+
+#: resume/cities.py:50
+msgid "East Kazakhstan Region"
+msgstr "Шығыс Қазақстан облысы"
+
+#: resume/cities.py:51
+msgid "Oskemen (Ust-Kamenogorsk)"
+msgstr "Өскемен"
+
+#: resume/cities.py:52
+msgid "Ridder"
+msgstr "Риддер"
+
+#: resume/cities.py:53
+msgid "Altai (Zyryanovsk)"
+msgstr "Алтай (Зырян)"
+
+#: resume/cities.py:54
+msgid "Serebryansk"
+msgstr "Серебрянск"
+
+#: resume/cities.py:55
+msgid "Shemonaikha"
+msgstr "Шемонаиха"
+
+#: resume/cities.py:56
+msgid "Zaysan"
+msgstr "Зайсан"
+
+#: resume/cities.py:58
+msgid "Jambyl Region"
+msgstr "Жамбыл облысы"
+
+#: resume/cities.py:59
+msgid "Taraz"
+msgstr "Тараз"
+
+#: resume/cities.py:60
+msgid "Karatau"
+msgstr "Қаратау"
+
+#: resume/cities.py:61
+msgid "Shu"
+msgstr "Шу"
+
+#: resume/cities.py:62
+msgid "Zhanatas"
+msgstr "Жаңатас"
+
+#: resume/cities.py:64
+msgid "Jetisu Region"
+msgstr "Жетісу облысы"
+
+#: resume/cities.py:65
+msgid "Taldykorgan"
+msgstr "Талдықорған"
+
+#: resume/cities.py:66
+msgid "Tekeli"
+msgstr "Текелі"
+
+#: resume/cities.py:67
+msgid "Ushtobe"
+msgstr "Үштөбе"
+
+#: resume/cities.py:68
+msgid "Sarkand"
+msgstr "Сарқанд"
+
+#: resume/cities.py:69
+msgid "Zharkent"
+msgstr "Жаркент"
+
+#: resume/cities.py:71
+msgid "Karaganda Region"
+msgstr "Қарағанды облысы"
+
+#: resume/cities.py:72
+msgid "Karaganda"
+msgstr "Қарағанды"
+
+#: resume/cities.py:73
+msgid "Abai"
+msgstr "Абай"
+
+#: resume/cities.py:74
+msgid "Balkhash"
+msgstr "Балқаш"
+
+#: resume/cities.py:75
+msgid "Karkaraly"
+msgstr "Қарқаралы"
+
+#: resume/cities.py:76
+msgid "Priozersk"
+msgstr "Приозерск"
+
+#: resume/cities.py:77
+msgid "Saran"
+msgstr "Саран"
+
+#: resume/cities.py:78
+msgid "Temirtau"
+msgstr "Теміртау"
+
+#: resume/cities.py:79
+msgid "Shakhtinsk"
+msgstr "Шахтинск"
+
+#: resume/cities.py:81
+msgid "Kostanay Region"
+msgstr "Қостанай облысы"
+
+#: resume/cities.py:82
+msgid "Kostanay"
+msgstr "Қостанай"
+
+#: resume/cities.py:83
+msgid "Arkalyk"
+msgstr "Арқалық"
+
+#: resume/cities.py:84
+msgid "Lisakovsk"
+msgstr "Лисаков"
+
+#: resume/cities.py:85
+msgid "Rudny"
+msgstr "Рудный"
+
+#: resume/cities.py:86
+msgid "Tobyl"
+msgstr "Тобыл"
+
+#: resume/cities.py:87
+msgid "Zhitikara"
+msgstr "Жітіқара"
+
+#: resume/cities.py:89
+msgid "Kyzylorda Region"
+msgstr "Қызылорда облысы"
+
+#: resume/cities.py:90
+msgid "Kyzylorda"
+msgstr "Қызылорда"
+
+#: resume/cities.py:91
+msgid "Aral"
+msgstr "Арал"
+
+#: resume/cities.py:92
+msgid "Baikonur"
+msgstr "Байқоңыр"
+
+#: resume/cities.py:93
+msgid "Kazaly"
+msgstr "Қазалы"
+
+#: resume/cities.py:95
+msgid "Mangystau Region"
+msgstr "Маңғыстау облысы"
+
+#: resume/cities.py:96
+msgid "Aktau"
+msgstr "Ақтау"
+
+#: resume/cities.py:97
+msgid "Zhanaozen"
+msgstr "Жаңаөзен"
+
+#: resume/cities.py:98
+msgid "Fort-Shevchenko"
+msgstr "Форт-Шевченко"
+
+#: resume/cities.py:100
+msgid "North Kazakhstan Region"
+msgstr "Солтүстік Қазақстан облысы"
+
+#: resume/cities.py:101
+msgid "Petropavl"
+msgstr "Петропавл"
+
+#: resume/cities.py:102
+msgid "Bulaevo"
+msgstr "Булаев"
+
+#: resume/cities.py:103
+msgid "Mamlyutka"
+msgstr "Мамлют"
+
+#: resume/cities.py:104
+msgid "Sergeyevka"
+msgstr "Сергеев"
+
+#: resume/cities.py:105
+msgid "Taiynsha"
+msgstr "Тайынша"
+
+#: resume/cities.py:107
+msgid "Pavlodar Region"
+msgstr "Павлодар облысы"
+
+#: resume/cities.py:108
+msgid "Pavlodar"
+msgstr "Павлодар"
+
+#: resume/cities.py:109
+msgid "Aksu"
+msgstr "Ақсу"
+
+#: resume/cities.py:110
+msgid "Ekibastuz"
+msgstr "Екібастұз"
+
+#: resume/cities.py:112
+msgid "Turkistan Region"
+msgstr "Түркістан облысы"
+
+#: resume/cities.py:113
+msgid "Turkistan"
+msgstr "Түркістан"
+
+#: resume/cities.py:114
+msgid "Arys"
+msgstr "Арыс"
+
+#: resume/cities.py:115
+msgid "Kentau"
+msgstr "Кентау"
+
+#: resume/cities.py:116
+msgid "Lenger"
+msgstr "Леңгір"
+
+#: resume/cities.py:117
+msgid "Saryagash"
+msgstr "Сарыағаш"
+
+#: resume/cities.py:118
+msgid "Shardara"
+msgstr "Шардара"
+
+#: resume/cities.py:119
+msgid "Zhetysai"
+msgstr "Жетісай"
+
+#: resume/cities.py:121
+msgid "Ulytau Region"
+msgstr "Ұлытау облысы"
+
+#: resume/cities.py:122
+msgid "Zhezkazgan"
+msgstr "Жезқазған"
+
+#: resume/cities.py:123
+msgid "Karazhal"
+msgstr "Қаражал"
+
+#: resume/cities.py:124
+msgid "Satbayev"
+msgstr "Сәтбаев"
+
+#: resume/cities.py:126
+msgid "West Kazakhstan Region"
+msgstr "Батыс Қазақстан облысы"
+
+#: resume/cities.py:127
+msgid "Oral (Uralsk)"
+msgstr "Орал"
+
+#: resume/cities.py:128
+msgid "Aksai"
+msgstr "Ақсай"
+
+#: resume/models.py:8
+msgid "Accountant"
+msgstr "Бухгалтер"
+
+#: resume/models.py:9
+msgid "Actor"
+msgstr "Актер"
+
+#: resume/models.py:10
+msgid "Actuary"
+msgstr "Актуарий"
+
+#: resume/models.py:11
+msgid "Architect"
+msgstr "Сәулетші"
+
+#: resume/models.py:12
+msgid "Artist"
+msgstr "Суретші"
+
+#: resume/models.py:13
+msgid "Astronomer"
+msgstr "Астроном"
+
+#: resume/models.py:14
+msgid "Athlete"
+msgstr "Спортшы"
+
+#: resume/models.py:15
+msgid "Audiologist"
+msgstr "Сурдолог"
+
+#: resume/models.py:16
+msgid "Biologist"
+msgstr "Биолог"
+
+#: resume/models.py:17
+msgid "Botanist"
+msgstr "Ботаник"
+
+#: resume/models.py:18
+msgid "Chef"
+msgstr "Аспаз"
+
+#: resume/models.py:19
+msgid "Chemist"
+msgstr "Химик"
+
+#: resume/models.py:20
+msgid "Coach"
+msgstr "Жаттықтырушы"
+
+#: resume/models.py:21
+msgid "Comedian"
+msgstr "Комик"
+
+#: resume/models.py:22
+msgid "Computer Scientist"
+msgstr "Информатика маманы"
+
+#: resume/models.py:23
+msgid "Consultant"
+msgstr "Кеңесші"
+
+#: resume/models.py:24
+msgid "Dancer"
+msgstr "Биші"
+
+#: resume/models.py:25
+msgid "Data Analyst"
+msgstr "Деректер талдаушысы"
+
+#: resume/models.py:26
+msgid "Data Scientist"
+msgstr "Data Scientist"
+
+#: resume/models.py:27
+msgid "Dentist"
+msgstr "Стоматолог"
+
+#: resume/models.py:28
+msgid "Designer"
+msgstr "Дизайнер"
+
+#: resume/models.py:29
+msgid "Developer"
+msgstr "Әзірлеуші"
+
+#: resume/models.py:30
+msgid "Doctor"
+msgstr "Дәрігер"
+
+#: resume/models.py:31
+msgid "Economist"
+msgstr "Экономист"
+
+#: resume/models.py:32
+msgid "Editor"
+msgstr "Редактор"
+
+#: resume/models.py:33
+msgid "Electrician"
+msgstr "Электрик"
+
+#: resume/models.py:34
+msgid "Engineer"
+msgstr "Инженер"
+
+#: resume/models.py:35
+msgid "Entrepreneur"
+msgstr "Кәсіпкер"
+
+#: resume/models.py:36
+msgid "Farmer"
+msgstr "Фермер"
+
+#: resume/models.py:37
+msgid "Film Director"
+msgstr "Кинорежиссер"
+
+#: resume/models.py:38
+msgid "Financial Analyst"
+msgstr "Қаржы талдаушысы"
+
+#: resume/models.py:39
+msgid "Firefighter"
+msgstr "Өрт сөндіруші"
+
+#: resume/models.py:40
+msgid "Geologist"
+msgstr "Геолог"
+
+#: resume/models.py:41
+msgid "Graphic Designer"
+msgstr "Графикалық дизайнер"
+
+#: resume/models.py:42
+msgid "Hairdresser"
+msgstr "Шаштараз"
+
+#: resume/models.py:43
+msgid "Historian"
+msgstr "Тарихшы"
+
+#: resume/models.py:44
+msgid "Illustrator"
+msgstr "Иллюстратор"
+
+#: resume/models.py:45
+msgid "Interpreter"
+msgstr "Ауызша аудармашы"
+
+#: resume/models.py:46
+msgid "IT Specialist"
+msgstr "IT маманы"
+
+#: resume/models.py:47
+msgid "Journalist"
+msgstr "Журналист"
+
+#: resume/models.py:48
+msgid "Lawyer"
+msgstr "Заңгер"
+
+#: resume/models.py:49
+msgid "Librarian"
+msgstr "Кітапханашы"
+
+#: resume/models.py:50
+msgid "Mechanic"
+msgstr "Механик"
+
+#: resume/models.py:51
+msgid "Marketing Specialist"
+msgstr "Маркетолог"
+
+#: resume/models.py:52
+msgid "Mathematician"
+msgstr "Математик"
+
+#: resume/models.py:53
+msgid "Model"
+msgstr "Модель"
+
+#: resume/models.py:54
+msgid "Musician"
+msgstr "Музыкант"
+
+#: resume/models.py:55
+msgid "Nurse"
+msgstr "Мейірбике"
+
+#: resume/models.py:56
+msgid "Nutritionist"
+msgstr "Нутрициолог"
+
+#: resume/models.py:57
+msgid "Painter"
+msgstr "Сырлаушы"
+
+#: resume/models.py:58
+msgid "Photographer"
+msgstr "Фотограф"
+
+#: resume/models.py:59
+msgid "Pharmacist"
+msgstr "Фармацевт"
+
+#: resume/models.py:60
+msgid "Pilot"
+msgstr "Ұшқыш"
+
+#: resume/models.py:61
+msgid "Physician"
+msgstr "Терапевт"
+
+#: resume/models.py:62
+msgid "Physicist"
+msgstr "Физик"
+
+#: resume/models.py:63
+msgid "Plumber"
+msgstr "Сантехник"
+
+#: resume/models.py:64
+msgid "Police Officer"
+msgstr "Полиция қызметкері"
+
+#: resume/models.py:65
+msgid "Politician"
+msgstr "Саясаткер"
+
+#: resume/models.py:66
+msgid "Professor"
+msgstr "Профессор"
+
+#: resume/models.py:67
+msgid "Psychologist"
+msgstr "Психолог"
+
+#: resume/models.py:68
+msgid "Receptionist"
+msgstr "Ресепшн әкімшісі"
+
+#: resume/models.py:69
+msgid "Researcher"
+msgstr "Зерттеуші"
+
+#: resume/models.py:70
+msgid "Sales Manager"
+msgstr "Сату менеджері"
+
+#: resume/models.py:71
+msgid "Scientist"
+msgstr "Ғалым"
+
+#: resume/models.py:72
+msgid "Security Specialist"
+msgstr "Қауіпсіздік маманы"
+
+#: resume/models.py:73
+msgid "Singer"
+msgstr "Әнші"
+
+#: resume/models.py:74
+msgid "Software Engineer"
+msgstr "Бағдарламалық жасақтама инженері"
+
+#: resume/models.py:75
+msgid "Statistician"
+msgstr "Статистик"
+
+#: resume/models.py:76
+msgid "Surgeon"
+msgstr "Хирург"
+
+#: resume/models.py:77
+msgid "Teacher"
+msgstr "Мұғалім"
+
+#: resume/models.py:78
+msgid "Translator"
+msgstr "Аудармашы"
+
+#: resume/models.py:79
+msgid "Veterinarian"
+msgstr "Ветеринар"
+
+#: resume/models.py:80
+msgid "Writer"
+msgstr "Жазушы"
+
+#: resume/models.py:81
+msgid "Yoga Instructor"
+msgstr "Йога нұсқаушысы"
+
+#: resume/models.py:82
+msgid "Zoologist"
+msgstr "Зоолог"
+
+#: resume/models.py:83
+msgid "Actress"
+msgstr "Актриса"
+
+#: resume/models.py:84
+msgid "Animator"
+msgstr "Аниматор"
+
+#: resume/models.py:85
+msgid "Archaeologist"
+msgstr "Археолог"
+
+#: resume/models.py:86
+msgid "Astronaut"
+msgstr "Ғарышкер"
+
+#: resume/models.py:87
+msgid "Baker"
+msgstr "Наубайшы"
+
+#: resume/models.py:88
+msgid "Barista"
+msgstr "Бариста"
+
+#: resume/models.py:89
+msgid "Bartender"
+msgstr "Бармен"
+
+#: resume/models.py:90
+msgid "Biochemist"
+msgstr "Биохимик"
+
+#: resume/models.py:91
+msgid "Blacksmith"
+msgstr "Ұста"
+
+#: resume/models.py:92
+msgid "Bricklayer"
+msgstr "Кірпіш қалаушы"
+
+#: resume/models.py:93
+msgid "Bus Driver"
+msgstr "Автобус жүргізушісі"
+
+#: resume/models.py:94
+msgid "Carpenter"
+msgstr "Ағаш ұстасы"
+
+#: resume/models.py:95
+msgid "Cartographer"
+msgstr "Картограф"
+
+#: resume/models.py:96
+msgid "Chef de Cuisine"
+msgstr "Бас аспаз"
+
+#: resume/models.py:97
+msgid "Choreographer"
+msgstr "Хореограф"
+
+#: resume/models.py:98
+msgid "Civil Engineer"
+msgstr "Құрылыс инженері"
+
+#: resume/models.py:99
+msgid "Coach Trainer"
+msgstr "Тәлімгер-жаттықтырушы"
+
+#: resume/models.py:100
+msgid "Composer"
+msgstr "Композитор"
+
+#: resume/models.py:101
+msgid "Computer Programmer"
+msgstr "Бағдарламашы"
+
+#: resume/models.py:102
+msgid "Construction Worker"
+msgstr "Құрылысшы"
+
+#: resume/models.py:103
+msgid "Content Writer"
+msgstr "Контент-райтер"
+
+#: resume/models.py:104
+msgid "Copywriter"
+msgstr "Копирайтер"
+
+#: resume/models.py:105
+msgid "Curator"
+msgstr "Куратор"
+
+#: resume/models.py:106
+msgid "Dietetics Specialist"
+msgstr "Диетолог"
+
+#: resume/models.py:107
+msgid "Director"
+msgstr "Директор"
+
+#: resume/models.py:108
+msgid "Econometrics Specialist"
+msgstr "Эконометрика маманы"
+
+#: resume/models.py:109
+msgid "Editor-in-Chief"
+msgstr "Бас редактор"
+
+#: resume/models.py:110
+msgid "Electrical Engineer"
+msgstr "Электр инженері"
+
+#: resume/models.py:111
+msgid "Event Planner"
+msgstr "Іс-шара ұйымдастырушы"
+
+#: resume/models.py:112
+msgid "Fashion Designer"
+msgstr "Сән дизайнері"
+
+#: resume/models.py:113
+msgid "Film Editor"
+msgstr "Фильм монтаждаушы"
+
+#: resume/models.py:114
+msgid "Financial Planner"
+msgstr "Қаржылық жоспарлаушы"
+
+#: resume/models.py:115
+msgid "Fitness Trainer"
+msgstr "Фитнес-жаттықтырушы"
+
+#: resume/models.py:116
+msgid "Florist"
+msgstr "Флорист"
+
+#: resume/models.py:117
+msgid "Geographer"
+msgstr "Географ"
+
+#: resume/models.py:118
+msgid "Gym Instructor"
+msgstr "Жаттығу залының нұсқаушысы"
+
+#: resume/models.py:119
+msgid "Handyman"
+msgstr "Шебер"
+
+#: resume/models.py:120
+msgid "HR Specialist"
+msgstr "HR маманы"
+
+#: resume/models.py:121
+msgid "Illustration Artist"
+msgstr "Иллюстратор-суретші"
+
+#: resume/models.py:122
+msgid "Industrial Designer"
+msgstr "Өнеркәсіптік дизайнер"
+
+#: resume/models.py:123
+msgid "Interior Designer"
+msgstr "Интерьер дизайнері"
+
+#: resume/models.py:124
+msgid "IT Consultant"
+msgstr "IT кеңесшісі"
+
+#: resume/models.py:125
+msgid "Judge"
+msgstr "Судья"
+
+#: resume/models.py:126
+msgid "Laboratory Technician"
+msgstr "Зертханашы"
+
+#: resume/models.py:127
+msgid "Landscaper"
+msgstr "Ландшафт дизайнері"
+
+#: resume/models.py:128
+msgid "Linguist"
+msgstr "Лингвист"
+
+#: resume/models.py:129
+msgid "Makeup Artist"
+msgstr "Визажист"
+
+#: resume/models.py:130
+msgid "Marine Biologist"
+msgstr "Теңіз биологы"
+
+#: resume/models.py:131
+msgid "Mechanics Engineer"
+msgstr "Механик инженер"
+
+#: resume/models.py:132
+msgid "Meteorologist"
+msgstr "Метеоролог"
+
+#: resume/models.py:133
+msgid "Microbiologist"
+msgstr "Микробиолог"
+
+#: resume/models.py:134
+msgid "Network Engineer"
+msgstr "Желі инженері"
+
+#: resume/models.py:135
+msgid "Nutrition Consultant"
+msgstr "Тамақтану жөніндегі кеңесші"
+
+#: resume/models.py:136
+msgid "Occupational Therapist"
+msgstr "Эрготерапевт"
+
+#: resume/models.py:137
+msgid "Oceanographer"
+msgstr "Океанолог"
+
+#: resume/models.py:138
+msgid "Optician"
+msgstr "Оптик"
+
+#: resume/models.py:139
+msgid "Painter Artist"
+msgstr "Кескіндемеші"
+
+#: resume/models.py:140
+msgid "Paralegal"
+msgstr "Заңгер көмекшісі"
+
+#: resume/models.py:141
+msgid "Paramedic"
+msgstr "Фельдшер"
+
+#: resume/models.py:142
+msgid "Philosopher"
+msgstr "Философ"
+
+#: resume/models.py:143
+msgid "Photographic Artist"
+msgstr "Фотосуретші"
+
+#: resume/models.py:144
+msgid "Physical Therapist"
+msgstr "Физиотерапевт"
+
+#: resume/models.py:145
+msgid "Pilot Captain"
+msgstr "Әуе кемесінің командирі"
+
+#: resume/models.py:146
+msgid "Plant Scientist"
+msgstr "Өсімдік зерттеушісі"
+
+#: resume/models.py:147
+msgid "Poet"
+msgstr "Ақын"
+
+#: resume/models.py:148
+msgid "Political Analyst"
+msgstr "Саясаттанушы"
+
+#: resume/models.py:149
+msgid "Producer"
+msgstr "Продюсер"
+
+#: resume/models.py:150
+msgid "Professor of Science"
+msgstr "Жаратылыстану ғылымдарының профессоры"
+
+#: resume/models.py:151
+msgid "Program Manager"
+msgstr "Бағдарлама менеджері"
+
+#: resume/models.py:152
+msgid "Project Engineer"
+msgstr "Жоба инженері"
+
+#: resume/models.py:153
+msgid "Public Relations Specialist"
+msgstr "PR маманы"
+
+#: resume/models.py:154
+msgid "Quality Analyst"
+msgstr "Сапа талдаушысы (QA)"
+
+#: resume/models.py:155
+msgid "Radiologist"
+msgstr "Рентгенолог"
+
+#: resume/models.py:156
+msgid "Real Estate Agent"
+msgstr "Жылжымайтын мүлік агенті"
+
+#: resume/models.py:157
+msgid "Reception Manager"
+msgstr "Ресепшн менеджері"
+
+#: resume/models.py:158
+msgid "Research Analyst"
+msgstr "Зерттеуші-талдаушы"
+
+#: resume/models.py:159
+msgid "Robotics Engineer"
+msgstr "Робототехника инженері"
+
+#: resume/models.py:160
+msgid "Sculptor"
+msgstr "Мүсінші"
+
+#: resume/models.py:161
+msgid "SEO Specialist"
+msgstr "SEO маманы"
+
+#: resume/models.py:162
+msgid "Social Worker"
+msgstr "Әлеуметтік қызметкер"
+
+#: resume/models.py:163
+msgid "Software Developer"
+msgstr "Бағдарламалық жасақтама әзірлеушісі"
+
+#: resume/models.py:164
+msgid "Sound Engineer"
+msgstr "Дыбыс режиссері"
+
+#: resume/models.py:165
+msgid "Statistician Analyst"
+msgstr "Статистик-талдаушы"
+
+#: resume/models.py:166
+msgid "Strategy Consultant"
+msgstr "Стратегия жөніндегі кеңесші"
+
+#: resume/models.py:167
+msgid "Structural Engineer"
+msgstr "Конструктор инженер"
+
+#: resume/models.py:168
+msgid "Surveyor"
+msgstr "Геодезист"
+
+#: resume/models.py:169
+msgid "Teacher Assistant"
+msgstr "Мұғалім көмекшісі"
+
+#: resume/models.py:170
+msgid "Technical Writer"
+msgstr "Техникалық жазушы"
+
+#: resume/models.py:171
+msgid "Television Presenter"
+msgstr "Теледидар жүргізушісі"
+
+#: resume/models.py:172
+msgid "UX Designer"
+msgstr "UX дизайнер"
+
+#: resume/models.py:173
+msgid "UI Designer"
+msgstr "UI дизайнер"
+
+#: resume/models.py:174
+msgid "Veterinary Nurse"
+msgstr "Ветеринарлық фельдшер"
+
+#: resume/models.py:175
+msgid "Video Editor"
+msgstr "Видеомонтаждаушы"
+
+#: resume/models.py:176
+msgid "Visual Designer"
+msgstr "Визуалды дизайнер"
+
+#: resume/models.py:177
+msgid "Web Developer"
+msgstr "Веб-әзірлеуші"
+
+#: resume/models.py:178
+msgid "Writer Editor"
+msgstr "Автор-редактор"
+
+#: resume/models.py:179
+msgid "Yoga Teacher"
+msgstr "Йога мұғалімі"
+
+#: resume/models.py:180
+msgid "Youth Worker"
+msgstr "Жастармен жұмыс жөніндегі маман"
+
+#: resume/models.py:181
+msgid "Zoology Specialist"
+msgstr "Зоология маманы"
+
+#: resume/templates/resume/base.html:7 resume/templates/resume/base.html:15
+#: resume/templates/resume/index.html:3
+msgid "Findy-Job — Resume Board for Hiring in Kazakhstan"
+msgstr "Findy-Job — Қазақстандағы жұмысқа алуға арналған түйіндеме тақтасы"
+
+#: resume/templates/resume/base.html:8
+msgid ""
+"Findy-Job is a free resume board for Kazakhstan. Browse candidates across "
+"170+ specialities in every city, save the best ones and contact them "
+"directly."
+msgstr ""
+"Findy-Job — Қазақстан бойынша тегін түйіндеме тақтасы. Барлық қалалардағы "
+"170-тен астам мамандық бойынша үміткерлерді қарап, ең үздіктерін сақтаңыз "
+"және олармен тікелей байланысыңыз."
+
+#: resume/templates/resume/base.html:16
+msgid ""
+"Browse candidates across 170+ specialities in every city of Kazakhstan, save"
+" the best ones and contact them directly."
+msgstr ""
+"Қазақстанның барлық қалаларындағы 170-тен астам мамандық бойынша "
+"үміткерлерді қарап, ең үздіктерін сақтаңыз және олармен тікелей "
+"байланысыңыз."
+
+#: resume/templates/resume/base.html:39
+msgid "Skip to content"
+msgstr "Мазмұнға өту"
+
+#: resume/templates/resume/base.html:45
+msgid "Findy-Job home"
+msgstr "Findy-Job — басты бет"
+
+#: resume/templates/resume/base.html:51 resume/templates/resume/index.html:49
+msgid "Search resumes"
+msgstr "Түйіндеме іздеу"
+
+#: resume/templates/resume/base.html:56
+msgid "Menu"
+msgstr "Мәзір"
+
+#: resume/templates/resume/base.html:61
+msgid "Main"
+msgstr "Негізгі мәзір"
+
+#: resume/templates/resume/base.html:64
+msgid "Close menu"
+msgstr "Мәзірді жабу"
+
+#: resume/templates/resume/base.html:68
+msgid "Resumes"
+msgstr "Түйіндемелер"
+
+#: resume/templates/resume/base.html:70
+msgid "Saved"
+msgstr "Таңдаулылар"
+
+#: resume/templates/resume/base.html:71
+msgid "Admin"
+msgstr "Әкімші"
+
+#: resume/templates/resume/base.html:72 resume/templates/resume/base.html:118
+msgid "Log out"
+msgstr "Шығу"
+
+#: resume/templates/resume/base.html:74 resume/templates/resume/base.html:116
+msgid "Create resume"
+msgstr "Түйіндеме құру"
+
+#: resume/templates/resume/base.html:77 resume/templates/resume/base.html:121
+msgid "Log in"
+msgstr "Кіру"
+
+#: resume/templates/resume/base.html:78 resume/templates/resume/base.html:120
+msgid "Sign up"
+msgstr "Тіркелу"
+
+#: resume/templates/resume/base.html:81
+msgid "Language"
+msgstr "Тіл"
+
+#: resume/templates/resume/base.html:101
+msgid ""
+"A resume board for hiring teams: search across 170+ specialities, save "
+"candidates and contact them directly."
+msgstr ""
+"Жұмысқа алушыларға арналған түйіндеме тақтасы: 170-тен астам мамандық "
+"бойынша іздеу, үміткерлерді сақтау және олармен тікелей байланыс."
+
+#: resume/templates/resume/base.html:104
+msgid "Browse"
+msgstr "Шолу"
+
+#: resume/templates/resume/base.html:106
+#: resume/templates/resume/resume_detail.html:7
+msgid "All resumes"
+msgstr "Барлық түйіндемелер"
+
+#: resume/templates/resume/base.html:107
+msgid "Software engineers"
+msgstr "Бағдарламашылар"
+
+#: resume/templates/resume/base.html:108
+msgid "Designers"
+msgstr "Дизайнерлер"
+
+#: resume/templates/resume/base.html:109
+msgid "Accountants"
+msgstr "Бухгалтерлер"
+
+#: resume/templates/resume/base.html:113
+msgid "Account"
+msgstr "Аккаунт"
+
+#: resume/templates/resume/base.html:126
+msgid "Contact"
+msgstr "Байланыс"
+
+#: resume/templates/resume/base.html:133
+msgid "All rights reserved."
+msgstr "Барлық құқықтар қорғалған."
+
+#: resume/templates/resume/base.html:134
+msgid "Made with"
+msgstr "Сүйіспеншілікпен"
+
+#: resume/templates/resume/base.html:134
+msgid "love"
+msgstr "сүйіспеншілік"
+
+#: resume/templates/resume/base.html:134
+msgid "by"
+msgstr "жасаған:"
+
+#: resume/templates/resume/create_resume.html:4
+#: resume/templates/resume/create_resume.html:8
+msgid "Create a resume"
+msgstr "Түйіндеме құру"
+
+#: resume/templates/resume/create_resume.html:9
+msgid ""
+"Fill in the basics — employers see your name, speciality and contact email."
+msgstr ""
+"Негізгі мәліметтерді толтырыңыз — жұмыс берушілер атыңызды, мамандығыңызды "
+"және байланыс email-іңізді көреді."
+
+#: resume/templates/resume/create_resume.html:17
+#: resume/templates/resume/edit_resume.html:17
+msgid "Save"
+msgstr "Сақтау"
+
+#: resume/templates/resume/delete_resume.html:4
+#: resume/templates/resume/delete_resume.html:20
+msgid "Delete resume"
+msgstr "Түйіндемені өшіру"
+
+#: resume/templates/resume/delete_resume.html:7
+msgid "Back to resume"
+msgstr "Түйіндемеге оралу"
+
+#: resume/templates/resume/delete_resume.html:9
+msgid "Delete this resume?"
+msgstr "Бұл түйіндемені өшіру керек пе?"
+
+#: resume/templates/resume/delete_resume.html:10
+msgid ""
+"It disappears from the board and from everyone’s saved lists. This can’t be "
+"undone."
+msgstr ""
+"Ол тақтадан және барлық пайдаланушылардың таңдаулыларынан жойылады. Бұл "
+"әрекетті болдырмау мүмкін емес."
+
+#: resume/templates/resume/delete_resume.html:21
+msgid "Keep it"
+msgstr "Қалдыру"
+
+#: resume/templates/resume/edit_resume.html:4
+#: resume/templates/resume/edit_resume.html:8
+msgid "Edit resume"
+msgstr "Түйіндемені өңдеу"
+
+#: resume/templates/resume/edit_resume.html:9
+msgid "Update your details. Changes are visible immediately."
+msgstr "Мәліметтерді жаңартыңыз. Өзгерістер бірден көрінеді."
+
+#: resume/templates/resume/index.html:16
+msgid ""
+"A free resume board for Kazakhstan: browse candidates across 170+ "
+"specialities in every city."
+msgstr ""
+"Қазақстан бойынша тегін түйіндеме тақтасы: барлық қалалардағы 170-тен астам "
+"мамандық бойынша үміткерлер."
+
+#: resume/templates/resume/index.html:40
+msgid "Find your next hire"
+msgstr "Жаңа қызметкер табыңыз"
+
+#: resume/templates/resume/index.html:41
+msgid ""
+"Browse resumes, filter by speciality and city, and save the people you want "
+"to contact."
+msgstr ""
+"Түйіндемелерді қарап, мамандық пен қала бойынша сүзіңіз және хабарласқыңыз "
+"келетін адамдарды сақтаңыз."
+
+#: resume/templates/resume/index.html:49
+msgid "Search by name or speciality"
+msgstr "Аты немесе мамандығы бойынша іздеу"
+
+#: resume/templates/resume/index.html:50
+msgid "Filter by city"
+msgstr "Қала бойынша сүзу"
+
+#: resume/templates/resume/index.html:51
+msgid "All cities"
+msgstr "Барлық қалалар"
+
+#: resume/templates/resume/index.html:55
+#, python-format
+msgid "%(total)s resume"
+msgid_plural "%(total)s resumes"
+msgstr[0] "%(total)s түйіндеме"
+msgstr[1] "%(total)s түйіндеме"
+
+#: resume/templates/resume/index.html:68
+msgid "No resumes yet"
+msgstr "Әзірге түйіндеме жоқ"
+
+#: resume/templates/resume/resume_detail.html:11
+#, python-format
+msgid "Photo of %(name)s %(surname)s"
+msgstr "Фото: %(name)s %(surname)s"
+
+#: resume/templates/resume/resume_detail.html:21
+msgid "City"
+msgstr "Қала"
+
+#: resume/templates/resume/resume_detail.html:22
+msgid "Education"
+msgstr "Білімі"
+
+#: resume/templates/resume/resume_detail.html:23
+msgid "Experience"
+msgstr "Жұмыс тәжірибесі"
+
+#: resume/templates/resume/resume_detail.html:24 users/forms.py:22
+#: users/forms.py:23 users/forms.py:37
+msgid "Email"
+msgstr "Email"
+
+#: resume/templates/resume/resume_detail.html:25
+msgid "Published"
+msgstr "Жарияланды"
+
+#: resume/templates/resume/resume_detail.html:33
+msgid "Save for consideration"
+msgstr "Таңдаулыларға қосу"
+
+#: resume/templates/resume/resume_detail.html:36
+msgid "Email candidate"
+msgstr "Үміткерге жазу"
+
+#: resume/templates/resume/resume_detail.html:38
+msgid "Edit"
+msgstr "Өңдеу"
+
+#: resume/templates/resume/resume_detail.html:39
+msgid "Delete"
+msgstr "Өшіру"
+
+#: resume/views.py:129
+msgid "Save changes"
+msgstr "Өзгерістерді сақтау"
+
+#: resume/views.py:129
+msgid "Publish resume"
+msgstr "Түйіндемені жариялау"
+
+#: resume/views.py:167
+msgid "You cannot edit this resume."
+msgstr "Бұл түйіндемені өңдей алмайсыз."
+
+#: resume/views.py:182
+msgid "You cannot delete this resume."
+msgstr "Бұл түйіндемені өшіре алмайсыз."
+
+#: templates/404.html:4 templates/404.html:8
+msgid "Page not found"
+msgstr "Бет табылмады"
+
+#: templates/404.html:9
+msgid "The page you’re looking for doesn’t exist or was moved."
+msgstr "Сіз іздеген бет жоқ немесе басқа жерге ауыстырылған."
+
+#: templates/404.html:10 templates/500.html:10
+msgid "Back to resumes"
+msgstr "Түйіндемелерге оралу"
+
+#: templates/500.html:4 templates/500.html:8
+msgid "Something went wrong"
+msgstr "Бірдеңе дұрыс болмады"
+
+#: templates/500.html:9
+msgid "We hit an error on our side. Please try again in a moment."
+msgstr "Біздің тарапта қате орын алды. Сәлден кейін қайталап көріңіз."
+
+#: templates/admin/index.html:4
+msgid "Dashboard"
+msgstr ""
+
+#: templates/admin/index.html:4
+msgid "Django site admin"
+msgstr ""
+
+#: users/forms.py:9
+msgid "Username"
+msgstr "Пайдаланушы аты"
+
+#: users/forms.py:12 users/forms.py:13 users/forms.py:38
+msgid "Password"
+msgstr "Құпиясөз"
+
+#: users/forms.py:17
+msgid "Password confirmation"
+msgstr "Құпиясөзді растау"
+
+#: users/forms.py:18
+msgid "Repeat password"
+msgstr "Құпиясөзді қайталаңыз"
+
+#: users/forms.py:29
+msgid "This email already exists"
+msgstr "Бұл email бұрыннан тіркелген"
+
+#: users/forms.py:48 users/forms.py:57
+msgid "Wrong email or password"
+msgstr "Email немесе құпиясөз қате"
+
+#: users/forms.py:53
+msgid "Please confirm your email first."
+msgstr "Алдымен email-ді растаңыз."
+
+#: users/models.py:16
+msgid "Employer"
+msgstr "Жұмыс беруші"
+
+#: users/models.py:17
+msgid "Administrator"
+msgstr "Әкімші"
+
+#: users/models.py:18
+msgid "Job seeker"
+msgstr "Жұмыс іздеуші"
+
+#: users/models.py:63
+msgid "This code has expired. Request a new one."
+msgstr "Кодтың мерзімі өтті. Жаңасын сұраңыз."
+
+#: users/models.py:65 users/models.py:71
+msgid "Too many attempts. Request a new code."
+msgstr "Әрекеттер тым көп. Жаңа код сұраңыз."
+
+#: users/models.py:73
+#, python-format
+msgid "Wrong code. %(left)d attempt left."
+msgid_plural "Wrong code. %(left)d attempts left."
+msgstr[0] "Код қате. %(left)d әрекет қалды."
+msgstr[1] "Код қате. %(left)d әрекет қалды."
+
+#: users/templates/users/email/verify_code.html:12
+#: users/templates/users/verify_code.html:4
+msgid "Confirm your email"
+msgstr "Email-ді растаңыз"
+
+#: users/templates/users/email/verify_code.html:13
+#, python-format
+msgid ""
+"Hi %(name)s, enter this code on the Findy-Job page to activate your account."
+msgstr ""
+"Сәлеметсіз бе, %(name)s! Аккаунтты белсендіру үшін осы кодты Findy-Job "
+"бетіне енгізіңіз."
+
+#: users/templates/users/email/verify_code.html:19
+#, python-format
+msgid ""
+"The code expires in %(minutes)s minutes. If you didn't sign up for Findy-"
+"Job, you can ignore this email."
+msgstr ""
+"Код %(minutes)s минут жарамды. Егер сіз Findy-Job-қа тіркелмеген болсаңыз, "
+"бұл хатты елемеңіз."
+
+#: users/templates/users/email/verify_code.html:22
+msgid "Made by"
+msgstr "Авторы:"
+
+#: users/templates/users/email/verify_code.txt:1
+#, python-format
+msgid "Hi %(name)s,"
+msgstr "Сәлеметсіз бе, %(name)s!"
+
+#: users/templates/users/email/verify_code.txt:3
+#, python-format
+msgid "Your Findy-Job verification code is: %(code)s"
+msgstr "Findy-Job растау кодыңыз: %(code)s"
+
+#: users/templates/users/email/verify_code.txt:5
+#, python-format
+msgid ""
+"It expires in %(minutes)s minutes. If you didn't sign up for Findy-Job, "
+"ignore this email."
+msgstr ""
+"Код %(minutes)s минут жарамды. Егер сіз Findy-Job-қа тіркелмеген болсаңыз, "
+"бұл хатты елемеңіз."
+
+#: users/templates/users/login.html:4 users/templates/users/login.html:9
+msgid "Welcome back"
+msgstr "Қайта оралуыңызбен"
+
+#: users/templates/users/login.html:10
+msgid "Log in to save resumes and manage your own."
+msgstr "Түйіндемелерді сақтау және өз түйіндемеңізді басқару үшін кіріңіз."
+
+#: users/templates/users/login.html:18 users/templates/users/register.html:18
+msgid "Continue"
+msgstr "Жалғастыру"
+
+#: users/templates/users/register.html:4 users/templates/users/register.html:9
+msgid "Create your account"
+msgstr "Аккаунт ашыңыз"
+
+#: users/templates/users/register.html:10
+msgid "It takes a minute. We’ll email you a 6-digit code to confirm."
+msgstr ""
+"Бір минут қана кетеді. Растау үшін поштаңызға 6 таңбалы код жібереміз."
+
+#: users/templates/users/verify_code.html:9
+msgid "Check your inbox"
+msgstr "Поштаңызды тексеріңіз"
+
+#: users/templates/users/verify_code.html:10
+msgid "Enter the 6-digit code to activate your account."
+msgstr "Аккаунтты белсендіру үшін 6 таңбалы кодты енгізіңіз."
+
+#: users/templates/users/verify_code.html:17
+#, python-format
+msgid "We sent a code to <strong>%(email)s</strong>."
+msgstr "<strong>%(email)s</strong> адресіне код жібердік."
+
+#: users/templates/users/verify_code.html:19
+msgid "Verification code"
+msgstr "Растау коды"
+
+#: users/templates/users/verify_code.html:20
+msgid "Confirm email"
+msgstr "Email-ді растау"
+
+#: users/views.py:32
+#, python-format
+msgid "%(code)s is your Findy-Job verification code"
+msgstr "%(code)s — Findy-Job растау кодыңыз"
+
+#: users/views.py:73 users/views.py:103
+msgid "We could not send the confirmation code. Please try again later."
+msgstr "Растау кодын жіберу мүмкін болмады. Кейінірек қайталап көріңіз."
+
+#: users/views.py:75
+msgid "Your email is not confirmed yet. We sent you a code."
+msgstr "Email әлі расталмаған. Сізге код жібердік."
+
+#: users/views.py:146
+#, python-format
+msgid "Welcome to Findy-Job, %(name)s!"
+msgstr "Findy-Job-қа қош келдіңіз, %(name)s!"
+
+#: users/views.py:163
+msgid "Your session expired. Please sign up again."
+msgstr "Сессия мерзімі өтті. Қайта тіркеліңіз."
+
+#: users/views.py:166
+#, python-format
+msgid "Please wait %(seconds)d s."
+msgstr "%(seconds)d с күтіңіз."
+
+#: users/views.py:172
+msgid "We could not send the code. Try again later."
+msgstr "Кодты жіберу мүмкін болмады. Кейінірек қайталап көріңіз."

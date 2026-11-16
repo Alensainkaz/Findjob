@@ -1,10 +1,12 @@
 {% extends 'resume/base.html' %}
-{% block title %}Create a resume · Findy-Job{% endblock %}
+{% load i18n %}
+{% block robots %}<meta name="robots" content="noindex, follow">{% endblock %}
+{% block title %}{% trans "Create a resume" %} · Findy-Job{% endblock %}
 
 {% block content %}
 <div class="page-head">
-  <h1>Create a resume</h1>
-  <p>Fill in the basics — employers see your name, speciality and contact email.</p>
+  <h1>{% trans "Create a resume" %}</h1>
+  <p>{% trans "Fill in the basics — employers see your name, speciality and contact email." %}</p>
 </div>
 <div class="auth__panel" style="max-width: 760px">
   {{ props|json_script:"resume-form-data" }}
@@ -12,7 +14,7 @@
     <form method="post" enctype="multipart/form-data" class="form">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit" class="btn btn--primary">Save</button>
+      <button type="submit" class="btn btn--primary">{% trans "Save" %}</button>
     </form>
   </div>
 </div>

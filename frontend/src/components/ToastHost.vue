@@ -1,6 +1,7 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import AppIcon from './AppIcon.vue'
+import { t } from '../i18n'
 
 const props = defineProps({ messages: { type: Array, default: () => [] } })
 const toasts = ref([])
@@ -29,7 +30,7 @@ onBeforeUnmount(() => window.removeEventListener('fj:toast', onToast))
       <div v-for="t in toasts" :key="t.id" class="toast" :class="`toast--${t.level}`">
         <AppIcon :name="t.level === 'error' ? 'alert' : 'check'" />
         <span>{{ t.text }}</span>
-        <button type="button" class="toast__close" aria-label="Dismiss" @click="dismiss(t.id)">
+        <button type="button" class="toast__close" :aria-label="t('Dismiss')" @click="dismiss(t.id)">
           <AppIcon name="x" :size="16" />
         </button>
       </div>

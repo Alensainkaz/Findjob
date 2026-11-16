@@ -1,11 +1,13 @@
 {% extends 'resume/base.html' %}
-{% block title %}Welcome back · Findy-Job{% endblock %}
+{% load i18n %}
+{% block robots %}<meta name="robots" content="noindex, follow">{% endblock %}
+{% block title %}{% trans "Welcome back" %} · Findy-Job{% endblock %}
 
 {% block content %}
 <div class="auth">
   <div class="page-head">
-    <h1>Welcome back</h1>
-    <p>Log in to save resumes and manage your own.</p>
+    <h1>{% trans "Welcome back" %}</h1>
+    <p>{% trans "Log in to save resumes and manage your own." %}</p>
   </div>
   <div class="auth__panel">
     {{ props|json_script:"login-data" }}
@@ -13,7 +15,7 @@
       <form method="post" class="form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn--primary btn--block">Continue</button>
+        <button type="submit" class="btn btn--primary btn--block">{% trans "Continue" %}</button>
       </form>
     </div>
   </div>

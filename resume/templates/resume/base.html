@@ -1,65 +1,90 @@
-{% load static %}<!DOCTYPE html>
-<html lang="en">
+{% load static i18n %}{% get_current_language as LANGUAGE_CODE %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{% block description %}Findy-Job — browse resumes across 170+ specialities and save the candidates you want to contact.{% endblock %}">
+  {% with site='https://findy-job.com' %}
+  <title>{% block title %}{% trans "Findy-Job — Resume Board for Hiring in Kazakhstan" %}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{% trans "Findy-Job is a free resume board for Kazakhstan. Browse candidates across 170+ specialities in every city, save the best ones and contact them directly." %}{% endblock %}">
+  <link rel="canonical" href="{{ site }}{{ request.path }}">
+  {% block robots %}{% endblock %}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Findy-Job">
+  <meta property="og:locale" content="{% if LANGUAGE_CODE == 'kk' %}kk_KZ{% elif LANGUAGE_CODE == 'ru' %}ru_RU{% else %}en_US{% endif %}">
+  <meta property="og:url" content="{{ site }}{{ request.path }}">
+  <meta property="og:title" content="{% trans 'Findy-Job — Resume Board for Hiring in Kazakhstan' %}">
+  <meta property="og:description" content="{% trans 'Browse candidates across 170+ specialities in every city of Kazakhstan, save the best ones and contact them directly.' %}">
+  <meta property="og:image" content="{{ site }}{% static 'favicon-512x512.png' %}">
+  <meta name="twitter:card" content="summary">
+  {% endwith %}
   <meta name="theme-color" content="#0b1622">
   <meta name="csrf-token" content="{{ csrf_token }}">
-  <title>{% block title %}Findy-Job{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  {# Google Search shows a favicon only if it is square, at least 48px and linked from the home page #}
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="192x192" href="{% static 'favicon-192x192.png' %}">
+  <link rel="icon" type="image/png" sizes="96x96" href="{% static 'favicon-96x96.png' %}">
+  <link rel="icon" type="image/png" sizes="48x48" href="{% static 'favicon-48x48.png' %}">
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
   <link rel="apple-touch-icon" href="{% static 'apple-touch-icon.png' %}">
+  <link rel="manifest" href="/site.webmanifest">
+  {% block structured_data %}{% endblock %}
   <link rel="stylesheet" href="{% static 'dist/app.css' %}">
   <script type="module" src="{% static 'dist/app.js' %}"></script>
 </head>
 <body>
 {% include 'partials/icons.html' %}
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main">{% trans "Skip to content" %}</a>
 <div class="page-progress" aria-hidden="true"></div>
 
 {% with path=request.path %}
 <header class="site-header">
   <div class="site-header__inner">
-    <a href="{% url 'index' %}" class="logo" aria-label="Findy-Job home">Findy<span>-</span>Job</a>
+    <a href="{% url 'index' %}" class="logo" aria-label="{% trans 'Findy-Job home' %}">Findy<span>-</span>Job</a>
 
     {% block header_search %}
     <form class="header-search" method="get" action="{% url 'index' %}" role="search">
       <div class="input-wrap">
         <svg class="icon input-wrap__icon" width="16" height="16" aria-hidden="true"><use href="#i-search"/></svg>
-        <input type="search" name="q" value="{{ request.GET.q }}" class="input input--with-icon" placeholder="Search resumes" aria-label="Search resumes">
+        <input type="search" name="q" value="{{ request.GET.q }}" class="input input--with-icon" placeholder="{% trans 'Search resumes' %}" aria-label="{% trans 'Search resumes' %}">
       </div>
     </form>
     {% endblock %}
 
-    <button type="button" class="icon-button nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+    <button type="button" class="icon-button nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="{% trans 'Menu' %}">
       <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-menu"/></svg>
     </button>
 
     <div class="nav-backdrop" data-nav-close aria-hidden="true"></div>
-    <nav id="site-nav" class="nav" aria-label="Main">
+    <nav id="site-nav" class="nav" aria-label="{% trans 'Main' %}">
       <div class="nav__head">
         <a href="{% url 'index' %}" class="logo" tabindex="-1">Findy<span>-</span>Job</a>
-        <button type="button" class="icon-button" data-nav-close aria-label="Close menu">
+        <button type="button" class="icon-button" data-nav-close aria-label="{% trans 'Close menu' %}">
           <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-x"/></svg>
         </button>
       </div>
-      <a href="{% url 'index' %}" {% if path == '/' %}aria-current="page"{% endif %}>Resumes</a>
+      <a href="{% url 'index' %}" {% if path == '/' %}aria-current="page"{% endif %}>{% trans "Resumes" %}</a>
       {% if user.is_authenticated %}
-        <a href="{% url 'cart_detail' %}" {% if path == '/cart/' %}aria-current="page"{% endif %}>Saved</a>
-        {% if user.is_staff %}<a href="{% url 'admin:index' %}">Admin</a>{% endif %}
-        <a href="{% url 'logout_view' %}">Log out</a>
+        <a href="{% url 'cart_detail' %}" {% if path == '/cart/' %}aria-current="page"{% endif %}>{% trans "Saved" %}</a>
+        {% if user.is_staff %}<a href="{% url 'admin:index' %}">{% trans "Admin" %}</a>{% endif %}
+        <a href="{% url 'logout_view' %}">{% trans "Log out" %}</a>
         <a href="{% url 'create_resume' %}" class="btn btn--primary btn--small">
-          <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-plus"/></svg>Create resume
+          <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-plus"/></svg>{% trans "Create resume" %}
         </a>
       {% else %}
-        <a href="{% url 'login_view' %}" {% if path == '/login/' %}aria-current="page"{% endif %}>Log in</a>
-        <a href="{% url 'register_view' %}" class="btn btn--primary btn--small">Sign up</a>
+        <a href="{% url 'login_view' %}" {% if path == '/login/' %}aria-current="page"{% endif %}>{% trans "Log in" %}</a>
+        <a href="{% url 'register_view' %}" class="btn btn--primary btn--small">{% trans "Sign up" %}</a>
       {% endif %}
+      {% get_available_languages as LANGUAGES %}
+      <form class="lang-switch" action="{% url 'set_language' %}" method="post" aria-label="{% trans 'Language' %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        {% for code, name in LANGUAGES %}{% get_language_info for code as li %}
+          <button type="submit" name="language" value="{{ code }}" lang="{{ code }}" class="lang-switch__item" title="{{ li.name_local|capfirst }}" aria-label="{{ li.name_local|capfirst }}"{% if code == LANGUAGE_CODE %} aria-current="true"{% endif %}>{% if code == 'kk' %}Қаз{% elif code == 'ru' %}Рус{% else %}Eng{% endif %}</button>
+        {% endfor %}
+      </form>
     </nav>
   </div>
 </header>
@@ -73,40 +98,40 @@
   <div class="site-footer__inner">
     <div class="site-footer__about">
       <a href="{% url 'index' %}" class="logo">Findy<span>-</span>Job</a>
-      <p>A resume board for hiring teams: search across 170+ specialities, save candidates and contact them directly.</p>
+      <p>{% trans "A resume board for hiring teams: search across 170+ specialities, save candidates and contact them directly." %}</p>
     </div>
     <nav aria-labelledby="footer-browse">
-      <h2 id="footer-browse">Browse</h2>
+      <h2 id="footer-browse">{% trans "Browse" %}</h2>
       <ul>
-        <li><a href="{% url 'index' %}">All resumes</a></li>
-        <li><a href="{% url 'index' %}?speciality=software_engineer">Software engineers</a></li>
-        <li><a href="{% url 'index' %}?speciality=designer">Designers</a></li>
-        <li><a href="{% url 'index' %}?speciality=accountant">Accountants</a></li>
+        <li><a href="{% url 'index' %}">{% trans "All resumes" %}</a></li>
+        <li><a href="{% url 'index' %}?speciality=software_engineer">{% trans "Software engineers" %}</a></li>
+        <li><a href="{% url 'index' %}?speciality=designer">{% trans "Designers" %}</a></li>
+        <li><a href="{% url 'index' %}?speciality=accountant">{% trans "Accountants" %}</a></li>
       </ul>
     </nav>
     <nav aria-labelledby="footer-account">
-      <h2 id="footer-account">Account</h2>
+      <h2 id="footer-account">{% trans "Account" %}</h2>
       <ul>
         {% if user.is_authenticated %}
-          <li><a href="{% url 'create_resume' %}">Create resume</a></li>
-          <li><a href="{% url 'cart_detail' %}">Saved resumes</a></li>
-          <li><a href="{% url 'logout_view' %}">Log out</a></li>
+          <li><a href="{% url 'create_resume' %}">{% trans "Create resume" %}</a></li>
+          <li><a href="{% url 'cart_detail' %}">{% trans "Saved resumes" %}</a></li>
+          <li><a href="{% url 'logout_view' %}">{% trans "Log out" %}</a></li>
         {% else %}
-          <li><a href="{% url 'register_view' %}">Sign up</a></li>
-          <li><a href="{% url 'login_view' %}">Log in</a></li>
+          <li><a href="{% url 'register_view' %}">{% trans "Sign up" %}</a></li>
+          <li><a href="{% url 'login_view' %}">{% trans "Log in" %}</a></li>
         {% endif %}
       </ul>
     </nav>
     <div>
-      <h2>Contact</h2>
+      <h2>{% trans "Contact" %}</h2>
       <ul>
         <li><a href="mailto:sainalenkz@gmail.com"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-mail"/></svg>sainalenkz@gmail.com</a></li>
       </ul>
     </div>
   </div>
   <div class="site-footer__bottom">
-    <span>© {% now "Y" %} Findy-Job. All rights reserved.</span>
-    <span class="site-footer__credit">Made with <svg class="icon" width="14" height="14" aria-label="love" role="img"><use href="#i-heart"/></svg> by <strong>Sain Alen</strong></span>
+    <span>© {% now "Y" %} Findy-Job. {% trans "All rights reserved." %}</span>
+    <span class="site-footer__credit">{% trans "Made with" %} <svg class="icon" width="14" height="14" aria-label="{% trans 'love' %}" role="img"><use href="#i-heart"/></svg> {% trans "by" %} <strong>Sain Alen</strong></span>
   </div>
 </footer>
 

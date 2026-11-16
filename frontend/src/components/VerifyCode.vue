@@ -2,6 +2,7 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import AppSpinner from './AppSpinner.vue'
 import { csrfToken, postJSON, toast } from '../composables/api'
+import { t, tSplit } from '../i18n'
 
 const props = defineProps({
   email: { type: String, required: true },
@@ -21,6 +22,7 @@ const resending = ref(false)
 let timer
 
 const code = computed(() => digits.value.join(''))
+const [sentBefore, sentAfter] = tSplit('We sent a 6-digit code to {email}. It expires in 15 minutes.', 'email')
 
 function tick() {
   clearInterval(timer)
@@ -76,7 +78,7 @@ async function resend() {
     digits.value = Array(LENGTH).fill('')
     error.value = ''
     focusAt(0)
-    toast('A new code is on its way.', 'success')
+    toast(t('A new code is on its way.'), 'success')
   } catch (err) {
     if (err.data?.resendIn) { countdown.value = err.data.resendIn; tick() }
     toast(err.message, 'error')
@@ -93,14 +95,14 @@ onBeforeUnmount(() => clearInterval(timer))
   <form ref="formEl" method="post" class="form" @submit.prevent="submitIfComplete">
     <input type="hidden" name="csrfmiddlewaretoken" :value="csrfToken()">
     <input type="hidden" name="code" :value="code">
-    <p class="form__lead">We sent a 6-digit code to <strong>{{ email }}</strong>. It expires in 15 minutes.</p>
+    <p class="form__lead">{{ sentBefore }}<strong>{{ email }}</strong>{{ sentAfter }}</p>
 
     <fieldset class="code" :class="{ 'code--invalid': error }" :disabled="submitting">
-      <legend class="visually-hidden">Verification code</legend>
+      <legend class="visually-hidden">{{ t('Verification code') }}</legend>
       <input
         v-for="(d, i) in digits" :key="i" :ref="(el) => (inputs[i] = el)" :value="d"
         class="code__digit" inputmode="numeric" autocomplete="one-time-code" maxlength="6"
-        :aria-label="`Digit ${i + 1}`" @input="onInput(i, $event)" @keydown="onKeydown(i, $event)" @paste="onPaste"
+        :aria-label="t('Digit {n}', { n: i + 1 })" @input="onInput(i, $event)" @keydown="onKeydown(i, $event)" @paste="onPaste"
         @focus="$event.target.select()"
       >
     </fieldset>
@@ -108,15 +110,15 @@ onBeforeUnmount(() => clearInterval(timer))
 
     <button type="submit" class="btn btn--primary btn--block" :disabled="submitting || code.length < 6">
       <AppSpinner v-if="submitting" />
-      {{ submitting ? 'Checking…' : 'Confirm email' }}
+      {{ submitting ? t('Checking…') : t('Confirm email') }}
     </button>
 
     <p class="form__switch">
-      Didn’t get it?
+      {{ t('Didn’t get it?') }}
       <button v-if="!countdown" type="button" class="link-button" :disabled="resending" @click="resend">
-        <AppSpinner v-if="resending" :size="14" /> Send a new code
+        <AppSpinner v-if="resending" :size="14" /> {{ t('Send a new code') }}
       </button>
-      <span v-else class="muted">Send a new code in {{ countdown }} s</span>
+      <span v-else class="muted">{{ t('Send a new code in {s} s', { s: countdown }) }}</span>
     </p>
   </form>
 </template>

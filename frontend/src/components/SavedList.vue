@@ -3,6 +3,7 @@ import { reactive, ref } from 'vue'
 import AppIcon from './AppIcon.vue'
 import AppSpinner from './AppSpinner.vue'
 import { postJSON, toast } from '../composables/api'
+import { t } from '../i18n'
 
 const props = defineProps({
   items: { type: Array, default: () => [] },
@@ -16,9 +17,9 @@ async function remove(item) {
   try {
     await postJSON(item.removeUrl)
     items.value = items.value.filter(i => i.id !== item.id)
-    toast(`${item.name} removed from saved`, 'success')
+    toast(t('{name} removed from saved', { name: item.name }), 'success')
   } catch {
-    toast('Could not remove it. Try again.', 'error')
+    toast(t('Could not remove it. Try again.'), 'error')
   } finally {
     pending.delete(item.id)
   }
@@ -28,9 +29,9 @@ async function remove(item) {
 <template>
   <div v-if="!items.length" class="empty">
     <AppIcon name="bookmark" :size="28" />
-    <h2 class="empty__title">Nothing saved yet</h2>
-    <p class="empty__text">Save resumes from the board to compare candidates here.</p>
-    <a :href="browseUrl" class="btn btn--primary">Browse resumes <AppIcon name="arrow-right" :size="16" /></a>
+    <h2 class="empty__title">{{ t('Nothing saved yet') }}</h2>
+    <p class="empty__text">{{ t('Save resumes from the board to compare candidates here.') }}</p>
+    <a :href="browseUrl" class="btn btn--primary">{{ t('Browse resumes') }} <AppIcon name="arrow-right" :size="16" /></a>
   </div>
   <TransitionGroup v-else tag="div" name="list" class="board__list">
     <article v-for="item in items" :key="item.id" class="resume-row">
@@ -46,7 +47,7 @@ async function remove(item) {
       <div class="resume-row__actions">
         <button type="button" class="btn btn--small btn--ghost btn--danger-text" :disabled="pending.has(item.id)" @click="remove(item)">
           <AppSpinner v-if="pending.has(item.id)" :size="14" />
-          <AppIcon v-else name="x" :size="16" /> Remove
+          <AppIcon v-else name="x" :size="16" /> {{ t('Remove') }}
         </button>
       </div>
     </article>

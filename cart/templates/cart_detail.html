@@ -1,10 +1,12 @@
 {% extends 'resume/base.html' %}
-{% block title %}Saved resumes · Findy-Job{% endblock %}
+{% load i18n %}
+{% block robots %}<meta name="robots" content="noindex, follow">{% endblock %}
+{% block title %}{% trans "Saved resumes" %} · Findy-Job{% endblock %}
 
 {% block content %}
 <div class="page-head">
-  <h1>Saved for consideration</h1>
-  <p>Your shortlist. Email candidates directly or remove the ones you’ve ruled out.</p>
+  <h1>{% trans "Saved for consideration" %}</h1>
+  <p>{% trans "Your shortlist. Email candidates directly or remove the ones you’ve ruled out." %}</p>
 </div>
 {{ props|json_script:"saved-data" }}
 <div data-vue="saved-list" data-props-id="saved-data">
@@ -15,10 +17,10 @@
           <h3 class="resume-row__name"><a href="{% url 'resume_detail' item.resume_id %}">{{ item.resume.name }} {{ item.resume.surname }}</a></h3>
           <p class="chip">{{ item.resume.get_speciality_display }}</p>
         </div>
-        <form method="post" action="{% url 'cart_remove' item.id %}">{% csrf_token %}<button class="btn btn--small btn--ghost">Remove</button></form>
+        <form method="post" action="{% url 'cart_remove' item.id %}">{% csrf_token %}<button class="btn btn--small btn--ghost">{% trans "Remove" %}</button></form>
       </article>
     {% empty %}
-      <div class="empty"><h2 class="empty__title">Nothing saved yet</h2><a href="{% url 'index' %}" class="btn btn--primary">Browse resumes</a></div>
+      <div class="empty"><h2 class="empty__title">{% trans "Nothing saved yet" %}</h2><a href="{% url 'index' %}" class="btn btn--primary">{% trans "Browse resumes" %}</a></div>
     {% endfor %}
   </div>
 </div>

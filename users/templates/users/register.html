@@ -1,11 +1,13 @@
 {% extends 'resume/base.html' %}
-{% block title %}Create your account · Findy-Job{% endblock %}
+{% load i18n %}
+{% block robots %}<meta name="robots" content="noindex, follow">{% endblock %}
+{% block title %}{% trans "Create your account" %} · Findy-Job{% endblock %}
 
 {% block content %}
 <div class="auth">
   <div class="page-head">
-    <h1>Create your account</h1>
-    <p>It takes a minute. We’ll email you a 6-digit code to confirm.</p>
+    <h1>{% trans "Create your account" %}</h1>
+    <p>{% trans "It takes a minute. We’ll email you a 6-digit code to confirm." %}</p>
   </div>
   <div class="auth__panel">
     {{ props|json_script:"register-data" }}
@@ -13,7 +15,7 @@
       <form method="post" class="form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn--primary btn--block">Continue</button>
+        <button type="submit" class="btn btn--primary btn--block">{% trans "Continue" %}</button>
       </form>
     </div>
   </div>

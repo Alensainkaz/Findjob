@@ -1,21 +1,23 @@
 {% extends 'resume/base.html' %}
-{% block title %}Confirm your email · Findy-Job{% endblock %}
+{% load i18n %}
+{% block robots %}<meta name="robots" content="noindex, follow">{% endblock %}
+{% block title %}{% trans "Confirm your email" %} · Findy-Job{% endblock %}
 
 {% block content %}
 <div class="auth">
   <div class="page-head">
-    <h1>Check your inbox</h1>
-    <p>Enter the 6-digit code to activate your account.</p>
+    <h1>{% trans "Check your inbox" %}</h1>
+    <p>{% trans "Enter the 6-digit code to activate your account." %}</p>
   </div>
   <div class="auth__panel">
     {{ props|json_script:"verify-data" }}
     <div data-vue="verify-code" data-props-id="verify-data">
       <form method="post" class="form">
         {% csrf_token %}
-        <p class="form__lead">We sent a code to <strong>{{ props.email }}</strong>.</p>
+        <p class="form__lead">{% blocktrans with email=props.email %}We sent a code to <strong>{{ email }}</strong>.{% endblocktrans %}</p>
         {% if props.error %}<p class="form__alert" role="alert">{{ props.error }}</p>{% endif %}
-        <input name="code" class="input" inputmode="numeric" autocomplete="one-time-code" maxlength="6" aria-label="Verification code" required>
-        <button type="submit" class="btn btn--primary btn--block">Confirm email</button>
+        <input name="code" class="input" inputmode="numeric" autocomplete="one-time-code" maxlength="6" aria-label="{% trans 'Verification code' %}" required>
+        <button type="submit" class="btn btn--primary btn--block">{% trans "Confirm email" %}</button>
       </form>
     </div>
   </div>

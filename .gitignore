@@ -7,3 +7,5 @@ db.sqlite3
 .venv/
 .env
 media/
+.vercel
+.env*

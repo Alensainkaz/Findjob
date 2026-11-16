@@ -21,12 +21,15 @@ if not SECRET_KEY:
     else:
         raise ImproperlyConfigured('SECRET_KEY environment variable is not set')
 
-ALLOWED_HOSTS = ['www.findy-job.com', 'findy-job.com', '127.0.0.1', 'localhost', '.onrender.com']
+ALLOWED_HOSTS = ['www.findy-job.com', 'findy-job.com', '127.0.0.1', 'localhost', '.onrender.com', '.vercel.app']
 CSRF_TRUSTED_ORIGINS = [
     'https://findy-job.com',
     'https://www.findy-job.com',
     'https://*.onrender.com',
+    'https://*.vercel.app',
 ]
+# Vercel выставляет VERCEL=1 и в сборке, и во время работы функций
+ON_VERCEL = bool(os.getenv('VERCEL'))
 
 # Render терминирует HTTPS на прокси
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -49,6 +52,7 @@ INSTALLED_APPS = [
     # staticfiles должен идти ДО cloudinary_storage: Cloudinary используется
     # только для media, и collectstatic должен быть стандартным
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     'cloudinary_storage',
     'cloudinary',
     'users',
@@ -61,6 +65,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -80,6 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
                 'Jobfinder.context_processors.toasts',
             ],
         },
@@ -104,7 +110,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-LANGUAGE_CODE = 'en-us'
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGE_CODE = 'ru'
+LANGUAGES = [
+    ('kk', _('Kazakh')),
+    ('ru', _('Russian')),
+    ('en', _('English')),
+]
+LOCALE_PATHS = [BASE_DIR / 'locale']
+LANGUAGE_COOKIE_AGE = 60 * 60 * 24 * 365
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
@@ -131,9 +146,13 @@ STORAGES = {
         if os.getenv('CLOUDINARY_CLOUD_NAME') else 'django.core.files.storage.FileSystemStorage',
     },
     'staticfiles': {
-        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        # На Vercel collectstatic не запускается, поэтому без манифеста:
+        # WhiteNoise отдаёт файлы прямо из static/ и папок приложений
+        'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage' if ON_VERCEL
+        else 'whitenoise.storage.CompressedManifestStaticFilesStorage',
     },
 }
+WHITENOISE_USE_FINDERS = ON_VERCEL
 # django-cloudinary-storage 0.3.0 всё ещё читает это имя в своём collectstatic
 STATICFILES_STORAGE = STORAGES['staticfiles']['BACKEND']
 

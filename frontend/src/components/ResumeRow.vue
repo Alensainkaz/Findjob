@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import AppIcon from './AppIcon.vue'
 import AppSpinner from './AppSpinner.vue'
+import { t } from '../i18n'
 
 const props = defineProps({
   resume: { type: Object, required: true },
@@ -43,10 +44,10 @@ const initials = computed(() => `${props.resume.name[0] || ''}${props.resume.sur
       >
         <AppSpinner v-if="pending" :size="14" />
         <AppIcon v-else :name="resume.saved ? 'bookmark-check' : 'bookmark'" :size="16" />
-        {{ resume.saved ? 'Saved' : 'Save' }}
+        {{ resume.saved ? t('Saved') : t('Save') }}
       </button>
-      <a v-if="resume.editUrl" :href="resume.editUrl" class="icon-button" aria-label="Edit resume"><AppIcon name="pencil" :size="16" /></a>
-      <a v-if="resume.deleteUrl" :href="resume.deleteUrl" class="icon-button icon-button--danger" aria-label="Delete resume"><AppIcon name="trash" :size="16" /></a>
+      <a v-if="resume.editUrl" :href="resume.editUrl" class="icon-button" :aria-label="t('Edit resume')"><AppIcon name="pencil" :size="16" /></a>
+      <a v-if="resume.deleteUrl" :href="resume.deleteUrl" class="icon-button icon-button--danger" :aria-label="t('Delete resume')"><AppIcon name="trash" :size="16" /></a>
     </div>
   </article>
 </template>

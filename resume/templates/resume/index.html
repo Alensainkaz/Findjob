@@ -1,12 +1,44 @@
 {% extends 'resume/base.html' %}
-{% block title %}Resumes · Findy-Job{% endblock %}
+{% load i18n %}{% get_current_language as LANGUAGE_CODE %}
+{% block title %}{% trans "Findy-Job — Resume Board for Hiring in Kazakhstan" %}{% endblock %}
 {% block header_search %}{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://findy-job.com/#website",
+      "url": "https://findy-job.com/",
+      "name": "Findy-Job",
+      "alternateName": "Findy Job",
+      "description": "{% trans 'A free resume board for Kazakhstan: browse candidates across 170+ specialities in every city.' %}",
+      "inLanguage": "{{ LANGUAGE_CODE }}",
+      "publisher": { "@id": "https://findy-job.com/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": { "@type": "EntryPoint", "urlTemplate": "https://findy-job.com/?q={search_term_string}" },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://findy-job.com/#organization",
+      "name": "Findy-Job",
+      "url": "https://findy-job.com/",
+      "logo": "https://findy-job.com/static/favicon-512x512.png"
+    }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <div class="page-head page-head--split">
   <div>
-    <h1>Find your next hire</h1>
-    <p>Browse resumes, filter by speciality and city, and save the people you want to contact.</p>
+    <h1>{% trans "Find your next hire" %}</h1>
+    <p>{% trans "Browse resumes, filter by speciality and city, and save the people you want to contact." %}</p>
   </div>
 </div>
 
@@ -14,13 +46,13 @@
 <div data-vue="resume-board" data-props-id="board-data">
   {# Server-rendered fallback: replaced by the Vue board once it mounts #}
   <form class="board__filters" method="get" role="search">
-    <input type="search" name="q" value="{{ request.GET.q }}" class="input" placeholder="Search by name or speciality" aria-label="Search resumes">
-    <select name="city" class="input select" aria-label="Filter by city" onchange="this.form.submit()">
-      <option value="">All cities</option>
+    <input type="search" name="q" value="{{ request.GET.q }}" class="input" placeholder="{% trans 'Search by name or speciality' %}" aria-label="{% trans 'Search resumes' %}">
+    <select name="city" class="input select" aria-label="{% trans 'Filter by city' %}" onchange="this.form.submit()">
+      <option value="">{% trans "All cities" %}</option>
       {% for g in board.cities %}<optgroup label="{{ g.region }}">{% for c in g.cities %}<option value="{{ c.value }}"{% if c.value == board.city %} selected{% endif %}>{{ c.label }}</option>{% endfor %}</optgroup>{% endfor %}
     </select>
   </form>
-  <p class="board__count">{{ board.total }} resume{{ board.total|pluralize }}</p>
+  <p class="board__count">{% blocktrans count total=board.total %}{{ total }} resume{% plural %}{{ total }} resumes{% endblocktrans %}</p>
   <div class="board__list">
     {% for r in resumes %}
       <article class="resume-row">
@@ -33,7 +65,7 @@
         </div>
       </article>
     {% empty %}
-      <div class="empty"><h2 class="empty__title">No resumes yet</h2></div>
+      <div class="empty"><h2 class="empty__title">{% trans "No resumes yet" %}</h2></div>
     {% endfor %}
   </div>
 </div>

@@ -1,3 +1,5 @@
+import { t } from '../i18n'
+
 export function csrfToken() {
   return document.querySelector('meta[name="csrf-token"]')?.content || ''
 }
@@ -16,7 +18,7 @@ async function request(url, options = {}) {
   let data = {}
   try { data = await response.json() } catch { /* empty body */ }
   if (!response.ok) {
-    const error = new Error(data.error || `Request failed (${response.status})`)
+    const error = new Error(data.error || t('Request failed ({status})', { status: response.status }))
     error.status = response.status
     error.data = data
     throw error
