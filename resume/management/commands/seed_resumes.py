@@ -2,7 +2,10 @@
 
     python manage.py seed_resumes
 """
+from pathlib import Path
+
 from django.contrib.auth import get_user_model
+from django.core.files import File
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
@@ -10,6 +13,8 @@ from resume.cities import CITY_LABELS
 from resume.models import SPECIALITY_CHOICES, Resume
 
 DEMO_OWNER = 'demo@findy-job.com'
+# Pexels stock portraits, one per demo resume; sources in demo_photos/CREDITS.md
+PHOTO_DIR = Path(__file__).resolve().parent.parent / 'demo_photos'
 
 # All people below are fictional; emails use the reserved example.com domain.
 RESUMES = [
@@ -67,9 +72,9 @@ class Command(BaseCommand):
                 owner.set_unusable_password()
                 owner.save()
 
-            added = 0
+            added = photos = 0
             for name, surname, father, spec, city, education, experience in RESUMES:
-                _, made = Resume.objects.get_or_create(
+                resume, made = Resume.objects.get_or_create(
                     email=f'{name}.{surname}@example.com'.lower(),
                     defaults={
                         'name': name, 'surname': surname, 'father_name': father,
@@ -78,5 +83,11 @@ class Command(BaseCommand):
                         'user': owner,
                     })
                 added += made
+                photo = PHOTO_DIR / f'{name}-{surname}.jpg'.lower()
+                if not resume.image and photo.exists():
+                    with photo.open('rb') as fh:
+                        resume.image.save(photo.name, File(fh), save=True)
+                    photos += 1
         self.stdout.write(self.style.SUCCESS(
-            f'Added {added} demo resumes ({len(RESUMES) - added} already existed)'))
+            f'Added {added} demo resumes ({len(RESUMES) - added} already existed), '
+            f'attached {photos} photos'))
