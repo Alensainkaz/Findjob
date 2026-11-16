@@ -51,6 +51,13 @@ nav?.addEventListener('click', (e) => { if (e.target.closest('a')?.parentElement
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setNav(false) })
 mobileNav.addEventListener('change', (e) => { if (!e.matches) setNav(false, { restoreFocus: false }) })
 
+// Language menu: close on outside click / Escape
+const langMenu = document.querySelector('[data-lang-menu]')
+document.addEventListener('click', (e) => { if (langMenu?.open && !langMenu.contains(e.target)) langMenu.open = false })
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && langMenu?.open) { langMenu.open = false; langMenu.querySelector('summary').focus() }
+})
+
 // Top progress bar for full page navigations (links and plain forms)
 const bar = document.querySelector('.page-progress')
 function startProgress() { bar?.classList.add('is-active') }

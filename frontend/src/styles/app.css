@@ -95,12 +95,24 @@ p { text-wrap: pretty; }
 .nav a.btn--primary { color: var(--accent-ink); background: var(--accent); }
 .nav a.btn--primary:hover { color: var(--accent-ink); background: var(--accent-strong); }
 
-/* Language switch: Қаз · Рус · Eng */
-.lang-switch { display: inline-flex; margin-left: 8px; padding: 2px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg-raised); }
-.lang-switch__item { min-width: 40px; padding: 5px 8px; border: 0; border-radius: 4px; background: none; color: var(--text-subtle); font: 600 .8rem/1 var(--font-body); cursor: pointer; transition: color .15s, background-color .15s; }
-.lang-switch__item:hover { color: var(--text); }
-.lang-switch__item[aria-current="true"] { color: var(--text); background: var(--surface-2); }
-.lang-switch__item:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* Language menu: globe button + dropdown list */
+.lang-menu { position: relative; margin-left: 8px; }
+.lang-menu__toggle { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg-raised); color: var(--text-muted); font: 600 .85rem/1 var(--font-body); cursor: pointer; list-style: none; user-select: none; transition: color .15s, background-color .15s; }
+.lang-menu__toggle::-webkit-details-marker { display: none; }
+.lang-menu__toggle:hover, .lang-menu[open] .lang-menu__toggle { color: var(--text); background: var(--surface-2); }
+.lang-menu__toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.lang-menu__chevron { transition: transform .2s var(--ease-out); }
+.lang-menu[open] .lang-menu__chevron { transform: rotate(180deg); }
+.lang-menu__list { position: absolute; top: calc(100% + 6px); right: 0; z-index: 30; display: flex; flex-direction: column; gap: 2px; min-width: 180px; padding: 6px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg-raised); box-shadow: var(--shadow-lg); transform-origin: top right; }
+.lang-menu[open] .lang-menu__list { animation: lang-menu-in .16s var(--ease-out); }
+@keyframes lang-menu-in { from { opacity: 0; transform: translateY(-4px) scale(.97); } }
+.lang-menu__item { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 9px 10px; border: 0; border-radius: 4px; background: none; color: var(--text-muted); font: 500 .9rem/1.2 var(--font-body); text-align: left; cursor: pointer; transition: color .15s, background-color .15s; }
+.lang-menu__item:hover { color: var(--text); background: var(--surface-2); }
+.lang-menu__item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.lang-menu__item .icon { opacity: 0; color: var(--accent); }
+.lang-menu__item[aria-current="true"] { color: var(--text); font-weight: 600; }
+.lang-menu__item[aria-current="true"] .icon { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .lang-menu[open] .lang-menu__list { animation: none; } }
 
 /* ---------- layout ---------- */
 .site-main { flex: 1; width: 100%; max-width: var(--content); margin: 0 auto; padding: clamp(28px, 5vw, 56px) var(--gutter) 72px; }
@@ -341,8 +353,11 @@ p { text-wrap: pretty; }
   .nav > a { padding: 12px; opacity: 0; transform: translateX(16px); transition: opacity .15s ease-out, transform .15s ease-out, color .15s, background-color .15s; }
   .nav-open .nav > a { opacity: 1; transform: none; transition: opacity .3s var(--ease-out), transform .3s var(--ease-out), color .15s, background-color .15s; transition-delay: calc(60ms + var(--i, 0) * 35ms), calc(60ms + var(--i, 0) * 35ms), 0s, 0s; }
   .nav .btn { margin: 8px 0 0; justify-content: center; }
-  .lang-switch { margin: 16px 0 0; align-self: stretch; }
-  .lang-switch__item { flex: 1; padding: 10px 8px; font-size: .88rem; }
+  .lang-menu { margin: 16px 0 0; align-self: stretch; }
+  .lang-menu__toggle { width: 100%; height: 44px; padding: 0 12px; font-size: .9rem; }
+  .lang-menu__chevron { margin-left: auto; }
+  .lang-menu__list { position: static; margin-top: 6px; min-width: 0; box-shadow: none; }
+  .lang-menu__item { padding: 12px; }
   .nav__user { padding: 8px 12px; }
   .site-footer__inner { grid-template-columns: 1fr 1fr; }
   .site-footer__about { grid-column: 1 / -1; }

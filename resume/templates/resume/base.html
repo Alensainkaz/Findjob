@@ -78,13 +78,23 @@
         <a href="{% url 'register_view' %}" class="btn btn--primary btn--small">{% trans "Sign up" %}</a>
       {% endif %}
       {% get_available_languages as LANGUAGES %}
-      <form class="lang-switch" action="{% url 'set_language' %}" method="post" aria-label="{% trans 'Language' %}">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.get_full_path }}">
-        {% for code, name in LANGUAGES %}{% get_language_info for code as li %}
-          <button type="submit" name="language" value="{{ code }}" lang="{{ code }}" class="lang-switch__item" title="{{ li.name_local|capfirst }}" aria-label="{{ li.name_local|capfirst }}"{% if code == LANGUAGE_CODE %} aria-current="true"{% endif %}>{% if code == 'kk' %}Қаз{% elif code == 'ru' %}Рус{% else %}Eng{% endif %}</button>
-        {% endfor %}
-      </form>
+      <details class="lang-menu" data-lang-menu>
+        <summary class="lang-menu__toggle" aria-label="{% trans 'Language' %}">
+          <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-globe"/></svg>
+          <span>{% if LANGUAGE_CODE == 'kk' %}Қаз{% elif LANGUAGE_CODE == 'ru' %}Рус{% else %}Eng{% endif %}</span>
+          <svg class="icon lang-menu__chevron" width="14" height="14" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+        </summary>
+        <form class="lang-menu__list" action="{% url 'set_language' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          {% for code, name in LANGUAGES %}{% get_language_info for code as li %}
+            <button type="submit" name="language" value="{{ code }}" lang="{{ code }}" class="lang-menu__item"{% if code == LANGUAGE_CODE %} aria-current="true"{% endif %}>
+              <span>{{ li.name_local|capfirst }}</span>
+              <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+          {% endfor %}
+        </form>
+      </details>
     </nav>
   </div>
 </header>
