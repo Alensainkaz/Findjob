@@ -33,6 +33,11 @@
   {% block structured_data %}{% endblock %}
   <link rel="stylesheet" href="{% static 'dist/app.css' %}">
   <script type="module" src="{% static 'dist/app.js' %}"></script>
+  {% if on_vercel %}
+  {# Vercel Web Analytics: the platform serves /_vercel/insights/* on every deployment #}
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  {% endif %}
 </head>
 <body>
 {% include 'partials/icons.html' %}

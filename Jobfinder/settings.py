@@ -87,6 +87,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'Jobfinder.context_processors.toasts',
+                'Jobfinder.context_processors.vercel',
             ],
         },
     },
