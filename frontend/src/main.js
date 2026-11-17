@@ -1,5 +1,6 @@
 import './styles/app.css'
 import { createApp } from 'vue'
+import { inject as injectAnalytics } from '@vercel/analytics'
 import ResumeBoard from './components/ResumeBoard.vue'
 import ResumeForm from './components/ResumeForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
@@ -19,6 +20,9 @@ const registry = {
   'saved-list': SavedList,
   toasts: ToastHost,
 }
+
+// Vercel Web Analytics. /_vercel/insights/* exists only on Vercel, so skip local runs.
+if (!['localhost', '127.0.0.1'].includes(location.hostname)) injectAnalytics()
 
 // Mount every <div data-vue="name" data-props-id="json-script-id"> on the page.
 document.querySelectorAll('[data-vue]').forEach((el) => {

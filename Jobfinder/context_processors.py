@@ -12,9 +12,3 @@ def toasts(request):
             ],
         },
     }
-
-
-def vercel(request):
-    """Expose whether we run on Vercel, so templates load Web Analytics only there."""
-    from django.conf import settings
-    return {'on_vercel': getattr(settings, 'ON_VERCEL', False)}
