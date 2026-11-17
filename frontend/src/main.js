@@ -21,8 +21,8 @@ const registry = {
   toasts: ToastHost,
 }
 
-// Vercel Web Analytics. /_vercel/insights/* exists only on Vercel, so skip local runs.
-if (!['localhost', '127.0.0.1'].includes(location.hostname)) injectAnalytics()
+// Vercel Web Analytics. /_vercel/insights/* exists only on Vercel; the server flags it (settings.ON_VERCEL).
+if (document.documentElement.hasAttribute('data-vercel-analytics')) injectAnalytics()
 
 // Mount every <div data-vue="name" data-props-id="json-script-id"> on the page.
 document.querySelectorAll('[data-vue]').forEach((el) => {

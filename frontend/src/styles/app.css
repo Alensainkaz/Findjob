@@ -88,6 +88,10 @@ p { text-wrap: pretty; }
 .nav a:hover { color: var(--text); background: var(--surface); }
 .nav a[aria-current="page"] { color: var(--text); background: var(--surface); }
 .nav .btn { margin-left: 8px; }
+.nav form { display: contents; }
+.link-button { padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
+.nav .link-button { display: inline-flex; align-items: center; padding: 8px 12px; border-radius: var(--radius-sm); color: var(--text-muted); font-weight: 500; font-size: .92rem; transition: color .15s, background-color .15s; }
+.nav .link-button:hover { color: var(--text); background: var(--surface); }
 .nav__user { color: var(--text-subtle); font-size: .88rem; padding: 0 8px; }
 .header-search { width: 220px; }
 .icon-button.nav-toggle { display: none; margin-left: auto; }
@@ -221,6 +225,9 @@ p { text-wrap: pretty; }
 .auth__panel { padding: clamp(24px, 4vw, 36px); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow); }
 .auth .page-head { text-align: center; }
 .auth .page-head p { margin-inline: auto; }
+.auth__switch { margin-top: 18px; text-align: center; font-size: .92rem; }
+.auth__switch a { color: var(--text-muted); }
+.notice { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 24px; padding: 14px 18px; border-radius: var(--radius); background: var(--accent-soft); border: 1px solid var(--line-strong); color: var(--text); font-size: .95rem; }
 
 /* ---------- resume board ---------- */
 .board__filters { display: grid; grid-template-columns: 1fr 240px 220px; gap: 12px; }
@@ -230,7 +237,7 @@ p { text-wrap: pretty; }
 .board__more .resume-row { width: 100%; }
 
 .resume-row {
-  display: grid; grid-template-columns: 64px 1fr auto; gap: 18px; align-items: center;
+  position: relative; display: grid; grid-template-columns: 64px 1fr auto; gap: 18px; align-items: center;
   padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
   transition: border-color .2s, background-color .2s;
 }
@@ -244,6 +251,10 @@ p { text-wrap: pretty; }
 .resume-row__name { font-size: 1.08rem; letter-spacing: -.01em; }
 .resume-row__name a { color: var(--text); text-decoration: none; }
 .resume-row__name a:hover { color: var(--accent); }
+/* Stretched link: the name link covers the whole card, so a click anywhere opens the resume */
+.resume-row__name a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.resume-row:hover .resume-row__name a { color: var(--accent); }
+.resume-row__meta a, .resume-row__actions { position: relative; z-index: 1; }
 .resume-row__meta { display: flex; flex-wrap: wrap; gap: 4px 16px; color: var(--text-muted); font-size: .86rem; }
 .resume-row__meta > * { display: inline-flex; align-items: center; gap: 6px; min-width: 0; overflow-wrap: anywhere; }
 .resume-row__meta a { color: var(--text-muted); text-decoration: none; }

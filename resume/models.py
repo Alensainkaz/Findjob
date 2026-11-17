@@ -1,6 +1,8 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+from users.models import VerificationCode
 
 from .cities import CITY_CHOICES
 
@@ -184,7 +186,10 @@ class Resume(models.Model):
     name=models.CharField(max_length=100)
     surname=models.CharField(max_length=100)
     father_name=models.CharField(max_length=100)
-    email=models.EmailField(max_length=100, unique=True)
+    email=models.EmailField(max_length=100)
+    # A resume is public only once its contact email is confirmed; unconfirmed claims
+    # of the same address may coexist, the first one confirmed owns it.
+    email_verified=models.BooleanField(default=False)
     experience=models.CharField(max_length=100)
     education=models.CharField(max_length=100)
     image=models.ImageField(upload_to='images/', blank=True, null=True)
@@ -192,5 +197,19 @@ class Resume(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     city = models.CharField(max_length=50, choices=CITY_CHOICES, db_index=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['email'], condition=models.Q(email_verified=True), name='resume_unique_verified_email',
+                violation_error_message=_('A resume with this email already exists.'),
+            ),
+        ]
+
     def __str__(self):
         return self.name
+
+
+class ResumeEmailCode(VerificationCode):
+    resume = models.OneToOneField(Resume, on_delete=models.CASCADE, related_name='email_code')
+    email = models.EmailField(max_length=100)  # the address the current code was sent to

@@ -8,9 +8,9 @@ from .models import Resume
 
 @admin.register(Resume)
 class ResumeAdmin(ModelAdmin):
-    list_display = ('photo', 'full_name', 'speciality', 'city', 'email', 'user', 'created_at')
+    list_display = ('photo', 'full_name', 'speciality', 'city', 'email', 'email_verified', 'user', 'created_at')
     list_display_links = ('photo', 'full_name')
-    list_filter = ('speciality', 'city', ('created_at', RangeDateFilter))
+    list_filter = ('email_verified', 'speciality', 'city', ('created_at', RangeDateFilter))
     list_filter_submit = True
     search_fields = ('name', 'surname', 'father_name', 'email', 'user__username')
     autocomplete_fields = ('user',)
@@ -18,7 +18,7 @@ class ResumeAdmin(ModelAdmin):
     readonly_fields = ('photo_preview', 'created_at')
     list_per_page = 25
     fieldsets = (
-        ('Person', {'fields': ('name', 'surname', 'father_name', 'email', 'user')}),
+        ('Person', {'fields': ('name', 'surname', 'father_name', 'email', 'email_verified', 'user')}),
         ('Profile', {'fields': ('speciality', 'city', 'education', 'experience')}),
         ('Photo', {'fields': ('image', 'photo_preview')}),
         ('Meta', {'fields': ('created_at',)}),

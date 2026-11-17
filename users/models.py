@@ -24,18 +24,18 @@ def _hash_code(code):
     return hmac.new(settings.SECRET_KEY.encode(), code.encode(), hashlib.sha256).hexdigest()
 
 
-class EmailVerificationToken(models.Model):
+class VerificationCode(models.Model):
+    """A 6-digit email code: hashed at rest, expires, rate-limits resends and counts attempts."""
     CODE_TTL = timedelta(minutes=15)
     RESEND_COOLDOWN = timedelta(seconds=60)
     MAX_ATTEMPTS = 5
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    token = models.UUIDField(default=uuid.uuid4, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    is_verified = models.BooleanField(default=False)
     code_hash = models.CharField(max_length=64, blank=True)
     attempts = models.PositiveSmallIntegerField(default=0)
     sent_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        abstract = True
 
     def issue_code(self):
         """Generate a fresh 6-digit code, store its hash and return the plain code."""
@@ -75,3 +75,10 @@ class EmailVerificationToken(models.Model):
                 left,
             ) % {'left': left}
         return True, ''
+
+
+class EmailVerificationToken(VerificationCode):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    token = models.UUIDField(default=uuid.uuid4, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_verified = models.BooleanField(default=False)

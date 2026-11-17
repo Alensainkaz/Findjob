@@ -92,6 +92,8 @@ def register_view(request):
         if form.is_valid():
             try:
                 with transaction.atomic():
+                    # Unverified sign-ups never owned the address; the new registrant replaces them
+                    User.objects.filter(is_active=False, email__iexact=form.cleaned_data['email']).delete()
                     user = form.save(commit=False)
                     user.role = 'jobfinder'
                     user.is_active = False
@@ -180,12 +182,16 @@ def check_availability(request):
     username = request.GET.get('username', '').strip()
     email = request.GET.get('email', '').strip()
     if username:
-        result['usernameTaken'] = User.objects.filter(username__iexact=username).exists()
+        taken = User.objects.filter(username__iexact=username)
+        if email:
+            taken = taken.exclude(is_active=False, email__iexact=email)
+        result['usernameTaken'] = taken.exists()
     if email:
-        result['emailTaken'] = User.objects.filter(email__iexact=email).exists()
+        result['emailTaken'] = User.objects.filter(email__iexact=email, is_active=True).exists()
     return JsonResponse(result)
 
 
+@require_POST
 def logout_view(request):
     logout(request)
     return redirect('index')

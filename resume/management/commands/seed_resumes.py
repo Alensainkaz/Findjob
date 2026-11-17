@@ -80,7 +80,7 @@ class Command(BaseCommand):
                         'name': name, 'surname': surname, 'father_name': father,
                         'speciality': spec, 'city': city,
                         'education': education, 'experience': experience,
-                        'user': owner,
+                        'user': owner, 'email_verified': True,
                     })
                 added += made
                 photo = PHOTO_DIR / f'{name}-{surname}.jpg'.lower()

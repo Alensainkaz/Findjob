@@ -24,10 +24,29 @@ class UserRegisterForm(UserCreationForm):
         help_text=''
     )
     def clean_email(self):
-        email=self.cleaned_data.get('email')
-        if User.objects.filter(email__iexact=email).exists():
+        email = self.cleaned_data.get('email')
+        # Only a verified (active) account owns an address; pending sign-ups are replaced on save
+        if User.objects.filter(email__iexact=email, is_active=True).exists():
             raise forms.ValidationError(_('This email already exists'))
         return email
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        email = self.data.get('email', '')
+        taken = User.objects.filter(username__iexact=username).exclude(is_active=False, email__iexact=email)
+        if taken.exists():
+            raise forms.ValidationError(_('A user with that username already exists.'))
+        return username
+
+    def validate_unique(self):
+        # Username uniqueness is checked in clean_username, which lets a pending sign-up
+        # with the same email be replaced; the DB constraint still guards against races.
+        exclude = self._get_validation_exclusions()
+        exclude.add('username')
+        try:
+            self.instance.validate_unique(exclude=exclude)
+        except forms.ValidationError as e:
+            self._update_errors(e)
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']

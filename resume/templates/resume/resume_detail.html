@@ -6,6 +6,13 @@
 {% block content %}
 <a href="{% url 'index' %}" class="back-link"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow-right"/></svg>{% trans "All resumes" %}</a>
 
+{% if not resume.email_verified %}
+<div class="notice" role="status">
+  <span>{% trans "This resume is hidden until you confirm its email." %}</span>
+  <a href="{% url 'verify_resume_email' resume.pk %}" class="btn btn--primary btn--small">{% trans "Confirm email" %}</a>
+</div>
+{% endif %}
+
 <article class="profile">
   {% if resume.image %}
     <img src="{{ resume.image.url }}" alt="{% blocktrans with name=resume.name surname=resume.surname %}Photo of {{ name }} {{ surname }}{% endblocktrans %}" class="profile__photo">

@@ -1,0 +1,8 @@
+{% load i18n %}{% autoescape off %}{% blocktrans with name=resume.name %}Hi {{ name }},{% endblocktrans %}
+
+{% blocktrans %}Your code to confirm the resume email on Findy-Job: {{ code }}{% endblocktrans %}
+
+{% blocktrans %}It expires in {{ minutes }} minutes. If you didn't add this address to a resume, ignore this email — it won't be published.{% endblocktrans %}
+
+— Findy-Job
+{% endautoescape %}

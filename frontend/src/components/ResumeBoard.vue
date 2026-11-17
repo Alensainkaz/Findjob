@@ -51,13 +51,19 @@ function params(p) {
 
 async function load(p = 1) {
   controller?.abort()
-  controller = new AbortController()
+  const current = (controller = new AbortController())
   const append = p > 1
   append ? (loadingMore.value = true) : (loading.value = true)
   failed.value = false
   try {
-    const data = await getJSON(`${props.apiUrl}?${params(p)}`, { signal: controller.signal })
-    items.value = append ? [...items.value, ...data.results] : data.results
+    const data = await getJSON(`${props.apiUrl}?${params(p)}`, { signal: current.signal })
+    if (append) {
+      // Offset pages shift when a resume is published in between; skip ids already shown
+      const seen = new Set(items.value.map((r) => r.id))
+      items.value = [...items.value, ...data.results.filter((r) => !seen.has(r.id))]
+    } else {
+      items.value = data.results
+    }
     page.value = data.page
     hasNext.value = data.hasNext
     total.value = data.total
@@ -68,8 +74,11 @@ async function load(p = 1) {
   } catch (err) {
     if (err.name !== 'AbortError') failed.value = true
   } finally {
-    loading.value = false
-    loadingMore.value = false
+    // An aborted request settles after its replacement started; leave the newer request's flags alone
+    if (controller === current) {
+      loading.value = false
+      loadingMore.value = false
+    }
   }
 }
 

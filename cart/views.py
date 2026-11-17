@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.http import require_POST
 
 from resume.models import Resume
@@ -9,9 +10,8 @@ from .models import Cart, CartItem
 
 
 def ensure_cart(user):
-    cart = Cart.objects.filter(user=user).first()
-    if cart is None:
-        cart = Cart.objects.create(user=user)
+    # get_or_create retries the lookup on IntegrityError, so concurrent requests share one cart
+    cart, _created = Cart.objects.get_or_create(user=user)
     return cart
 
 
@@ -48,7 +48,10 @@ def cart_add(request, item_id):
     CartItem.objects.get_or_create(cart=cart, resume=resume)
     if _wants_json(request):
         return JsonResponse({'saved': True})
-    return redirect(request.POST.get('next') or 'cart_detail')
+    next_url = request.POST.get('next', '')
+    if not url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}, require_https=request.is_secure()):
+        next_url = 'cart_detail'
+    return redirect(next_url)
 
 
 @login_required
@@ -57,9 +60,9 @@ def cart_toggle(request, resume_id):
     """Save or unsave a resume; used by the resume board."""
     resume = get_object_or_404(Resume, id=resume_id)
     cart = ensure_cart(request.user)
-    deleted, _ = CartItem.objects.filter(cart__user=request.user, resume=resume).delete()
+    deleted, _ = CartItem.objects.filter(cart=cart, resume=resume).delete()
     if not deleted:
-        CartItem.objects.create(cart=cart, resume=resume)
+        CartItem.objects.get_or_create(cart=cart, resume=resume)
     return JsonResponse({'saved': not deleted})
 
 
